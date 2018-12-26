@@ -19,7 +19,17 @@ test_that("excludes columns", {
 })
 
 test_that("with a pattern returns that pattern", {
-  expect_equal(search_help("tool", package)$package, "fgeo.tool")
+  expect_equal(
+    unique(search_help("combine strings", packages = "base")$concept),
+    "combine strings"
+  )
+})
+
+test_that("is sensitive to argument `packages`", {
+  expect_equal(
+    unique(search_help(packages = c("base", "utils"))$package),
+    c("base", "utils")
+  )
 })
 
 test_that("errs with infomative error messages", {
@@ -27,45 +37,18 @@ test_that("errs with infomative error messages", {
   expect_error(search_help(invalid), "object.*not found")
 })
 
-test_that("outputs an entry for fgeo_elevation", {
-  expect_true(
-    any(
-      grepl(
-        "fgeo_elevation",
-        pick_package("fgeo.tool")$alias
-      )
-    )
-  )
-})
-
-test_that("is sensitive to argument `packages`", {
-  expect_equal(unique(search_help(packages = "fgeo")$package), "fgeo")
-
-  pkgs <- sort(c("fgeo", "fgeo.x"))
-  expect_equal(
-    sort(unique(search_help(packages = pkgs)$package)),
-    pkgs
-  )
-})
-
 
 
 context("pick_package")
 
-test_that("doesn't include package documentation", {
-  expect_false(
-    any(grepl("fgeo.x", unique(search_docs("fgeo.x")$alias)))
-  )
-  expect_false(
-    any(grepl("fgeo.x-package", unique(search_docs("fgeo.x")$alias)))
-  )
+test_that("no longer misses fgeo_elevation", {
+  skip_if_not_installed("fgeo.tool")
+  expect_true(any(grepl("fgeo_elevation", pick_package("fgeo.tool")$alias)))
 })
 
-test_that("includes only the given package", {
-  expect_equal(
-    actual <- unique(pick_package("fgeo")$package),
-    expect <- "<a href=https://forestgeo.github.io/fgeo>fgeo</a>"
-  )
+test_that("doesn't include package documentation", {
+  skip_if_not_installed("fgeo")
+  expect_false(any(grepl("fgeo-package", unique(search_help("fgeo")$alias))))
 })
 
 
@@ -73,7 +56,45 @@ test_that("includes only the given package", {
 context("pick_concept")
 
 test_that("known concept retrieves known alias", {
-  retrieved_docs <- pick_concept("functions to explore fgeo")$alias
-  expect_true(any(grepl("fgeo_help", unique(retrieved_docs)))
+  retrieved_docs <- pick_concept("combine strings")$alias
+  expect_true(any(grepl("paste", unique(retrieved_docs)))
   )
+})
+
+test_that("no longer picks demography_impl", {
+  skip_if_not_installed("fgeo.analyze")
+  skip_if_not_installed("fgeo")
+
+  result <- pick_concept(
+    "demography functions",
+    url = NULL,
+    packages = fgeo:::fgeo_packages()
+  )$topic
+
+  expect_false(any(grepl("demography_impl", result)))
+  expect_true(any(grepl("demography_ctfs", result)))
+})
+
+
+
+context("reference_package")
+
+test_that("works with fgeo", {
+  skip_if_not_installed("fgeo")
+  expect_is(reference_package("fgeo"), "data.frame")
+  expect_is(reference_package("fgeo", url = "https://..."), "data.frame")
+})
+
+test_that("works with tidyverse packages", {
+  expect_is(reference_package("dplyr", url = "https://..."), "data.frame")
+})
+
+test_that("works with base packages", {
+  expect_is(reference_package("base"), "data.frame")
+  expect_is(reference_package("utils"), "data.frame")
+  expect_is(reference_package("stats"), "data.frame")
+})
+
+test_that("works with MASS", {
+  expect_is(reference_package("MASS"), "data.frame")
 })
