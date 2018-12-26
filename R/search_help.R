@@ -37,15 +37,24 @@ pick_docs <- function(package_or_concept) {
 #' @return A dataframe.
 #'
 #' @examples
-#' pick_package("fgeo.x")
-#' pick_package("fgeo.x", url = "https://forestgeo.github.io/")
+#' pick_package("base")
 #'
-#' pick_concept("datasets")
-#' pick_concept("datasets", url = "https://forestgeo.github.io/")
+#' pick_concept("PCA")
 #'
-#' reference_concept("datasets", url = "https://forestgeo.github.io/")
-#' reference_package("datasets", url = "https://forestgeo.github.io/")
+#' packages <- c("stats", "MASS")
+#' pick_package(packages)
 #'
+#' concepts <- c("combine strings", "files", "PCA")
+#' pick_concept(concepts)
+#'
+#' \dontrun{
+#' if (requireNamespace("fgeo.x", quietly = TRUE)) {
+#'   library(fgeo.x)
+#'
+#'   reference_concept("datasets", url = "https://forestgeo.github.io/")
+#'   reference_package("datasets", url = "https://forestgeo.github.io/")
+#' }
+#' }
 #' @export
 pick_package <- pick_docs("package")
 
@@ -114,8 +123,10 @@ search_docs <- function(packages = NULL) {
 #' @return A dataframe.
 #'
 #' @examples
+#' \dontrun{
 #' collapse_alias(pick_package("fgeo"))
 #' collapse_alias(pick_package("fgeo"), strip_s3class = TRUE)
+#' }
 #'
 #' @noRd
 collapse_alias <- function(.data, strip_s3class = FALSE) {
