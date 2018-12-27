@@ -64,41 +64,13 @@ reference_concept <- function(x,
 
 
 
-#' Dataframe the documentation of installed packages.
-#'
-#' This is fundamentally a dataframe version of the output of
-#' [utils::hsearch_db()].
-#'
-#' @inheritParams reference_package
-#'
-#' @return A dataframe.
-#'
-#' @examples
-#' search_docs(NULL)
-#'
-#' @export
-search_docs <- function(packages = NULL) {
-  docs <- suppressMessages(
-    purrr::reduce(utils::hsearch_db(), dplyr::full_join)
-  )
-
-  result <- set_names(tibble::as.tibble(docs), tolower)
-
-  if (is.null(packages)) {
-    return(result)
-  }
-
-  filter(result, .data$package %in% packages)
-}
-
-
-
 #' Collapse the result of pick_docs() by alias.
 #'
 #' This avoids an unnecesary long result.
 #'
 #' @param .data The result of pick_docs().
 #' @param strip_s3class `TRUE` strips the class component of S3 methods.
+#'
 #' @return A dataframe.
 #' @noRd
 collapse_alias <- function(.data, strip_s3class = FALSE) {
@@ -119,30 +91,9 @@ strip_or_not <- function(x, .f = s3_strip_class) {
   paste(unique(.f(x)), collapse = ", ")
 }
 
-
-
-#' Explore the documentation of __fgeo__.
-#'
-#' @param pattern Character string of length one to match an entry in packages
-#'   documentation.
-#' @param ... Bare names of the columns to select. Valid names are `package`,
-#'   `name`, `title`, `topic`, `type`, `alias`, `keyword`, `concept`. If no name
-#'   is given, then all names are returned.
+#' From the entire documentation dataframe, pick useful columns and rows.
 #' @inheritParams reference_package
-#'
 #' @return A dataframe.
-#'
-#' @examples
-#' # Filter rows with a matching pattern.
-#' pick_useful_docs("abundance")
-#'
-#' # Select specific columns
-#' pick_useful_docs("abundance", concept, topic, title)
-#'
-#' # Exclude specific columns
-#' pick_useful_docs("abundance", -package)
-#'
-#' @family functions for developers
 #' @noRd
 pick_useful_docs <- function(packages = NULL) {
   search_docs(packages = packages) %>%
