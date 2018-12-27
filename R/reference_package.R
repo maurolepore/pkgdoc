@@ -12,8 +12,6 @@ pick_docs <- function(package_or_concept) {
   }
 }
 
-
-
 #' Pick documentation matching some concepts or package names.
 #'
 #' These functions help you to reference the documentation of specific functions
@@ -35,16 +33,6 @@ pick_docs <- function(package_or_concept) {
 #' @return A dataframe.
 #'
 #' @examples
-#' pick_package("base")
-#'
-#' pick_concept("PCA")
-#'
-#' packages <- c("stats", "MASS")
-#' pick_package(packages)
-#'
-#' concepts <- c("combine strings", "files", "PCA")
-#' pick_concept(concepts)
-#'
 #' \dontrun{
 #' if (requireNamespace("fgeo.x", quietly = TRUE)) {
 #'   library(fgeo.x)
@@ -54,30 +42,22 @@ pick_docs <- function(package_or_concept) {
 #' }
 #' }
 #' @export
-pick_package <- pick_docs("package")
-
-#' @rdname pick_package
-#' @export
-pick_concept <- pick_docs("concept")
-
-#' @rdname pick_package
-#' @export
 reference_package <- function(x,
                               url = NULL,
                               packages = NULL,
                               strip_s3class = TRUE) {
-  pick_package(x, url = url, packages = packages) %>%
-    collapse_alias(strip_s3class = strip_s3class) %>%
+  pick_docs("package")(x, url = url, packages = packages) %>%
+    collapse_alias(strip_s3class) %>%
     select(c("topic", "alias", "title"))
 }
 
-#' @rdname pick_package
+#' @rdname reference_package
 #' @export
 reference_concept <- function(x,
                               url = NULL,
                               packages = NULL,
                               strip_s3class = TRUE) {
-  pick_concept(x, url = url, packages = packages) %>%
+  pick_docs("concept")(x, url = url, packages = packages) %>%
     collapse_alias(strip_s3class) %>%
     select(c("topic", "alias", "title"))
 }
@@ -89,7 +69,7 @@ reference_concept <- function(x,
 #' This is fundamentally a dataframe version of the output of
 #' [utils::hsearch_db()].
 #'
-#' @inheritParams pick_package
+#' @inheritParams reference_package
 #'
 #' @return A dataframe.
 #'
@@ -113,35 +93,30 @@ search_docs <- function(packages = NULL) {
 
 
 
-#' Flatten the result of pick_package() and pick_concept() by alias.
+#' Collapse the result of pick_docs() by alias.
 #'
-#' @param .data The result of pick_package() and pick_concept().
+#' This avoids an unnecesary long result.
+#'
+#' @param .data The result of pick_docs().
 #' @param strip_s3class `TRUE` strips the class component of S3 methods.
-#'
 #' @return A dataframe.
-#'
-#' @examples
-#' \dontrun{
-#' collapse_alias(pick_package("fgeo"))
-#' collapse_alias(pick_package("fgeo"), strip_s3class = TRUE)
-#' }
-#'
 #' @noRd
 collapse_alias <- function(.data, strip_s3class = FALSE) {
-  strip <- function(x) {
-    paste(unique(s3_strip_class(x)), collapse = ", ")
-  }
-  asis <- function(x) {
-    paste0(unique(x), collapse = ", ")
-  }
-
   .data %>%
     group_by(.data$topic) %>%
     mutate(
-      alias = ifelse(strip_s3class, strip(.data$alias), asis(.data$alias))
+      alias = ifelse(
+        strip_s3class,
+        strip_or_not(.data$alias, .f = s3_strip_class),
+        strip_or_not(.data$alias, .f = identity)
+      )
     ) %>%
     ungroup() %>%
     unique()
+}
+
+strip_or_not <- function(x, .f = s3_strip_class) {
+  paste(unique(.f(x)), collapse = ", ")
 }
 
 
@@ -153,7 +128,7 @@ collapse_alias <- function(.data, strip_s3class = FALSE) {
 #' @param ... Bare names of the columns to select. Valid names are `package`,
 #'   `name`, `title`, `topic`, `type`, `alias`, `keyword`, `concept`. If no name
 #'   is given, then all names are returned.
-#' @inheritParams pick_package
+#' @inheritParams reference_package
 #'
 #' @return A dataframe.
 #'
@@ -218,11 +193,7 @@ select_these_cols <- function(.data, elipsis) {
 
 pick_this_pattern <- function(.data, pattern) {
   .data %>%
-    dplyr::filter_all(dplyr::any_vars(grepl(pipes(pattern), .)))
-}
-
-pipes <- function(x) {
-  paste(x, collapse = "|")
+    dplyr::filter_all(dplyr::any_vars(grepl(paste(pattern, collapse = "|"), .)))
 }
 
 link_topic <- function(.data, url) {
