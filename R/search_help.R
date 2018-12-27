@@ -29,10 +29,8 @@ pick_docs <- function(package_or_concept) {
 #' @param url Character vector of length-1 giving a base url, e.g.
 #'   "https://forestgeo.github.io/".
 #' @param strip_s3class `TRUE` removes the class component of S3 methods.
-#' @param packages A character vector with the names of packages to search
-#'   through, or NULL in which case all available packages in the library trees
-#'   specified by lib.loc are searched. Defaults to search only the core
-#'   packages of __fgeo__.
+#' @param packages A character vector with the names of packages to limit the
+#'   search, or `NULL` to serach in all known libraries.
 #'
 #' @return A dataframe.
 #'
