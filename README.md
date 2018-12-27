@@ -34,7 +34,7 @@ library(pkgdoc)
 ``` r
 # Documentation of all installed packages
 search_docs()
-#> # A tibble: 71,937 x 11
+#> # A tibble: 71,935 x 11
 #>    package libpath id    name  title topic encoding type  alias keyword
 #>    <chr>   <chr>   <chr> <chr> <chr> <chr> <chr>    <chr> <chr> <chr>  
 #>  1 acepack C:/Use~ 1/1   ace   Alte~ ace   ""       help  ace   models 
@@ -47,7 +47,7 @@ search_docs()
 #>  8 addine~ C:/Use~ 2/4   refo~ Refo~ refo~ ""       help  refo~ <NA>   
 #>  9 addine~ C:/Use~ 2/5   subs~ Subs~ subs~ ""       help  subs~ <NA>   
 #> 10 AGBflu~ C:/Use~ 3/1   AGBf~ AGBf~ AGBf~ UTF-8    help  AGBf~ intern~
-#> # ... with 71,927 more rows, and 1 more variable: concept <chr>
+#> # ... with 71,925 more rows, and 1 more variable: concept <chr>
 
 some_packages <- c("utils", "base")
 search_docs(some_packages)
@@ -68,67 +68,46 @@ search_docs(some_packages)
 ```
 
 ``` r
-packages <- c("stats", "MASS")
-pick_package(packages)
-#> # A tibble: 2,416 x 7
-#>    package title                 topic   type  alias  keyword concept      
-#>    <chr>   <chr>                 <chr>   <chr> <chr>  <chr>   <chr>        
-#>  1 MASS    Australian AIDS Surv~ Aids2   help  Aids2  datase~ Datasets ava~
-#>  2 MASS    Brain and Body Weigh~ Animals help  Anima~ datase~ Datasets ava~
-#>  3 MASS    Housing Values in Su~ Boston  help  Boston datase~ Datasets ava~
-#>  4 MASS    Data from 93 Cars on~ Cars93  help  Cars93 datase~ Datasets ava~
-#>  5 MASS    Diagnostic Tests on ~ Cushin~ help  Cushi~ datase~ Datasets ava~
-#>  6 MASS    DDT in Kale           DDT     help  DDT    datase~ Datasets ava~
-#>  7 MASS    Level of GAG in Urin~ GAGuri~ help  GAGur~ datase~ Datasets ava~
-#>  8 MASS    Numbers of Car Insur~ Insura~ help  Insur~ datase~ Datasets ava~
-#>  9 MASS    Survival from Malign~ Melano~ help  Melan~ datase~ Datasets ava~
-#> 10 MASS    Null Spaces of Matri~ Null    help  Null   algebra Linear Algeb~
-#> # ... with 2,406 more rows
+reference_package(c("stats", "MASS"))
+#> # A tibble: 970 x 3
+#>    topic     alias     title                                               
+#>    <chr>     <chr>     <chr>                                               
+#>  1 Aids2     Aids2     Australian AIDS Survival Data                       
+#>  2 Animals   Animals   Brain and Body Weights for 28 Species               
+#>  3 Boston    Boston    Housing Values in Suburbs of Boston                 
+#>  4 Cars93    Cars93    Data from 93 Cars on Sale in the USA in 1993        
+#>  5 Cushings  Cushings  Diagnostic Tests on Patients with Cushing's Syndrome
+#>  6 DDT       DDT       DDT in Kale                                         
+#>  7 GAGurine  GAGurine  Level of GAG in Urine of Children                   
+#>  8 Insurance Insurance Numbers of Car Insurance claims                     
+#>  9 Melanoma  Melanoma  Survival from Malignant Melanoma                    
+#> 10 Null      Null      Null Spaces of Matrices                             
+#> # ... with 960 more rows
 
-concepts <- c("combine strings", "files", "PCA")
-pick_concept(concepts)
-#> # A tibble: 18 x 7
-#>    package title            topic    type  alias       keyword   concept   
-#>    <chr>   <chr>            <chr>    <chr> <chr>       <chr>     <chr>     
-#>  1 base    Find Packages    find.pa~ help  find.packa~ <NA>      files     
-#>  2 base    Find Packages    find.pa~ help  path.packa~ <NA>      files     
-#>  3 base    Concatenate Str~ paste    help  paste       character combine s~
-#>  4 base    Concatenate Str~ paste    help  paste0      character combine s~
-#>  5 stats   Principal Compo~ prcomp   help  prcomp      multivar~ PCA       
-#>  6 stats   Principal Compo~ prcomp   help  prcomp.for~ multivar~ PCA       
-#>  7 stats   Principal Compo~ prcomp   help  prcomp.def~ multivar~ PCA       
-#>  8 stats   Principal Compo~ prcomp   help  plot.prcomp multivar~ PCA       
-#>  9 stats   Principal Compo~ prcomp   help  predict.pr~ multivar~ PCA       
-#> 10 stats   Principal Compo~ prcomp   help  print.prco~ multivar~ PCA       
-#> 11 stats   Principal Compo~ prcomp   help  summary.pr~ multivar~ PCA       
-#> 12 stats   Principal Compo~ prcomp   help  print.summ~ multivar~ PCA       
-#> 13 stats   Principal Compo~ princomp help  princomp    multivar~ PCA       
-#> 14 stats   Principal Compo~ princomp help  princomp.f~ multivar~ PCA       
-#> 15 stats   Principal Compo~ princomp help  princomp.d~ multivar~ PCA       
-#> 16 stats   Principal Compo~ princomp help  plot.princ~ multivar~ PCA       
-#> 17 stats   Principal Compo~ princomp help  print.prin~ multivar~ PCA       
-#> 18 stats   Principal Compo~ princomp help  predict.pr~ multivar~ PCA
+reference_concept(c("combine strings", "files", "PCA"))
+#> # A tibble: 4 x 3
+#>   topic        alias                             title                     
+#>   <chr>        <chr>                             <chr>                     
+#> 1 find.package find.package, path.package        Find Packages             
+#> 2 paste        paste, paste0                     Concatenate Strings       
+#> 3 prcomp       prcomp, plot, predict, print, su~ Principal Components Anal~
+#> 4 princomp     princomp, plot, print, predict    Principal Components Anal~
 ```
 
 ``` r
-reference_package("fgeo", url = "https://forestgeo.github.io/") %>% 
-  knitr::kable()
-```
+if (requireNamespace("fgeo", quietly = TRUE)) {
 
-| topic                                                                | alias                                 | title                                 |
-| :------------------------------------------------------------------- | :------------------------------------ | :------------------------------------ |
-| <a href=https://forestgeo.github.io/fgeo/reference/fgeo_browse>?</a> | fgeo\_browse, fgeo\_browse\_reference | Open a web browser on fgeo’s website. |
-| <a href=https://forestgeo.github.io/fgeo/reference/fgeo_help>?</a>   | fgeo\_help, fgeo\_help\_addin         | Get help with fgeo.                   |
-
-``` r
-
-reference_concept("datasets", url = "https://forestgeo.github.io/") %>% 
-  knitr::kable()
+  reference_concept(
+    "datasets", 
+    url = "https://forestgeo.github.io/",
+    packages = c("fgeo.x", "fgeo.plot")
+  ) %>% 
+    knitr::kable()
+} 
 ```
 
 | topic                                                                    | alias                                                                                       | title                                      |
 | :----------------------------------------------------------------------- | :------------------------------------------------------------------------------------------ | :----------------------------------------- |
-| <a href=https://forestgeo.github.io/fgeo.map/reference/vft_1quad>?</a>   | vft\_1quad                                                                                  | Small ViewFullTables from Luquillo.        |
 | <a href=https://forestgeo.github.io/fgeo.plot/reference/vft_1quad>?</a>  | vft\_1quad                                                                                  | Small ViewFullTables from Luquillo.        |
 | <a href=https://forestgeo.github.io/fgeo.x/reference/datasets>?</a>      | datasets, elevation, habitat, stem5, stem6, taxa, tree5, tree6, vft\_4quad, tree6\_3species | Datasets from Luquillo, Puerto Rico.       |
 | <a href=https://forestgeo.github.io/fgeo.x/reference/download_data>?</a> | download\_data                                                                              | Download data from fgeo.data.              |

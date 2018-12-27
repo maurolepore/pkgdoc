@@ -43,18 +43,20 @@ search_docs(some_packages)
 ```
 
 ```{r}
-packages <- c("stats", "MASS")
-pick_package(packages)
+reference_package(c("stats", "MASS"))
 
-concepts <- c("combine strings", "files", "PCA")
-pick_concept(concepts)
+reference_concept(c("combine strings", "files", "PCA"))
 ```
 
 ```{r}
-reference_package("fgeo", url = "https://forestgeo.github.io/") %>% 
-  knitr::kable()
+if (requireNamespace("fgeo", quietly = TRUE)) {
 
-reference_concept("datasets", url = "https://forestgeo.github.io/") %>% 
-  knitr::kable()
+  reference_concept(
+    "datasets", 
+    url = "https://forestgeo.github.io/",
+    packages = c("fgeo.x", "fgeo.plot")
+  ) %>% 
+    knitr::kable()
+} 
 ```
 
