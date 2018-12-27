@@ -65,14 +65,14 @@ test_that("no longer picks demography_impl", {
   skip_if_not_installed("fgeo.analyze")
   skip_if_not_installed("fgeo")
 
-  result <- pick_concept(
+  strip_false <- pick_concept(
     "demography functions",
     url = NULL,
     packages = fgeo:::fgeo_packages()
   )$topic
 
-  expect_false(any(grepl("demography_impl", result)))
-  expect_true(any(grepl("demography_ctfs", result)))
+  expect_false(any(grepl("demography_impl", strip_false)))
+  expect_true(any(grepl("demography_ctfs", strip_false)))
 })
 
 
@@ -97,4 +97,30 @@ test_that("works with base packages", {
 
 test_that("works with MASS", {
   expect_is(reference_package("MASS"), "data.frame")
+})
+
+test_that("is sensitive to strip_s3class", {
+  pull_all_equal <- function(x) {
+    x %>%
+      dplyr::filter(topic == "all.equal") %>%
+      dplyr::distinct() %>%
+      dplyr::pull(alias) %>%
+      strsplit(", ") %>%
+      unlist()
+  }
+
+  strip_false <- reference_package("base", strip_s3class = FALSE) %>%
+    pull_all_equal()
+  expect_true("all.equal.character" %in% strip_false)
+
+  strip_true <- reference_package("base", strip_s3class = TRUE) %>%
+    pull_all_equal()
+  expect_false("all.equal.character" %in% strip_true)
+})
+
+test_that("picks the expected concepts", {
+  expect_equal(
+    reference_concept(c("combine strings", "files"))$topic,
+    c("find.package", "paste")
+  )
 })
