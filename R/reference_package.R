@@ -1,7 +1,7 @@
 pick_docs <- function(package_or_concept) {
   force(package_or_concept)
   function(x, url = NULL, packages = NULL) {
-    result <- search_help(packages = packages) %>%
+    result <- pick_useful_docs(packages = packages) %>%
       filter(.[[package_or_concept]] %in% x)
 
     if (is.null(url)) {
@@ -134,38 +134,22 @@ strip_or_not <- function(x, .f = s3_strip_class) {
 #'
 #' @examples
 #' # Filter rows with a matching pattern.
-#' search_help("abundance")
+#' pick_useful_docs("abundance")
 #'
 #' # Select specific columns
-#' search_help("abundance", concept, topic, title)
+#' pick_useful_docs("abundance", concept, topic, title)
 #'
 #' # Exclude specific columns
-#' search_help("abundance", -package)
+#' pick_useful_docs("abundance", -package)
 #'
 #' @family functions for developers
 #' @noRd
-search_help <- function(pattern = NULL,
-                        ...,
-                        packages = NULL,
-                        exclude_internal = TRUE) {
-  result <- search_docs(packages = packages) %>%
+pick_useful_docs <- function(packages = NULL) {
+  search_docs(packages = packages) %>%
     exclude_package_doc(packages) %>%
+    exclude_internal_functions() %>%
     select(-.data$libpath, -.data$id, -.data$encoding, -.data$name) %>%
     unique()
-
-  if (exclude_internal) {
-    result <- exclude_internal_functions(result)
-  }
-
-  if (want_specific_cols(enquos(...))) {
-    result <- select_these_cols(result, enquos(...))
-  }
-
-  if (!is.null(pattern)) {
-    result <- pick_this_pattern(result, pattern)
-  }
-
-  unique(result)
 }
 
 exclude_package_doc <- function(.data, packages) {
@@ -177,23 +161,9 @@ exclude_package_doc <- function(.data, packages) {
     filter(!.data$alias %in% c(packages, glue("{package}-package")))
 }
 
-want_specific_cols <- function(elipsis) {
-  any(purrr::map_lgl(elipsis, rlang::is_quosure))
-}
-
 exclude_internal_functions <- function(.data) {
   .data %>%
     filter(!.data$keyword %in% "internal")
-}
-
-select_these_cols <- function(.data, elipsis) {
-  .data %>%
-    select(!!! elipsis)
-}
-
-pick_this_pattern <- function(.data, pattern) {
-  .data %>%
-    dplyr::filter_all(dplyr::any_vars(grepl(paste(pattern, collapse = "|"), .)))
 }
 
 link_topic <- function(.data, url) {
