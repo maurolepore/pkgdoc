@@ -1,17 +1,3 @@
-pick_docs <- function(package_or_concept) {
-  force(package_or_concept)
-  function(x, url = NULL, packages = NULL) {
-    result <- pick_useful_docs(packages = packages) %>%
-      filter(.[[package_or_concept]] %in% x)
-
-    if (is.null(url)) {
-      return(unique(result))
-    }
-
-    unique(link_topic(result, url))
-  }
-}
-
 #' Pick documentation matching some concepts or package names.
 #'
 #' These functions help you to reference the documentation of specific functions
@@ -41,14 +27,30 @@ pick_docs <- function(package_or_concept) {
 #'   reference_package("datasets", url = "https://forestgeo.github.io/")
 #' }
 #' }
+#' @name reference_package
+NULL
+pick_docs <- function(package_or_concept) {
+  force(package_or_concept)
+  function(x, url = NULL, packages = NULL) {
+    result <- pick_useful_docs(packages = packages) %>%
+      filter(.[[package_or_concept]] %in% x)
+
+    if (is.null(url)) {
+      return(unique(result))
+    }
+
+    unique(link_topic(result, url))
+  }
+}
+
+#' @rdname reference_package
 #' @export
 reference_package <- function(x,
                               url = NULL,
                               packages = NULL,
                               strip_s3class = TRUE) {
   pick_docs("package")(x, url = url, packages = packages) %>%
-    collapse_alias(strip_s3class) %>%
-    select(c("topic", "alias", "title"))
+    tidy_reference(strip_s3class)
 }
 
 #' @rdname reference_package
@@ -58,8 +60,14 @@ reference_concept <- function(x,
                               packages = NULL,
                               strip_s3class = TRUE) {
   pick_docs("concept")(x, url = url, packages = packages) %>%
+    tidy_reference(strip_s3class)
+}
+
+tidy_reference <- function(.data, strip_s3class) {
+  .data %>%
     collapse_alias(strip_s3class) %>%
-    select(c("topic", "alias", "title"))
+    select(c("topic", "alias", "title")) %>%
+    arrange(.data$alias)
 }
 
 
