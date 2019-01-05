@@ -46,6 +46,7 @@ pick_docs <- function(package_or_concept) {
 #' @rdname reference_package
 NULL
 reference_any <- function(doc) {
+  force(doc)
   function(x, url = NULL, packages = NULL, strip_s3class = TRUE) {
     out <- pick_docs(doc)(x, url = url, packages = packages)
     out <- tidy_reference(out, strip_s3class)
@@ -65,37 +66,6 @@ reference_package <- reference_any("package")
 #' @rdname reference_doc
 #' @export
 reference_concept <- reference_any("concept")
-
-#' @export
-reference_package_xxx <- function(x,
-                              url = NULL,
-                              packages = NULL,
-                              strip_s3class = TRUE) {
-  out <- pick_docs("package")(x, url = url, packages = packages) %>%
-    tidy_reference(strip_s3class)
-
-  if (identical(nrow(out), 0L)) {
-    warn(glue("No package matches '{x}'."))
-  }
-
-  out
-}
-
-#' @rdname reference_package
-#' @export
-reference_concept_xxx <- function(x,
-                              url = NULL,
-                              packages = NULL,
-                              strip_s3class = TRUE) {
-  out <- pick_docs("concept")(x, url = url, packages = packages) %>%
-    tidy_reference(strip_s3class)
-
-  if (identical(nrow(out), 0L)) {
-    warn(glue("No concept matches '{x}'."))
-  }
-
-  out
-}
 
 tidy_reference <- function(.data, strip_s3class) {
   .data %>%
