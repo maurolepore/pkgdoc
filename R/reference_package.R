@@ -44,8 +44,30 @@ pick_docs <- function(package_or_concept) {
 }
 
 #' @rdname reference_package
+NULL
+reference_any <- function(doc) {
+  function(x, url = NULL, packages = NULL, strip_s3class = TRUE) {
+    out <- pick_docs(doc)(x, url = url, packages = packages)
+    out <- tidy_reference(out, strip_s3class)
+
+    if (identical(nrow(out), 0L)) {
+      warn(glue("No {doc} matches '{x}'."))
+    }
+
+    out
+  }
+}
+
+#' @rdname reference_doc
 #' @export
-reference_package <- function(x,
+reference_package <- reference_any("package")
+
+#' @rdname reference_doc
+#' @export
+reference_concept <- reference_any("concept")
+
+#' @export
+reference_package_xxx <- function(x,
                               url = NULL,
                               packages = NULL,
                               strip_s3class = TRUE) {
@@ -61,7 +83,7 @@ reference_package <- function(x,
 
 #' @rdname reference_package
 #' @export
-reference_concept <- function(x,
+reference_concept_xxx <- function(x,
                               url = NULL,
                               packages = NULL,
                               strip_s3class = TRUE) {
