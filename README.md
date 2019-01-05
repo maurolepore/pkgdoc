@@ -9,16 +9,15 @@ status](https://travis-ci.org/maurolepore/pkgdoc.svg?branch=master)](https://tra
 status](https://coveralls.io/repos/github/maurolepore/pkgdoc/badge.svg)](https://coveralls.io/r/maurolepore/pkgdoc?branch=master)
 
 The goal of **pkgdoc** is to create dataframes of the documentation of
-installed packages. This helps you to mamipulate documentation accross
-multiple packages. For example, you can use **pkgdoc** to create a
-reference of functions by concept accross multiple packages (similar to
-the Reference section of a [**pkgdown**](https://pkgdown.r-lib.org/)
-website but not limited to a single package).
+installed packages. This helps you to manipulate documentation across
+multiple packages. Combined with `krittr::kable()` or `DT::datatable()`,
+**pkgdoc** allows you to reference functions by package or concept
+across multiple packages and provide links to each topic’s help file
+(similar to the Reference section of a
+[**pkgdown**](https://pkgdown.r-lib.org/) website but not limited to a
+single package).
 
 ## Installation
-
-You can install the released version of pkgdoc from
-[CRAN](https://CRAN.R-project.org) with:
 
 ``` r
 # install.packages("devtools")
@@ -34,7 +33,7 @@ library(pkgdoc)
 ``` r
 # Documentation of all installed packages
 search_docs()
-#> # A tibble: 71,935 x 11
+#> # A tibble: 71,920 x 11
 #>    package libpath id    name  title topic encoding type  alias keyword
 #>    <chr>   <chr>   <chr> <chr> <chr> <chr> <chr>    <chr> <chr> <chr>  
 #>  1 acepack C:/Use~ 1/1   ace   Alte~ ace   ""       help  ace   models 
@@ -47,7 +46,7 @@ search_docs()
 #>  8 addine~ C:/Use~ 2/4   refo~ Refo~ refo~ ""       help  refo~ <NA>   
 #>  9 addine~ C:/Use~ 2/5   subs~ Subs~ subs~ ""       help  subs~ <NA>   
 #> 10 AGBflu~ C:/Use~ 3/1   AGBf~ AGBf~ AGBf~ UTF-8    help  AGBf~ intern~
-#> # ... with 71,925 more rows, and 1 more variable: concept <chr>
+#> # ... with 71,910 more rows, and 1 more variable: concept <chr>
 
 some_packages <- c("utils", "base")
 search_docs(some_packages)
@@ -70,18 +69,18 @@ search_docs(some_packages)
 ``` r
 reference_package(c("stats", "MASS"))
 #> # A tibble: 970 x 3
-#>    topic     alias     title                                               
-#>    <chr>     <chr>     <chr>                                               
-#>  1 Aids2     Aids2     Australian AIDS Survival Data                       
-#>  2 Animals   Animals   Brain and Body Weights for 28 Species               
-#>  3 Boston    Boston    Housing Values in Suburbs of Boston                 
-#>  4 Cars93    Cars93    Data from 93 Cars on Sale in the USA in 1993        
-#>  5 Cushings  Cushings  Diagnostic Tests on Patients with Cushing's Syndrome
-#>  6 DDT       DDT       DDT in Kale                                         
-#>  7 GAGurine  GAGurine  Level of GAG in Urine of Children                   
-#>  8 Insurance Insurance Numbers of Car Insurance claims                     
-#>  9 Melanoma  Melanoma  Survival from Malignant Melanoma                    
-#> 10 Null      Null      Null Spaces of Matrices                             
+#>    topic       alias                   title                               
+#>    <chr>       <chr>                   <chr>                               
+#>  1 .checkMFCl~ .checkMFClasses, .MFcl~ Functions to Check the Type of Vari~
+#>  2 .preformat~ .preformat.ts, print    Printing and Formatting of Time-Ser~
+#>  3 abbey       abbey                   Determinations of Nickel Content    
+#>  4 accdeaths   accdeaths               Accidental Deaths in the US 1973-19~
+#>  5 acf         acf, ccf, pacf, [       Auto- and Cross- Covariance and -Co~
+#>  6 acf2AR      acf2AR                  Compute an AR Process Exactly Fitti~
+#>  7 add.scope   add.scope, drop.scope,~ Compute Allowed Changes in Adding t~
+#>  8 add1        add1, drop1             Add or Drop All Possible Single Ter~
+#>  9 addmargins  addmargins              Puts Arbitrary Margins on Multidime~
+#> 10 addmargins  addmargins              Puts Arbitrary Margins on Multidime~
 #> # ... with 960 more rows
 
 reference_concept(c("combine strings", "files", "PCA"))
@@ -94,21 +93,53 @@ reference_concept(c("combine strings", "files", "PCA"))
 #> 4 princomp     princomp, plot, print, predict    Principal Components Anal~
 ```
 
-``` r
-if (requireNamespace("fgeo", quietly = TRUE)) {
+### Referencing functions accross multiple packages
 
-  reference_concept(
-    "datasets", 
-    url = "https://forestgeo.github.io/",
-    packages = c("fgeo.x", "fgeo.plot")
+This example shows how to build a reference section like [this
+one](https://forestgeo.github.io/fgeo/articles/siteonly/reference.html),
+from the meta-package
+[**fgeo**](https://forestgeo.github.io/fgeo/index.html).
+
+``` r
+reference_concept(
+  c("datasets", "plot functions"),
+  url = "https://forestgeo.github.io/",
   ) %>% 
-    knitr::kable()
-} 
+  dplyr::sample_n(10) %>% 
+  knitr::kable()
 ```
 
-| topic                                                                    | alias                                                                                       | title                                      |
-| :----------------------------------------------------------------------- | :------------------------------------------------------------------------------------------ | :----------------------------------------- |
-| <a href=https://forestgeo.github.io/fgeo.plot/reference/vft_1quad>?</a>  | vft\_1quad                                                                                  | Small ViewFullTables from Luquillo.        |
-| <a href=https://forestgeo.github.io/fgeo.x/reference/datasets>?</a>      | datasets, elevation, habitat, stem5, stem6, taxa, tree5, tree6, vft\_4quad, tree6\_3species | Datasets from Luquillo, Puerto Rico.       |
-| <a href=https://forestgeo.github.io/fgeo.x/reference/download_data>?</a> | download\_data                                                                              | Download data from fgeo.data.              |
-| <a href=https://forestgeo.github.io/fgeo.x/reference/x_example>?</a>     | x\_example                                                                                  | Path to directory containing example data. |
+| topic                                                                                       | alias                                                                                       | title                                                                    |
+| :------------------------------------------------------------------------------------------ | :------------------------------------------------------------------------------------------ | :----------------------------------------------------------------------- |
+| <a href=https://forestgeo.github.io/fgeo.plot/reference/autoplot.fgeo_habitat>?</a>         | autoplot.fgeo\_habitat                                                                      | Quick habitat plots.                                                     |
+| <a href=https://forestgeo.github.io/fgeo.x/reference/datasets>?</a>                         | datasets, elevation, habitat, stem5, stem6, taxa, tree5, tree6, vft\_4quad, tree6\_3species | Datasets from Luquillo, Puerto Rico.                                     |
+| <a href=https://forestgeo.github.io/fgeo.plot/reference/autoplot_by_species.sp_elev>?</a>   | autoplot\_by\_species.sp\_elev, autoplot\_by\_species.sp                                    | List plots of species distribution and topography (good for pdf output). |
+| <a href=https://forestgeo.github.io/fgeo.x/reference/download_data>?</a>                    | download\_data                                                                              | Download data from fgeo.data.                                            |
+| <a href=https://forestgeo.github.io/fgeo.plot/reference/autoplot.sp_elev>?</a>              | autoplot.sp\_elev, autoplot.sp, autoplot.elev                                               | Quick plot of species distribution and/or topography.                    |
+| <a href=https://forestgeo.github.io/fgeo.plot/reference/plot_dbh_bubbles_by_quadrat>?</a>   | plot\_dbh\_bubbles\_by\_quadrat                                                             | List dbh bubble-plots by quadrat (good for .pdf output).                 |
+| <a href=https://forestgeo.github.io/fgeo.plot/reference/sp>?</a>                            | sp                                                                                          | Enable autoplotting the variable ‘sp’.                                   |
+| <a href=https://forestgeo.github.io/fgeo.x/reference/example_path>?</a>                     | example\_path                                                                               | Path to directory containing example data.                               |
+| <a href=https://forestgeo.github.io/fgeo.plot/reference/plot_tag_status_by_subquadrat>?</a> | plot\_tag\_status\_by\_subquadrat                                                           | List plots of tree-tag status by subquadrat (good for .pdf output).      |
+| <a href=https://forestgeo.github.io/fgeo.plot/reference/sp_elev>?</a>                       | sp\_elev                                                                                    | Enable autoplotting the variables ‘sp’ and ‘elev’.                       |
+
+``` r
+reference_package(
+  c("fgeo.x", "fgeo.plot"), 
+  url = "https://forestgeo.github.io/"
+ ) %>% 
+  dplyr::sample_n(10) %>% 
+  knitr::kable()
+```
+
+| topic                                                                                       | alias                                         | title                                                               |
+| :------------------------------------------------------------------------------------------ | :-------------------------------------------- | :------------------------------------------------------------------ |
+| <a href=https://forestgeo.github.io/fgeo.plot/reference/plot_tag_status_by_subquadrat>?</a> | plot\_tag\_status\_by\_subquadrat             | List plots of tree-tag status by subquadrat (good for .pdf output). |
+| <a href=https://forestgeo.github.io/fgeo.plot/reference/elev>?</a>                          | elev                                          | Enable autoplotting the variable ‘elev’.                            |
+| <a href=https://forestgeo.github.io/fgeo.plot/reference/autoplot.fgeo_habitat>?</a>         | autoplot.fgeo\_habitat                        | Quick habitat plots.                                                |
+| <a href=https://forestgeo.github.io/fgeo.x/reference/example_path>?</a>                     | example\_path                                 | Path to directory containing example data.                          |
+| <a href=https://forestgeo.github.io/fgeo.plot/reference/elev>?</a>                          | elev                                          | Enable autoplotting the variable ‘elev’.                            |
+| <a href=https://forestgeo.github.io/fgeo.plot/reference/elev>?</a>                          | elev                                          | Enable autoplotting the variable ‘elev’.                            |
+| <a href=https://forestgeo.github.io/fgeo.plot/reference/sp_elev>?</a>                       | sp\_elev                                      | Enable autoplotting the variables ‘sp’ and ‘elev’.                  |
+| <a href=https://forestgeo.github.io/fgeo.plot/reference/autoplot.sp_elev>?</a>              | autoplot.sp\_elev, autoplot.sp, autoplot.elev | Quick plot of species distribution and/or topography.               |
+| <a href=https://forestgeo.github.io/fgeo.plot/reference/autoplot.sp_elev>?</a>              | autoplot.sp\_elev, autoplot.sp, autoplot.elev | Quick plot of species distribution and/or topography.               |
+| <a href=https://forestgeo.github.io/fgeo.plot/reference/autoplot.sp_elev>?</a>              | autoplot.sp\_elev, autoplot.sp, autoplot.elev | Quick plot of species distribution and/or topography.               |
