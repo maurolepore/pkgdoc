@@ -27,7 +27,7 @@
 #'   reference_package("datasets", url = "https://forestgeo.github.io/")
 #' }
 #' }
-#' @name reference_package
+#' @name reference_doc
 NULL
 pick_docs <- function(package_or_concept) {
   force(package_or_concept)
@@ -43,19 +43,18 @@ pick_docs <- function(package_or_concept) {
   }
 }
 
-#' @rdname reference_package
-NULL
 reference_any <- function(doc) {
   force(doc)
   function(x, url = NULL, packages = NULL, strip_s3class = TRUE) {
-    out <- pick_docs(doc)(x, url = url, packages = packages)
-    out <- tidy_reference(out, strip_s3class)
+    picked_doc <- pick_useful_docs(packages = packages) %>%
+      filter(.[[doc]] %in% x)
 
-    if (identical(nrow(out), 0L)) {
+    result <- tidy_reference(may_url(picked_doc, url), strip_s3class)
+    if (identical(nrow(result), 0L)) {
       warn(glue("No {doc} matches '{x}'."))
     }
 
-    out
+    result
   }
 }
 
@@ -136,4 +135,11 @@ link_topic <- function(.data, url) {
       package = glue("<a href={url}{package}>{package}</a>")
     ) %>%
     arrange(.data$package)
+}
+
+may_url <- function(x, url) {
+  if (is.null(url)) {
+    return(unique(x))
+  }
+  unique(link_topic(x, url))
 }
