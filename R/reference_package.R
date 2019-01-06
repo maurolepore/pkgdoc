@@ -37,27 +37,21 @@ reference_any <- function(doc) {
     pick <- pick_doc(packages = packages, doc = doc, x = x)
 
     result <- tidy_reference(may_url(pick, url), strip_s3class)
-    may_warn_missing_doc(result, doc, x)
     result
   }
 }
 
 pick_doc <- function(packages, doc, x) {
-  search_docs(packages = packages) %>%
+  result <- search_docs(packages = packages) %>%
     exclude_package_doc(packages) %>%
     exclude_internal_functions() %>%
     select(-.data$libpath, -.data$id, -.data$encoding, -.data$name) %>%
     unique() %>%
     filter(.[[doc]] %in% x)
+
+    may_warn_missing_doc(result, doc, x)
+    result
 }
-
-may_warn_missing_doc <- function(result, doc, x) {
-  if (identical(nrow(result), 0L)) {
-    warn(glue("No {doc} matches '{x}'."))
-  }
-}
-
-
 
 #' @rdname reference_package
 #' @export
@@ -146,4 +140,13 @@ may_url <- function(x, url) {
     return(unique(x))
   }
   unique(link_topic(x, url))
+}
+
+may_warn_missing_doc <- function(.data, doc, x) {
+  good_request <- x %in% unique(.data[[doc]])
+  if (all(good_request))
+    return(invisible(.data))
+
+  bad_request <- x[!good_request]
+  warn(glue("No {doc} matches '{bad_request}'."))
 }
