@@ -18,6 +18,11 @@ to provide links to each topic’s help file (similar to the Reference
 section of a [**pkgdown**](https://pkgdown.r-lib.org/) website but not
 limited to a single package).
 
+  - [Reference and
+    tutorial](https://maurolepore.github.io/pkgdoc/articles/siteonly/reference.html)
+  - [**pkgdoc** in
+    action](https://forestgeo.github.io/fgeo/articles/siteonly/reference.html)
+
 ## Installation
 
 ``` r

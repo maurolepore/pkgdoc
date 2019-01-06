@@ -21,6 +21,9 @@ knitr::opts_chunk$set(
 
 Create dataframes of the documentation of installed packages. Combined with `krittr::kable()` or `DT::datatable()`, __pkgdoc__ allows you to reference functions by package or concept across multiple packages and to provide links to each topic's help file (similar to the Reference section of a [__pkgdown__](https://pkgdown.r-lib.org/) website but not limited to a single package).
 
+* [Reference and tutorial](https://maurolepore.github.io/pkgdoc/articles/siteonly/reference.html)
+* [__pkgdoc__ in action](https://forestgeo.github.io/fgeo/articles/siteonly/reference.html)
+
 ## Installation
 
 ``` r
