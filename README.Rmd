@@ -37,6 +37,8 @@ devtools::install_github("maurolepore/pkgdoc")
 library(pkgdoc)
 ```
 
+`search_docs()` creates a dataframe of documentation available to you.
+
 ```{r example}
 # Documentation of all installed packages
 search_docs()
@@ -45,15 +47,15 @@ some_packages <- c("utils", "base")
 search_docs(some_packages)
 ```
 
+`reference_package()` and `reference_concept()` allow you to pick specific documentation.
+
 ```{r}
 reference_package(c("stats", "MASS"))
 
 reference_concept(c("combine strings", "files", "PCA"))
 ```
 
-### Referencing functions across multiple packages
-
-This example shows how to build a reference section like [this one](https://forestgeo.github.io/fgeo/articles/siteonly/reference.html), from the  meta-package [__fgeo__](https://forestgeo.github.io/fgeo/index.html).
+Use `knittr::kable()` or `DT::datatable()` for the links to become clickable.
 
 ```{r}
 library(fgeo)
