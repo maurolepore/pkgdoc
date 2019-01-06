@@ -36,7 +36,7 @@ reference_any <- function(doc) {
     warn_unnattached(x, doc)
     pick <- pick_doc(packages = packages, doc = doc, x = x)
 
-    result <- tidy_reference(may_url(pick, url), strip_s3class)
+    result <- tidy_reference(may_add_url(pick, url), strip_s3class)
     result
   }
 }
@@ -113,10 +113,9 @@ collapse_alias <- function(.data, strip_s3class = FALSE) {
   .data %>%
     group_by(.data$topic) %>%
     mutate(
-      alias = ifelse(
-        strip_s3class,
-        may_strip_s3class(.data$alias, .f = s3_strip_class),
-        may_strip_s3class(.data$alias, .f = identity)
+      alias = dplyr::case_when(
+        !strip_s3class ~ may_strip_s3class(.data$alias, .f = identity),
+         strip_s3class ~ may_strip_s3class(.data$alias, .f = s3_strip_class),
       )
     ) %>%
     ungroup() %>%
@@ -127,7 +126,7 @@ may_strip_s3class <- function(x, .f = s3_strip_class) {
   paste(unique(.f(x)), collapse = ", ")
 }
 
-may_url <- function(x, url) {
+may_add_url <- function(x, url) {
   if (is.null(url)) {
     return(unique(x))
   }
