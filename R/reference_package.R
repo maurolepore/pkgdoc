@@ -34,20 +34,21 @@ reference_any <- function(doc) {
   force(doc)
   function(x, url = NULL, packages = NULL, strip_s3class = TRUE) {
     warn_unnattached(x, doc)
+    pick <- pick_doc(packages = packages, doc = doc, x = x)
 
-    picked_doc <- pick_useful_doc(packages = packages) %>%
-      filter(.[[doc]] %in% x)
-    pick_doc <- function(packages, doc, x) {
-      picked_doc <- pick_useful_doc(packages = packages) %>%
-        filter(.[[doc]] %in% x)
-    }
-    picked_doc <- pick_doc(packages = packages, doc = doc, x = x)
-
-    result <- tidy_reference(may_url(picked_doc, url), strip_s3class)
-
+    result <- tidy_reference(may_url(pick, url), strip_s3class)
     may_warn_missing_doc(result, doc, x)
     result
   }
+}
+
+pick_doc <- function(packages, doc, x) {
+  search_docs(packages = packages) %>%
+    exclude_package_doc(packages) %>%
+    exclude_internal_functions() %>%
+    select(-.data$libpath, -.data$id, -.data$encoding, -.data$name) %>%
+    unique() %>%
+    filter(.[[doc]] %in% x)
 }
 
 may_warn_missing_doc <- function(result, doc, x) {
