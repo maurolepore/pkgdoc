@@ -73,11 +73,10 @@
 <div class="page-header"><h1 class="hasAnchor">
 <a href="#pkgdoc" class="anchor"></a>pkgdoc</h1></div>
 
-<p>The goal of <strong>pkgdoc</strong> is to create dataframes of the documentation of installed packages. This helps you to mamipulate documentation accross multiple packages. For example, you can use <strong>pkgdoc</strong> to create a reference of functions by concept accross multiple packages (similar to the Reference section of a <a href="https://pkgdown.r-lib.org/"><strong>pkgdown</strong></a> website but not limited to a single package).</p>
+<p>Create dataframes of the documentation of installed packages. Combined with <code>krittr::kable()</code> or <code><a href="https://www.rdocumentation.org/packages/DT/topics/datatable">DT::datatable()</a></code>, <strong>pkgdoc</strong> allows you to reference functions by package or concept across multiple packages and to provide links to each topic’s help file (similar to the Reference section of a <a href="https://pkgdown.r-lib.org/"><strong>pkgdown</strong></a> website but not limited to a single package).</p>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
-<p>You can install the released version of pkgdoc from <a href="https://CRAN.R-project.org">CRAN</a> with:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="co"># install.packages("devtools")</span></a>
 <a class="sourceLine" id="cb1-2" data-line-number="2">devtools<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/devtools/topics/reexports">install_github</a></span>(<span class="st">"maurolepore/pkgdoc"</span>)</a></code></pre></div>
 </div>
@@ -87,7 +86,7 @@
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(pkgdoc)</a></code></pre></div>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="co"># Documentation of all installed packages</span></a>
 <a class="sourceLine" id="cb3-2" data-line-number="2"><span class="kw"><a href="reference/search_docs.html">search_docs</a></span>()</a>
-<a class="sourceLine" id="cb3-3" data-line-number="3"><span class="co">#&gt; # A tibble: 71,919 x 11</span></a>
+<a class="sourceLine" id="cb3-3" data-line-number="3"><span class="co">#&gt; # A tibble: 71,920 x 11</span></a>
 <a class="sourceLine" id="cb3-4" data-line-number="4"><span class="co">#&gt;    package libpath id    name  title topic encoding type  alias keyword</span></a>
 <a class="sourceLine" id="cb3-5" data-line-number="5"><span class="co">#&gt;    &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;  </span></a>
 <a class="sourceLine" id="cb3-6" data-line-number="6"><span class="co">#&gt;  1 acepack C:/Use~ 1/1   ace   Alte~ ace   ""       help  ace   models </span></a>
@@ -100,7 +99,7 @@
 <a class="sourceLine" id="cb3-13" data-line-number="13"><span class="co">#&gt;  8 addine~ C:/Use~ 2/4   refo~ Refo~ refo~ ""       help  refo~ &lt;NA&gt;   </span></a>
 <a class="sourceLine" id="cb3-14" data-line-number="14"><span class="co">#&gt;  9 addine~ C:/Use~ 2/5   subs~ Subs~ subs~ ""       help  subs~ &lt;NA&gt;   </span></a>
 <a class="sourceLine" id="cb3-15" data-line-number="15"><span class="co">#&gt; 10 AGBflu~ C:/Use~ 3/1   AGBf~ AGBf~ AGBf~ UTF-8    help  AGBf~ intern~</span></a>
-<a class="sourceLine" id="cb3-16" data-line-number="16"><span class="co">#&gt; # ... with 71,909 more rows, and 1 more variable: concept &lt;chr&gt;</span></a>
+<a class="sourceLine" id="cb3-16" data-line-number="16"><span class="co">#&gt; # ... with 71,910 more rows, and 1 more variable: concept &lt;chr&gt;</span></a>
 <a class="sourceLine" id="cb3-17" data-line-number="17"></a>
 <a class="sourceLine" id="cb3-18" data-line-number="18">some_packages &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"utils"</span>, <span class="st">"base"</span>)</a>
 <a class="sourceLine" id="cb3-19" data-line-number="19"><span class="kw"><a href="reference/search_docs.html">search_docs</a></span>(some_packages)</a>
@@ -118,7 +117,7 @@
 <a class="sourceLine" id="cb3-31" data-line-number="31"><span class="co">#&gt;  9 base    C:/Use~ 10/3  all.~ Test~ all.~ ""       help  all.~ progra~</span></a>
 <a class="sourceLine" id="cb3-32" data-line-number="32"><span class="co">#&gt; 10 base    C:/Use~ 10/3  all.~ Test~ all.~ ""       help  all.~ progra~</span></a>
 <a class="sourceLine" id="cb3-33" data-line-number="33"><span class="co">#&gt; # ... with 5,925 more rows, and 1 more variable: concept &lt;chr&gt;</span></a></code></pre></div>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw"><a href="reference/reference_package.html">reference_package</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"stats"</span>, <span class="st">"MASS"</span>))</a>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw"><a href="reference/reference_doc.html">reference_package</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"stats"</span>, <span class="st">"MASS"</span>))</a>
 <a class="sourceLine" id="cb4-2" data-line-number="2"><span class="co">#&gt; # A tibble: 970 x 3</span></a>
 <a class="sourceLine" id="cb4-3" data-line-number="3"><span class="co">#&gt;    topic       alias                   title                               </span></a>
 <a class="sourceLine" id="cb4-4" data-line-number="4"><span class="co">#&gt;    &lt;chr&gt;       &lt;chr&gt;                   &lt;chr&gt;                               </span></a>
@@ -134,7 +133,7 @@
 <a class="sourceLine" id="cb4-14" data-line-number="14"><span class="co">#&gt; 10 addmargins  addmargins              Puts Arbitrary Margins on Multidime~</span></a>
 <a class="sourceLine" id="cb4-15" data-line-number="15"><span class="co">#&gt; # ... with 960 more rows</span></a>
 <a class="sourceLine" id="cb4-16" data-line-number="16"></a>
-<a class="sourceLine" id="cb4-17" data-line-number="17"><span class="kw"><a href="reference/reference_package.html">reference_concept</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"combine strings"</span>, <span class="st">"files"</span>, <span class="st">"PCA"</span>))</a>
+<a class="sourceLine" id="cb4-17" data-line-number="17"><span class="kw"><a href="reference/reference_doc.html">reference_concept</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"combine strings"</span>, <span class="st">"files"</span>, <span class="st">"PCA"</span>))</a>
 <a class="sourceLine" id="cb4-18" data-line-number="18"><span class="co">#&gt; # A tibble: 4 x 3</span></a>
 <a class="sourceLine" id="cb4-19" data-line-number="19"><span class="co">#&gt;   topic        alias                             title                     </span></a>
 <a class="sourceLine" id="cb4-20" data-line-number="20"><span class="co">#&gt;   &lt;chr&gt;        &lt;chr&gt;                             &lt;chr&gt;                     </span></a>
@@ -142,15 +141,23 @@
 <a class="sourceLine" id="cb4-22" data-line-number="22"><span class="co">#&gt; 2 paste        paste, paste0                     Concatenate Strings       </span></a>
 <a class="sourceLine" id="cb4-23" data-line-number="23"><span class="co">#&gt; 3 prcomp       prcomp, plot, predict, print, su~ Principal Components Anal~</span></a>
 <a class="sourceLine" id="cb4-24" data-line-number="24"><span class="co">#&gt; 4 princomp     princomp, plot, print, predict    Principal Components Anal~</span></a></code></pre></div>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="cf">if</span> (<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/ns-load">requireNamespace</a></span>(<span class="st">"fgeo"</span>, <span class="dt">quietly =</span> <span class="ot">TRUE</span>)) {</a>
-<a class="sourceLine" id="cb5-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb5-3" data-line-number="3">  <span class="kw"><a href="reference/reference_package.html">reference_concept</a></span>(</a>
-<a class="sourceLine" id="cb5-4" data-line-number="4">    <span class="st">"datasets"</span>, </a>
-<a class="sourceLine" id="cb5-5" data-line-number="5">    <span class="dt">url =</span> <span class="st">"https://forestgeo.github.io/"</span>,</a>
-<a class="sourceLine" id="cb5-6" data-line-number="6">    <span class="dt">packages =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"fgeo.x"</span>, <span class="st">"fgeo.plot"</span>)</a>
-<a class="sourceLine" id="cb5-7" data-line-number="7">  ) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb5-8" data-line-number="8"><span class="st">    </span>knitr<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/knitr/topics/kable">kable</a></span>()</a>
-<a class="sourceLine" id="cb5-9" data-line-number="9">} </a></code></pre></div>
+<div id="referencing-functions-accross-multiple-packages" class="section level3">
+<h3 class="hasAnchor">
+<a href="#referencing-functions-accross-multiple-packages" class="anchor"></a>Referencing functions accross multiple packages</h3>
+<p>This example shows how to build a reference section like <a href="https://forestgeo.github.io/fgeo/articles/siteonly/reference.html">this one</a>, from the meta-package <a href="https://forestgeo.github.io/fgeo/index.html"><strong>fgeo</strong></a>.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(fgeo)</a>
+<a class="sourceLine" id="cb5-2" data-line-number="2"><span class="co">#&gt; -- Attaching packages ------------------------------------------------------------ fgeo 0.0.0.9002 --</span></a>
+<a class="sourceLine" id="cb5-3" data-line-number="3"><span class="co">#&gt; v fgeo.analyze 0.0.0.9003     v fgeo.tool    0.0.0.9005</span></a>
+<a class="sourceLine" id="cb5-4" data-line-number="4"><span class="co">#&gt; v fgeo.plot    0.0.0.9402     v fgeo.x       0.0.0.9000</span></a>
+<a class="sourceLine" id="cb5-5" data-line-number="5"><span class="co">#&gt; -- Conflicts -------------------------------------------------------------------- fgeo_conflicts() --</span></a>
+<a class="sourceLine" id="cb5-6" data-line-number="6"><span class="co">#&gt; x fgeo.tool::filter() masks stats::filter()</span></a>
+<a class="sourceLine" id="cb5-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb5-8" data-line-number="8"><span class="kw"><a href="reference/reference_doc.html">reference_concept</a></span>(</a>
+<a class="sourceLine" id="cb5-9" data-line-number="9">  <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"datasets"</span>, <span class="st">"plot functions"</span>),</a>
+<a class="sourceLine" id="cb5-10" data-line-number="10">  <span class="dt">url =</span> <span class="st">"https://forestgeo.github.io/"</span>,</a>
+<a class="sourceLine" id="cb5-11" data-line-number="11">  ) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb5-12" data-line-number="12"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/sample.html">sample_n</a></span>(<span class="dv">10</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb5-13" data-line-number="13"><span class="st">  </span>knitr<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/knitr/topics/kable">kable</a></span>()</a></code></pre></div>
 <table class="table table">
 <thead><tr class="header">
 <th align="left">topic</th>
@@ -158,6 +165,46 @@
 <th align="left">title</th>
 </tr></thead>
 <tbody>
+<tr class="odd">
+<td align="left"><a href="https://forestgeo.github.io/fgeo.plot/reference/autoplot.sp_elev">?</a></td>
+<td align="left">autoplot</td>
+<td align="left">Quick plot of species distribution and/or topography.</td>
+</tr>
+<tr class="even">
+<td align="left"><a href="https://forestgeo.github.io/fgeo.plot/reference/plot_dbh_bubbles_by_quadrat">?</a></td>
+<td align="left">plot_dbh_bubbles_by_quadrat</td>
+<td align="left">List dbh bubble-plots by quadrat (good for .pdf output).</td>
+</tr>
+<tr class="odd">
+<td align="left"><a href="https://forestgeo.github.io/fgeo.plot/reference/sp_elev">?</a></td>
+<td align="left">sp_elev</td>
+<td align="left">Enable autoplotting the variables ‘sp’ and ‘elev’.</td>
+</tr>
+<tr class="even">
+<td align="left"><a href="https://forestgeo.github.io/fgeo.plot/reference/elev">?</a></td>
+<td align="left">elev</td>
+<td align="left">Enable autoplotting the variable ‘elev’.</td>
+</tr>
+<tr class="odd">
+<td align="left"><a href="https://forestgeo.github.io/fgeo.plot/reference/sp">?</a></td>
+<td align="left">sp</td>
+<td align="left">Enable autoplotting the variable ‘sp’.</td>
+</tr>
+<tr class="even">
+<td align="left"><a href="https://forestgeo.github.io/fgeo.plot/reference/plot_tag_status_by_subquadrat">?</a></td>
+<td align="left">plot_tag_status_by_subquadrat</td>
+<td align="left">List plots of tree-tag status by subquadrat (good for .pdf output).</td>
+</tr>
+<tr class="odd">
+<td align="left"><a href="https://forestgeo.github.io/fgeo.plot/reference/autoplot_by_species.sp_elev">?</a></td>
+<td align="left">autoplot_by_species</td>
+<td align="left">List plots of species distribution and topography (good for pdf output).</td>
+</tr>
+<tr class="even">
+<td align="left"><a href="https://forestgeo.github.io/fgeo.plot/reference/autoplot.fgeo_habitat">?</a></td>
+<td align="left">autoplot</td>
+<td align="left">Quick habitat plots.</td>
+</tr>
 <tr class="odd">
 <td align="left"><a href="https://forestgeo.github.io/fgeo.x/reference/datasets">?</a></td>
 <td align="left">datasets, elevation, habitat, stem5, stem6, taxa, tree5, tree6, vft_4quad, tree6_3species</td>
@@ -168,13 +215,74 @@
 <td align="left">download_data</td>
 <td align="left">Download data from fgeo.data.</td>
 </tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw"><a href="reference/reference_doc.html">reference_package</a></span>(</a>
+<a class="sourceLine" id="cb6-2" data-line-number="2">  <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"fgeo.x"</span>, <span class="st">"fgeo.plot"</span>), </a>
+<a class="sourceLine" id="cb6-3" data-line-number="3">  <span class="dt">url =</span> <span class="st">"https://forestgeo.github.io/"</span></a>
+<a class="sourceLine" id="cb6-4" data-line-number="4"> ) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb6-5" data-line-number="5"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/sample.html">sample_n</a></span>(<span class="dv">10</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb6-6" data-line-number="6"><span class="st">  </span>knitr<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/knitr/topics/kable">kable</a></span>()</a></code></pre></div>
+<table class="table table">
+<thead><tr class="header">
+<th align="left">topic</th>
+<th align="left">alias</th>
+<th align="left">title</th>
+</tr></thead>
+<tbody>
 <tr class="odd">
-<td align="left"><a href="https://forestgeo.github.io/fgeo.x/reference/example_path">?</a></td>
-<td align="left">example_path</td>
-<td align="left">Path to directory containing example data.</td>
+<td align="left"><a href="https://forestgeo.github.io/fgeo.plot/reference/plot_dbh_bubbles_by_quadrat">?</a></td>
+<td align="left">plot_dbh_bubbles_by_quadrat</td>
+<td align="left">List dbh bubble-plots by quadrat (good for .pdf output).</td>
+</tr>
+<tr class="even">
+<td align="left"><a href="https://forestgeo.github.io/fgeo.plot/reference/plot_dbh_bubbles_by_quadrat">?</a></td>
+<td align="left">plot_dbh_bubbles_by_quadrat</td>
+<td align="left">List dbh bubble-plots by quadrat (good for .pdf output).</td>
+</tr>
+<tr class="odd">
+<td align="left"><a href="https://forestgeo.github.io/fgeo.plot/reference/sp">?</a></td>
+<td align="left">sp</td>
+<td align="left">Enable autoplotting the variable ‘sp’.</td>
+</tr>
+<tr class="even">
+<td align="left"><a href="https://forestgeo.github.io/fgeo.plot/reference/elev">?</a></td>
+<td align="left">elev</td>
+<td align="left">Enable autoplotting the variable ‘elev’.</td>
+</tr>
+<tr class="odd">
+<td align="left"><a href="https://forestgeo.github.io/fgeo.plot/reference/sp_elev">?</a></td>
+<td align="left">sp_elev</td>
+<td align="left">Enable autoplotting the variables ‘sp’ and ‘elev’.</td>
+</tr>
+<tr class="even">
+<td align="left"><a href="https://forestgeo.github.io/fgeo.plot/reference/autoplot.sp_elev">?</a></td>
+<td align="left">autoplot</td>
+<td align="left">Quick plot of species distribution and/or topography.</td>
+</tr>
+<tr class="odd">
+<td align="left"><a href="https://forestgeo.github.io/fgeo.plot/reference/sp">?</a></td>
+<td align="left">sp</td>
+<td align="left">Enable autoplotting the variable ‘sp’.</td>
+</tr>
+<tr class="even">
+<td align="left"><a href="https://forestgeo.github.io/fgeo.x/reference/download_data">?</a></td>
+<td align="left">download_data</td>
+<td align="left">Download data from fgeo.data.</td>
+</tr>
+<tr class="odd">
+<td align="left"><a href="https://forestgeo.github.io/fgeo.plot/reference/autoplot.sp_elev">?</a></td>
+<td align="left">autoplot</td>
+<td align="left">Quick plot of species distribution and/or topography.</td>
+</tr>
+<tr class="even">
+<td align="left"><a href="https://forestgeo.github.io/fgeo.plot/reference/sp_elev">?</a></td>
+<td align="left">sp_elev</td>
+<td align="left">Enable autoplotting the variables ‘sp’ and ‘elev’.</td>
 </tr>
 </tbody>
 </table>
+</div>
 </div>
 </div>
   </div>

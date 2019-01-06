@@ -8,14 +8,12 @@ status](https://travis-ci.org/maurolepore/pkgdoc.svg?branch=master)](https://tra
 [![Coverage
 status](https://coveralls.io/repos/github/maurolepore/pkgdoc/badge.svg)](https://coveralls.io/r/maurolepore/pkgdoc?branch=master)
 
-The goal of **pkgdoc** is to create dataframes of the documentation of
-installed packages. This helps you to manipulate documentation across
-multiple packages. Combined with `krittr::kable()` or `DT::datatable()`,
-**pkgdoc** allows you to reference functions by package or concept
-across multiple packages and provide links to each topic’s help file
-(similar to the Reference section of a
-[**pkgdown**](https://pkgdown.r-lib.org/) website but not limited to a
-single package).
+Create dataframes of the documentation of installed packages. Combined
+with `krittr::kable()` or `DT::datatable()`, **pkgdoc** allows you to
+reference functions by package or concept across multiple packages and
+to provide links to each topic’s help file (similar to the Reference
+section of a [**pkgdown**](https://pkgdown.r-lib.org/) website but not
+limited to a single package).
 
 ## Installation
 
@@ -68,6 +66,8 @@ search_docs(some_packages)
 
 ``` r
 reference_package(c("stats", "MASS"))
+#> Warning:   All packages should be attached `strip_s3class` to work properly.
+#>   Not attached: MASS
 #> # A tibble: 970 x 3
 #>    topic       alias                   title                               
 #>    <chr>       <chr>                   <chr>                               
@@ -101,6 +101,13 @@ from the meta-package
 [**fgeo**](https://forestgeo.github.io/fgeo/index.html).
 
 ``` r
+library(fgeo)
+#> -- Attaching packages ----------------------------------------------------- fgeo 0.0.0.9002 --
+#> v fgeo.analyze 0.0.0.9003     v fgeo.tool    0.0.0.9005
+#> v fgeo.plot    0.0.0.9402     v fgeo.x       0.0.0.9000
+#> -- Conflicts ------------------------------------------------------------- fgeo_conflicts() --
+#> x fgeo.tool::filter() masks stats::filter()
+
 reference_concept(
   c("datasets", "plot functions"),
   url = "https://forestgeo.github.io/",
@@ -109,18 +116,18 @@ reference_concept(
   knitr::kable()
 ```
 
-| topic                                                                                       | alias                                                                                       | title                                                                    |
-| :------------------------------------------------------------------------------------------ | :------------------------------------------------------------------------------------------ | :----------------------------------------------------------------------- |
-| <a href=https://forestgeo.github.io/fgeo.plot/reference/autoplot.fgeo_habitat>?</a>         | autoplot.fgeo\_habitat                                                                      | Quick habitat plots.                                                     |
-| <a href=https://forestgeo.github.io/fgeo.x/reference/datasets>?</a>                         | datasets, elevation, habitat, stem5, stem6, taxa, tree5, tree6, vft\_4quad, tree6\_3species | Datasets from Luquillo, Puerto Rico.                                     |
-| <a href=https://forestgeo.github.io/fgeo.plot/reference/autoplot_by_species.sp_elev>?</a>   | autoplot\_by\_species.sp\_elev, autoplot\_by\_species.sp                                    | List plots of species distribution and topography (good for pdf output). |
-| <a href=https://forestgeo.github.io/fgeo.x/reference/download_data>?</a>                    | download\_data                                                                              | Download data from fgeo.data.                                            |
-| <a href=https://forestgeo.github.io/fgeo.plot/reference/autoplot.sp_elev>?</a>              | autoplot.sp\_elev, autoplot.sp, autoplot.elev                                               | Quick plot of species distribution and/or topography.                    |
-| <a href=https://forestgeo.github.io/fgeo.plot/reference/plot_dbh_bubbles_by_quadrat>?</a>   | plot\_dbh\_bubbles\_by\_quadrat                                                             | List dbh bubble-plots by quadrat (good for .pdf output).                 |
-| <a href=https://forestgeo.github.io/fgeo.plot/reference/sp>?</a>                            | sp                                                                                          | Enable autoplotting the variable ‘sp’.                                   |
-| <a href=https://forestgeo.github.io/fgeo.x/reference/example_path>?</a>                     | example\_path                                                                               | Path to directory containing example data.                               |
-| <a href=https://forestgeo.github.io/fgeo.plot/reference/plot_tag_status_by_subquadrat>?</a> | plot\_tag\_status\_by\_subquadrat                                                           | List plots of tree-tag status by subquadrat (good for .pdf output).      |
-| <a href=https://forestgeo.github.io/fgeo.plot/reference/sp_elev>?</a>                       | sp\_elev                                                                                    | Enable autoplotting the variables ‘sp’ and ‘elev’.                       |
+| topic                                                                                       | alias                             | title                                                                    |
+| :------------------------------------------------------------------------------------------ | :-------------------------------- | :----------------------------------------------------------------------- |
+| <a href=https://forestgeo.github.io/fgeo.x/reference/example_path>?</a>                     | example\_path                     | Path to directory containing example data.                               |
+| <a href=https://forestgeo.github.io/fgeo.plot/reference/sp>?</a>                            | sp                                | Enable autoplotting the variable ‘sp’.                                   |
+| <a href=https://forestgeo.github.io/fgeo.plot/reference/sp_elev>?</a>                       | sp\_elev                          | Enable autoplotting the variables ‘sp’ and ‘elev’.                       |
+| <a href=https://forestgeo.github.io/fgeo.plot/reference/autoplot_by_species.sp_elev>?</a>   | autoplot\_by\_species             | List plots of species distribution and topography (good for pdf output). |
+| <a href=https://forestgeo.github.io/fgeo.plot/reference/autoplot.fgeo_habitat>?</a>         | autoplot                          | Quick habitat plots.                                                     |
+| <a href=https://forestgeo.github.io/fgeo.x/reference/download_data>?</a>                    | download\_data                    | Download data from fgeo.data.                                            |
+| <a href=https://forestgeo.github.io/fgeo.plot/reference/elev>?</a>                          | elev                              | Enable autoplotting the variable ‘elev’.                                 |
+| <a href=https://forestgeo.github.io/fgeo.plot/reference/autoplot.sp_elev>?</a>              | autoplot                          | Quick plot of species distribution and/or topography.                    |
+| <a href=https://forestgeo.github.io/fgeo.plot/reference/plot_dbh_bubbles_by_quadrat>?</a>   | plot\_dbh\_bubbles\_by\_quadrat   | List dbh bubble-plots by quadrat (good for .pdf output).                 |
+| <a href=https://forestgeo.github.io/fgeo.plot/reference/plot_tag_status_by_subquadrat>?</a> | plot\_tag\_status\_by\_subquadrat | List plots of tree-tag status by subquadrat (good for .pdf output).      |
 
 ``` r
 reference_package(
@@ -131,15 +138,15 @@ reference_package(
   knitr::kable()
 ```
 
-| topic                                                                                       | alias                                         | title                                                               |
-| :------------------------------------------------------------------------------------------ | :-------------------------------------------- | :------------------------------------------------------------------ |
-| <a href=https://forestgeo.github.io/fgeo.plot/reference/plot_tag_status_by_subquadrat>?</a> | plot\_tag\_status\_by\_subquadrat             | List plots of tree-tag status by subquadrat (good for .pdf output). |
-| <a href=https://forestgeo.github.io/fgeo.plot/reference/elev>?</a>                          | elev                                          | Enable autoplotting the variable ‘elev’.                            |
-| <a href=https://forestgeo.github.io/fgeo.plot/reference/autoplot.fgeo_habitat>?</a>         | autoplot.fgeo\_habitat                        | Quick habitat plots.                                                |
-| <a href=https://forestgeo.github.io/fgeo.x/reference/example_path>?</a>                     | example\_path                                 | Path to directory containing example data.                          |
-| <a href=https://forestgeo.github.io/fgeo.plot/reference/elev>?</a>                          | elev                                          | Enable autoplotting the variable ‘elev’.                            |
-| <a href=https://forestgeo.github.io/fgeo.plot/reference/elev>?</a>                          | elev                                          | Enable autoplotting the variable ‘elev’.                            |
-| <a href=https://forestgeo.github.io/fgeo.plot/reference/sp_elev>?</a>                       | sp\_elev                                      | Enable autoplotting the variables ‘sp’ and ‘elev’.                  |
-| <a href=https://forestgeo.github.io/fgeo.plot/reference/autoplot.sp_elev>?</a>              | autoplot.sp\_elev, autoplot.sp, autoplot.elev | Quick plot of species distribution and/or topography.               |
-| <a href=https://forestgeo.github.io/fgeo.plot/reference/autoplot.sp_elev>?</a>              | autoplot.sp\_elev, autoplot.sp, autoplot.elev | Quick plot of species distribution and/or topography.               |
-| <a href=https://forestgeo.github.io/fgeo.plot/reference/autoplot.sp_elev>?</a>              | autoplot.sp\_elev, autoplot.sp, autoplot.elev | Quick plot of species distribution and/or topography.               |
+| topic                                                                                       | alias                             | title                                                                    |
+| :------------------------------------------------------------------------------------------ | :-------------------------------- | :----------------------------------------------------------------------- |
+| <a href=https://forestgeo.github.io/fgeo.plot/reference/elev>?</a>                          | elev                              | Enable autoplotting the variable ‘elev’.                                 |
+| <a href=https://forestgeo.github.io/fgeo.plot/reference/elev>?</a>                          | elev                              | Enable autoplotting the variable ‘elev’.                                 |
+| <a href=https://forestgeo.github.io/fgeo.plot/reference/plot_tag_status_by_subquadrat>?</a> | plot\_tag\_status\_by\_subquadrat | List plots of tree-tag status by subquadrat (good for .pdf output).      |
+| <a href=https://forestgeo.github.io/fgeo.plot/reference/autoplot_by_species.sp_elev>?</a>   | autoplot\_by\_species             | List plots of species distribution and topography (good for pdf output). |
+| <a href=https://forestgeo.github.io/fgeo.plot/reference/autoplot_by_species.sp_elev>?</a>   | autoplot\_by\_species             | List plots of species distribution and topography (good for pdf output). |
+| <a href=https://forestgeo.github.io/fgeo.plot/reference/sp>?</a>                            | sp                                | Enable autoplotting the variable ‘sp’.                                   |
+| <a href=https://forestgeo.github.io/fgeo.plot/reference/sp_elev>?</a>                       | sp\_elev                          | Enable autoplotting the variables ‘sp’ and ‘elev’.                       |
+| <a href=https://forestgeo.github.io/fgeo.plot/reference/autoplot.fgeo_habitat>?</a>         | autoplot                          | Quick habitat plots.                                                     |
+| <a href=https://forestgeo.github.io/fgeo.plot/reference/plot_dbh_bubbles_by_quadrat>?</a>   | plot\_dbh\_bubbles\_by\_quadrat   | List dbh bubble-plots by quadrat (good for .pdf output).                 |
+| <a href=https://forestgeo.github.io/fgeo.plot/reference/plot_dbh_bubbles_by_quadrat>?</a>   | plot\_dbh\_bubbles\_by\_quadrat   | List dbh bubble-plots by quadrat (good for .pdf output).                 |

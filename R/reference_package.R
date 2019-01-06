@@ -46,6 +46,8 @@ pick_docs <- function(package_or_concept) {
 reference_any <- function(doc) {
   force(doc)
   function(x, url = NULL, packages = NULL, strip_s3class = TRUE) {
+    warn_unnattached(x, doc)
+
     picked_doc <- pick_useful_docs(packages = packages) %>%
       filter(.[[doc]] %in% x)
 
@@ -57,6 +59,26 @@ reference_any <- function(doc) {
     result
   }
 }
+
+warn_unnattached <- function(x, doc) {
+  force(doc)
+  if (!identical(doc, "package")) {
+    return(invisible(x))
+  }
+
+  if (!all(attached(x))) {
+    unnatacched <- x[!attached(x)]
+    warn(glue("
+      All packages should be attached `strip_s3class` to work properly.
+      Not attached: {unnatacched}
+    "))
+  }
+}
+
+attached <- function(x) {
+  purrr::map_lgl(glue("package:{x}"), rlang::is_attached)
+}
+
 
 #' @rdname reference_doc
 #' @export

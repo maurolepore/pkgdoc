@@ -17,7 +17,7 @@ knitr::opts_chunk$set(
 [![Travis build status](https://travis-ci.org/maurolepore/pkgdoc.svg?branch=master)](https://travis-ci.org/maurolepore/pkgdoc)
 [![Coverage status](https://coveralls.io/repos/github/maurolepore/pkgdoc/badge.svg)](https://coveralls.io/r/maurolepore/pkgdoc?branch=master)
 
-The goal of __pkgdoc__ is to create dataframes of the documentation of installed packages. This helps you to manipulate documentation across multiple packages. Combined with `krittr::kable()` or `DT::datatable()`, __pkgdoc__ allows you to reference functions by package or concept across multiple packages and provide links to each topic's help file (similar to the Reference section of a [__pkgdown__](https://pkgdown.r-lib.org/) website but not limited to a single package).
+Create dataframes of the documentation of installed packages. Combined with `krittr::kable()` or `DT::datatable()`, __pkgdoc__ allows you to reference functions by package or concept across multiple packages and to provide links to each topic's help file (similar to the Reference section of a [__pkgdown__](https://pkgdown.r-lib.org/) website but not limited to a single package).
 
 ## Installation
 
@@ -51,6 +51,8 @@ reference_concept(c("combine strings", "files", "PCA"))
 This example shows how to build a reference section like [this one](https://forestgeo.github.io/fgeo/articles/siteonly/reference.html), from the  meta-package [__fgeo__](https://forestgeo.github.io/fgeo/index.html).
 
 ```{r}
+library(fgeo)
+
 reference_concept(
   c("datasets", "plot functions"),
   url = "https://forestgeo.github.io/",
@@ -67,4 +69,5 @@ reference_package(
   dplyr::sample_n(10) %>% 
   knitr::kable()
 ```
+
 

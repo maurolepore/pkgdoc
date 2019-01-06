@@ -1,5 +1,3 @@
-
-
 context("reference_concept")
 
 test_that("reference_concept fails gracefully w/ inexisting concept", {
@@ -28,6 +26,13 @@ test_that("reference_package adds a url", {
 
 context("reference_package")
 
+test_that("reference_package warns if some package isn't attached", {
+  expect_warning(
+    reference_package("notattached"),
+    "should be attached"
+  )
+})
+
 test_that("reference_package fails gracefully w/ inexisting concept", {
   expect_warning(
     reference_package("badpackage"),
@@ -55,7 +60,9 @@ test_that("is sensitive to strip_s3class", {
 })
 
 test_that("reference_package with fgeo outputs the expected data structure", {
+  skip_if_not_installed("MASS")
   skip_if_not_installed("fgeo")
+  library("fgeo")
 
   result <- reference_package("fgeo")
   expect_is(result, "data.frame")
@@ -66,6 +73,9 @@ test_that("reference_package with fgeo outputs the expected data structure", {
 })
 
 test_that("reference_package no longer includes package documentation", {
+  skip_if_not_installed("MASS")
   skip_if_not_installed("fgeo")
+  library("fgeo")
+
   expect_false(any(grepl("fgeo-package", unique(reference_package("fgeo")$alias))))
 })
