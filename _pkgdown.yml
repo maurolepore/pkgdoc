@@ -1,0 +1,5 @@
+navbar:
+  type: default
+  left:
+  - text: "Reference"
+    href: articles/siteonly/reference.html
