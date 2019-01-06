@@ -40,26 +40,19 @@ reference_any <- function(doc) {
     result
   }
 }
-
 #' @rdname reference_package
 #' @export
 reference_package <- reference_any("package")
-
 #' @rdname reference_package
 #' @export
 reference_concept <- reference_any("concept")
 
 
 
-# TODO relocate -----------------------------------------------------------
 
-pick_useful_doc <- function(packages = NULL) {
-  search_docs(packages = packages) %>%
-    exclude_package_doc(packages) %>%
-    exclude_internal_functions() %>%
-    select(-.data$libpath, -.data$id, -.data$encoding, -.data$name) %>%
-    unique()
-}
+
+
+# TODO relocate -----------------------------------------------------------
 
 link_topic <- function(.data, url) {
   .data %>%
