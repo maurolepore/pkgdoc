@@ -17,15 +17,12 @@ test_that("does nothing with non existing functions", {
 })
 
 test_that("outputs expected generics", {
-  skip_if_not_installed("fgeo.analyze")
-  library(fgeo.analyze)
 
   expect_equal(
     s3_strip_class(c(
       "print.data.frame",
-      "to_df.tt_lst",
       "print"
     )),
-    c("print", "to_df", "print")
+    c("print", "print")
   )
 })

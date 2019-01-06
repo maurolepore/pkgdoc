@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Dataframe the documentation of installed packages. — search_docs • pkgdoc</title>
+<title>Pick documentation matching some concepts or package names. — reference_doc • pkgdoc</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,10 +30,17 @@
 
 
 
-<meta property="og:title" content="Dataframe the documentation of installed packages. — search_docs" />
+<meta property="og:title" content="Pick documentation matching some concepts or package names. — reference_doc" />
 
-<meta property="og:description" content="This is fundamentally a dataframe version of the output of
-utils::hsearch_db()." />
+<meta property="og:description" content="These functions help you to reference the documentation of specific functions
+across multiple packages. This is useful in meta-packages. * The functions
+ending in package output all exported objects of the given packages, and
+the functions ending in concept output all objects containing the given
+concepts (strings passed to @family).
+The functions starting with reference_ output a dataframe optimized for
+building a reference table (maybe with DT::datatable() or
+knitr::kable()).
+" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -100,27 +107,51 @@ utils::hsearch_db()." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Dataframe the documentation of installed packages.</h1>
-    <small class="dont-index">Source: <a href='https://github.com/maurolepore/pkgdoc/blob/master/R/search_docs.R'><code>R/search_docs.R</code></a></small>
-    <div class="hidden name"><code>search_docs.Rd</code></div>
+    <h1>Pick documentation matching some concepts or package names.</h1>
+    <small class="dont-index">Source: <a href='https://github.com/maurolepore/pkgdoc/blob/master/R/reference_package.R'><code>R/reference_package.R</code></a></small>
+    <div class="hidden name"><code>reference_doc.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>This is fundamentally a dataframe version of the output of
-<code><a href='https://www.rdocumentation.org/packages/utils/topics/hsearch-utils'>utils::hsearch_db()</a></code>.</p>
+    <p>These functions help you to reference the documentation of specific functions
+across multiple packages. This is useful in meta-packages. * The functions
+ending in <code>package</code> output all exported objects of the given packages, and
+the functions ending in <code>concept</code> output all objects containing the given
+concepts (strings passed to <code>@family</code>).</p><ul>
+<li><p>The functions starting with <code>reference_</code> output a dataframe optimized for
+building a reference table (maybe with <code><a href='https://www.rdocumentation.org/packages/DT/topics/datatable'>DT::datatable()</a></code> or
+<code><a href='https://www.rdocumentation.org/packages/knitr/topics/kable'>knitr::kable()</a></code>).</p></li>
+</ul>
     
     </div>
 
-    <pre class="usage"><span class='fu'>search_docs</span>(<span class='kw'>packages</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>reference_package</span>(<span class='no'>x</span>, <span class='kw'>url</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>packages</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>strip_s3class</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+
+<span class='fu'>reference_concept</span>(<span class='no'>x</span>, <span class='kw'>url</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>packages</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>strip_s3class</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
+      <th>x</th>
+      <td><p>A character vector giving concepts or package names to match.</p></td>
+    </tr>
+    <tr>
+      <th>url</th>
+      <td><p>Character vector of length-1 giving a base url, e.g.
+"https://forestgeo.github.io/".</p></td>
+    </tr>
+    <tr>
       <th>packages</th>
       <td><p>A character vector with the names of packages to limit the
 search, or <code>NULL</code> to serach in all known libraries.</p></td>
+    </tr>
+    <tr>
+      <th>strip_s3class</th>
+      <td><p><code>TRUE</code> removes the class component of S3 methods.</p></td>
     </tr>
     </table>
     
@@ -130,21 +161,14 @@ search, or <code>NULL</code> to serach in all known libraries.</p></td>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>search_docs</span>(<span class='kw'>NULL</span>)</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 71,920 x 11</span><span>
-#&gt;    package  libpath id    name  title topic encoding type  alias keyword concept
-#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>  
-#&gt; </span><span style='color: #555555;'> 1</span><span> acepack  C:/Use~ 1/1   ace   Alte~ ace   </span><span style='color: #555555;'>""</span><span>       help  ace   models  Statis~
-#&gt; </span><span style='color: #555555;'> 2</span><span> acepack  C:/Use~ 1/2   avas  Addi~ avas  </span><span style='color: #555555;'>""</span><span>       help  avas  models  Statis~
-#&gt; </span><span style='color: #555555;'> 3</span><span> acepack  C:/Use~ 1/2   avas  Addi~ avas  </span><span style='color: #555555;'>""</span><span>       help  avas~ models  Statis~
-#&gt; </span><span style='color: #555555;'> 4</span><span> addinex~ C:/Use~ 2/1   addi~ RStu~ addi~ </span><span style='color: #555555;'>""</span><span>       help  addi~ </span><span style='color: #BB0000;'>NA</span><span>      </span><span style='color: #BB0000;'>NA</span><span>     
-#&gt; </span><span style='color: #555555;'> 5</span><span> addinex~ C:/Use~ 2/1   addi~ RStu~ addi~ </span><span style='color: #555555;'>""</span><span>       help  addi~ </span><span style='color: #BB0000;'>NA</span><span>      </span><span style='color: #BB0000;'>NA</span><span>     
-#&gt; </span><span style='color: #555555;'> 6</span><span> addinex~ C:/Use~ 2/2   find~ Find~ find~ </span><span style='color: #555555;'>""</span><span>       help  find~ </span><span style='color: #BB0000;'>NA</span><span>      </span><span style='color: #BB0000;'>NA</span><span>     
-#&gt; </span><span style='color: #555555;'> 7</span><span> addinex~ C:/Use~ 2/3   inse~ Inse~ inse~ </span><span style='color: #555555;'>""</span><span>       help  inse~ </span><span style='color: #BB0000;'>NA</span><span>      </span><span style='color: #BB0000;'>NA</span><span>     
-#&gt; </span><span style='color: #555555;'> 8</span><span> addinex~ C:/Use~ 2/4   refo~ Refo~ refo~ </span><span style='color: #555555;'>""</span><span>       help  refo~ </span><span style='color: #BB0000;'>NA</span><span>      </span><span style='color: #BB0000;'>NA</span><span>     
-#&gt; </span><span style='color: #555555;'> 9</span><span> addinex~ C:/Use~ 2/5   subs~ Subs~ subs~ </span><span style='color: #555555;'>""</span><span>       help  subs~ </span><span style='color: #BB0000;'>NA</span><span>      </span><span style='color: #BB0000;'>NA</span><span>     
-#&gt; </span><span style='color: #555555;'>10</span><span> AGBflux~ C:/Use~ 3/1   AGBf~ AGBf~ AGBf~ UTF-8    help  AGBf~ intern~ </span><span style='color: #BB0000;'>NA</span><span>     
-#&gt; </span><span style='color: #555555;'># ... with 71,910 more rows</span><span></div><div class='input'>
-</div></span></pre>
+    <pre class="examples"><span class='co'># NOT RUN {</span>
+<span class='kw'>if</span> (<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/ns-load'>requireNamespace</a></span>(<span class='st'>"fgeo.x"</span>, <span class='kw'>quietly</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)) {
+  <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/library'>library</a></span>(<span class='no'>fgeo.x</span>)
+
+  <span class='fu'>reference_concept</span>(<span class='st'>"datasets"</span>, <span class='kw'>url</span> <span class='kw'>=</span> <span class='st'>"https://forestgeo.github.io/"</span>)
+  <span class='fu'>reference_package</span>(<span class='st'>"datasets"</span>, <span class='kw'>url</span> <span class='kw'>=</span> <span class='st'>"https://forestgeo.github.io/"</span>)
+}
+<span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

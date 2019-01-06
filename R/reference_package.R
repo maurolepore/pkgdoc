@@ -27,7 +27,7 @@
 #'   reference_package("datasets", url = "https://forestgeo.github.io/")
 #' }
 #' }
-#' @name reference_package
+#' @name reference_doc
 NULL
 pick_docs <- function(package_or_concept) {
   force(package_or_concept)
@@ -43,25 +43,50 @@ pick_docs <- function(package_or_concept) {
   }
 }
 
-#' @rdname reference_package
-#' @export
-reference_package <- function(x,
-                              url = NULL,
-                              packages = NULL,
-                              strip_s3class = TRUE) {
-  pick_docs("package")(x, url = url, packages = packages) %>%
-    tidy_reference(strip_s3class)
+reference_any <- function(doc) {
+  force(doc)
+  function(x, url = NULL, packages = NULL, strip_s3class = TRUE) {
+    warn_unnattached(x, doc)
+
+    picked_doc <- pick_useful_docs(packages = packages) %>%
+      filter(.[[doc]] %in% x)
+
+    result <- tidy_reference(may_url(picked_doc, url), strip_s3class)
+    if (identical(nrow(result), 0L)) {
+      warn(glue("No {doc} matches '{x}'."))
+    }
+
+    result
+  }
 }
 
-#' @rdname reference_package
-#' @export
-reference_concept <- function(x,
-                              url = NULL,
-                              packages = NULL,
-                              strip_s3class = TRUE) {
-  pick_docs("concept")(x, url = url, packages = packages) %>%
-    tidy_reference(strip_s3class)
+warn_unnattached <- function(x, doc) {
+  force(doc)
+  if (!identical(doc, "package")) {
+    return(invisible(x))
+  }
+
+  if (!all(attached(x))) {
+    unnatacched <- x[!attached(x)]
+    warn(glue("
+      All packages should be attached `strip_s3class` to work properly.
+      Not attached: {unnatacched}
+    "))
+  }
 }
+
+attached <- function(x) {
+  purrr::map_lgl(glue("package:{x}"), rlang::is_attached)
+}
+
+
+#' @rdname reference_doc
+#' @export
+reference_package <- reference_any("package")
+
+#' @rdname reference_doc
+#' @export
+reference_concept <- reference_any("concept")
 
 tidy_reference <- function(.data, strip_s3class) {
   .data %>%
@@ -132,4 +157,11 @@ link_topic <- function(.data, url) {
       package = glue("<a href={url}{package}>{package}</a>")
     ) %>%
     arrange(.data$package)
+}
+
+may_url <- function(x, url) {
+  if (is.null(url)) {
+    return(unique(x))
+  }
+  unique(link_topic(x, url))
 }
