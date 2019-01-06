@@ -11,12 +11,18 @@ status](https://coveralls.io/repos/github/maurolepore/pkgdoc/badge.svg)](https:/
 [![CRAN
 status](https://www.r-pkg.org/badges/version/pkgdoc)](https://cran.r-project.org/package=pkgdoc)
 
-Create dataframes of the documentation of installed packages. Combined
-with `krittr::kable()` or `DT::datatable()`, **pkgdoc** allows you to
+Dataframe the documentation of available packages, and reference objects
+across multiple packages by package or concept. Combined with
+`krittr::kable()` or `DT::datatable()`, **pkgdoc** allows you to
 reference functions by package or concept across multiple packages and
 to provide links to each topic’s help file (similar to the Reference
 section of a [**pkgdown**](https://pkgdown.r-lib.org/) website but not
 limited to a single package).
+
+  - [Reference and
+    tutorial](https://maurolepore.github.io/pkgdoc/articles/siteonly/reference.html)
+  - [**pkgdoc** in
+    action](https://forestgeo.github.io/fgeo/articles/siteonly/reference.html)
 
 ## Installation
 
