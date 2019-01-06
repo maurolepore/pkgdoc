@@ -1,8 +1,16 @@
 context("reference_concept")
 
-test_that("reference_concept fails gracefully w/ inexisting concept", {
+test_that("reference_concept warns if no concept is matched", {
   expect_warning(
     reference_concept("bad concept"),
+    "No concept matches.*bad concept"
+  )
+})
+
+test_that("reference_concept warns if some concept is not matched", {
+  skip("WIP XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX")
+  expect_warning(
+    reference_concept(c("combine strings", "bad concept")),
     "No concept matches.*bad concept"
   )
 })

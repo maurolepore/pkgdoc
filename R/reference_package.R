@@ -39,13 +39,19 @@ reference_any <- function(doc) {
       filter(.[[doc]] %in% x)
 
     result <- tidy_reference(may_url(picked_doc, url), strip_s3class)
-    if (identical(nrow(result), 0L)) {
-      warn(glue("No {doc} matches '{x}'."))
-    }
 
+    may_warn_missing_doc(result, doc, x)
     result
   }
 }
+
+may_warn_missing_doc <- function(result, doc, x) {
+  if (identical(nrow(result), 0L)) {
+    warn(glue("No {doc} matches '{x}'."))
+  }
+}
+
+
 
 #' @rdname reference_package
 #' @export
@@ -63,7 +69,6 @@ tidy_reference <- function(.data, strip_s3class) {
 }
 
 warn_unnattached <- function(x, doc) {
-  force(doc)
   if (!identical(doc, "package")) {
     return(invisible(x))
   }
