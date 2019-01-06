@@ -35,7 +35,7 @@ reference_any <- function(doc) {
   function(x, url = NULL, packages = NULL, strip_s3class = TRUE) {
     warn_unnattached(x, doc)
 
-    picked_doc <- pick_useful_docs(packages = packages) %>%
+    picked_doc <- pick_useful_doc(packages = packages) %>%
       filter(.[[doc]] %in% x)
 
     result <- tidy_reference(may_url(picked_doc, url), strip_s3class)
@@ -104,7 +104,7 @@ strip_or_not <- function(x, .f = s3_strip_class) {
   paste(unique(.f(x)), collapse = ", ")
 }
 
-pick_useful_docs <- function(packages = NULL) {
+pick_useful_doc <- function(packages = NULL) {
   search_docs(packages = packages) %>%
     exclude_package_doc(packages) %>%
     exclude_internal_functions() %>%
