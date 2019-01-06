@@ -27,25 +27,38 @@ library(pkgdoc)
 library(tidyverse)
 library(glue)
 library(DT)
+```
 
-(docs <- reference_package(tidyverse:::core) %>% arrange(package))
+Let's pull the documenation of all core-tidyverse-packages with __pkgdoc__.
+
+```{r}
+(docs <- reference_package(tidyverse:::core))
 ```
 
 `reference_package()` and `reference_concept()` include the argument `url` but it only works if all packages are under the GitHub organization and the url is formatted as `https://{organization}.github.io/{package}/`. But we can create arbitrary links easily with `glue::glue()`.
 
 ```{r}
-linked <- mutate(
-  docs,
-  topic   = glue("<a href=https://{package}.tidyverse.org/reference/{topic}>?</a>"),
-  package = glue("<a href=https://{package}.tidyverse.org/index.html>{package}</a>")
+link_topic <- function(package, topic) {
+  glue("<a href=https://{package}.tidyverse.org/reference/{topic}>{topic}</a>")
+}
+
+link_package <- function(package) {
+  glue("<a href=https://{package}.tidyverse.org/index.html>{package}</a>")
+}
+
+linked <- docs %>% 
+  mutate(
+    topic   = link_topic(package, topic),
+    package = link_package(package)
 )
+
+linked
 ```
 
-We are almost ready. Let's arrange the documentation by package and use `DT::datatable()` to create clickable links.
+We are now read to create a searchable table with `DT::datatable()`.
 
 ```{r}
 linked %>% 
-  arrange(.data$package) %>% 
   datatable(
     escape = FALSE,
     rownames = NULL,
