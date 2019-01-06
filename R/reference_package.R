@@ -91,7 +91,7 @@ reference_concept <- reference_any("concept")
 tidy_reference <- function(.data, strip_s3class) {
   .data %>%
     collapse_alias(strip_s3class) %>%
-    select(c("topic", "alias", "title")) %>%
+    select(c("topic", "alias", "title", "concept", "package")) %>%
     arrange(.data$alias)
 }
 

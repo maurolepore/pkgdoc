@@ -57,17 +57,17 @@ reference_concept(
   c("datasets", "plot functions"),
   url = "https://forestgeo.github.io/",
   ) %>% 
-  dplyr::sample_n(10) %>% 
+  arrange(concept) %>%
+  head() %>% 
   knitr::kable()
 ```
 
 ```{r}
 reference_package(
-  c("fgeo.x", "fgeo.plot"), 
+  c("fgeo.x", "fgeo.analyze"), 
   url = "https://forestgeo.github.io/"
  ) %>% 
-  dplyr::sample_n(10) %>% 
+  arrange(concept) %>% 
   knitr::kable()
 ```
-
 
