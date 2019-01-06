@@ -3,3 +3,6 @@ navbar:
   left:
   - text: "Reference"
     href: articles/siteonly/reference.html
+  - text: "Example: Search the tidyverse"
+    href: articles/siteonly/reference-tidyverse.html
+
