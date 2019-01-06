@@ -66,7 +66,7 @@ test_that("reference_package with fgeo outputs the expected data structure", {
 
   result <- reference_package("fgeo")
   expect_is(result, "data.frame")
-  expect_named(result, c("topic", "alias", "title"))
+  expect_named(result, c("topic", "alias", "title", "concept", "package"))
 
   # Compare next test
   expect_false(grepl("href", result$topic[[1]]))
