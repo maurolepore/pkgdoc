@@ -49,37 +49,6 @@ reference_concept <- reference_any("concept")
 
 
 
-
-
-
-# TODO relocate -----------------------------------------------------------
-
-link_topic <- function(.data, url) {
-  .data %>%
-    mutate(
-      topic   = glue("<a href={url}{package}/reference/{topic}>?</a>"),
-      package = glue("<a href={url}{package}>{package}</a>")
-    ) %>%
-    arrange(.data$package)
-}
-
-may_url <- function(x, url) {
-  if (is.null(url)) {
-    return(unique(x))
-  }
-  unique(link_topic(x, url))
-}
-
-
-
-
-
-
-
-
-
-# Helpers -----------------------------------------------------------------
-
 warn_unnattached <- function(x, doc) {
   if (!identical(doc, "package")) {
     return(invisible(x))
@@ -146,15 +115,30 @@ collapse_alias <- function(.data, strip_s3class = FALSE) {
     mutate(
       alias = ifelse(
         strip_s3class,
-        strip_or_not(.data$alias, .f = s3_strip_class),
-        strip_or_not(.data$alias, .f = identity)
+        may_strip_s3class(.data$alias, .f = s3_strip_class),
+        may_strip_s3class(.data$alias, .f = identity)
       )
     ) %>%
     ungroup() %>%
     unique()
 }
 
-strip_or_not <- function(x, .f = s3_strip_class) {
+may_strip_s3class <- function(x, .f = s3_strip_class) {
   paste(unique(.f(x)), collapse = ", ")
 }
 
+may_url <- function(x, url) {
+  if (is.null(url)) {
+    return(unique(x))
+  }
+  unique(link_topic(x, url))
+}
+
+link_topic <- function(.data, url) {
+  .data %>%
+    mutate(
+      topic   = glue("<a href={url}{package}/reference/{topic}>?</a>"),
+      package = glue("<a href={url}{package}>{package}</a>")
+    ) %>%
+    arrange(.data$package)
+}
