@@ -88,6 +88,7 @@
 <h2 class="hasAnchor">
 <a href="#example" class="anchor"></a>Example</h2>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(pkgdoc)</a></code></pre></div>
+<p><code><a href="reference/search_docs.html">search_docs()</a></code> creates a dataframe of documentation available to you.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="co"># Documentation of all installed packages</span></a>
 <a class="sourceLine" id="cb3-2" data-line-number="2"><span class="kw"><a href="reference/search_docs.html">search_docs</a></span>()</a>
 <a class="sourceLine" id="cb3-3" data-line-number="3"><span class="co">#&gt; # A tibble: 71,919 x 11</span></a>
@@ -121,6 +122,7 @@
 <a class="sourceLine" id="cb3-31" data-line-number="31"><span class="co">#&gt;  9 base    C:/Use~ 10/3  all.~ Test~ all.~ ""       help  all.~ progra~</span></a>
 <a class="sourceLine" id="cb3-32" data-line-number="32"><span class="co">#&gt; 10 base    C:/Use~ 10/3  all.~ Test~ all.~ ""       help  all.~ progra~</span></a>
 <a class="sourceLine" id="cb3-33" data-line-number="33"><span class="co">#&gt; # ... with 5,925 more rows, and 1 more variable: concept &lt;chr&gt;</span></a></code></pre></div>
+<p><code><a href="reference/reference_package.html">reference_package()</a></code> and <code><a href="reference/reference_package.html">reference_concept()</a></code> allow you to pick specific documentation.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw"><a href="reference/reference_package.html">reference_package</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"stats"</span>, <span class="st">"MASS"</span>))</a>
 <a class="sourceLine" id="cb4-2" data-line-number="2"><span class="co">#&gt; Warning:   All packages should be attached `strip_s3class` to work properly.</span></a>
 <a class="sourceLine" id="cb4-3" data-line-number="3"><span class="co">#&gt;   Not attached: MASS</span></a>
@@ -147,10 +149,7 @@
 <a class="sourceLine" id="cb4-24" data-line-number="24"><span class="co">#&gt; 2 paste     paste, paste0            Concatenate Strin~ combine st~ base   </span></a>
 <a class="sourceLine" id="cb4-25" data-line-number="25"><span class="co">#&gt; 3 prcomp    prcomp, plot, predict, ~ Principal Compone~ PCA         stats  </span></a>
 <a class="sourceLine" id="cb4-26" data-line-number="26"><span class="co">#&gt; 4 princomp  princomp, plot, print, ~ Principal Compone~ PCA         stats</span></a></code></pre></div>
-<div id="referencing-functions-across-multiple-packages" class="section level3">
-<h3 class="hasAnchor">
-<a href="#referencing-functions-across-multiple-packages" class="anchor"></a>Referencing functions across multiple packages</h3>
-<p>This example shows how to build a reference section like <a href="https://forestgeo.github.io/fgeo/articles/siteonly/reference.html">this one</a>, from the meta-package <a href="https://forestgeo.github.io/fgeo/index.html"><strong>fgeo</strong></a>.</p>
+<p>Use <code>knittr::kable()</code> or <code><a href="https://www.rdocumentation.org/packages/DT/topics/datatable">DT::datatable()</a></code> for the links to become clickable.</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(fgeo)</a>
 <a class="sourceLine" id="cb5-2" data-line-number="2"><span class="co">#&gt; -- Attaching packages ------------------------------------------------------- fgeo 0.0.0.9002 --</span></a>
 <a class="sourceLine" id="cb5-3" data-line-number="3"><span class="co">#&gt; v fgeo.analyze 0.0.0.9003     v fgeo.tool    0.0.0.9005</span></a>
@@ -218,7 +217,6 @@
 </tr>
 </tbody>
 </table>
-</div>
 </div>
 </div>
   </div>

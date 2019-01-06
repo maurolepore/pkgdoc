@@ -20,6 +20,8 @@ knitr::opts_chunk$set(
 )
 ```
 
+WARNING: This reference may be out of date. It aims to demonstrate __pkgdoc__ -- not to provide a search tool for the tidyverse.
+
 ```{r}
 library(pkgdoc)
 library(tidyverse)

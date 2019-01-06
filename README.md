@@ -37,6 +37,8 @@ devtools::install_github("maurolepore/pkgdoc")
 library(pkgdoc)
 ```
 
+`search_docs()` creates a dataframe of documentation available to you.
+
 ``` r
 # Documentation of all installed packages
 search_docs()
@@ -73,6 +75,9 @@ search_docs(some_packages)
 #> # ... with 5,925 more rows, and 1 more variable: concept <chr>
 ```
 
+`reference_package()` and `reference_concept()` allow you to pick
+specific documentation.
+
 ``` r
 reference_package(c("stats", "MASS"))
 #> Warning:   All packages should be attached `strip_s3class` to work properly.
@@ -102,19 +107,15 @@ reference_concept(c("combine strings", "files", "PCA"))
 #> 4 princomp  princomp, plot, print, ~ Principal Compone~ PCA         stats
 ```
 
-### Referencing functions across multiple packages
-
-This example shows how to build a reference section like [this
-one](https://forestgeo.github.io/fgeo/articles/siteonly/reference.html),
-from the meta-package
-[**fgeo**](https://forestgeo.github.io/fgeo/index.html).
+Use `knittr::kable()` or `DT::datatable()` for the links to become
+clickable.
 
 ``` r
 library(fgeo)
-#> -- Attaching packages ---------------------------------------------- fgeo 0.0.0.9002 --
+#> -- Attaching packages ------------------------------------------------------- fgeo 0.0.0.9002 --
 #> v fgeo.analyze 0.0.0.9003     v fgeo.tool    0.0.0.9005
 #> v fgeo.plot    0.0.0.9402     v fgeo.x       0.0.0.9000
-#> -- Conflicts ------------------------------------------------------ fgeo_conflicts() --
+#> -- Conflicts --------------------------------------------------------------- fgeo_conflicts() --
 #> x fgeo.tool::filter() masks stats::filter()
 
 reference_concept(
