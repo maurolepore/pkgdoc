@@ -34,36 +34,22 @@ reference_any <- function(doc) {
   force(doc)
   function(x, url = NULL, packages = NULL, strip_s3class = TRUE) {
     warn_unnattached(x, doc)
+    pick <- pick_doc(packages = packages, doc = doc, x = x)
 
-    picked_doc <- pick_useful_docs(packages = packages) %>%
-      filter(.[[doc]] %in% x)
-
-    result <- tidy_reference(may_url(picked_doc, url), strip_s3class)
-    if (identical(nrow(result), 0L)) {
-      warn(glue("No {doc} matches '{x}'."))
-    }
-
+    result <- tidy_reference(may_add_url(pick, url), strip_s3class)
     result
   }
 }
-
 #' @rdname reference_package
 #' @export
 reference_package <- reference_any("package")
-
 #' @rdname reference_package
 #' @export
 reference_concept <- reference_any("concept")
 
-tidy_reference <- function(.data, strip_s3class) {
-  .data %>%
-    collapse_alias(strip_s3class) %>%
-    select(c("topic", "alias", "title", "concept", "package")) %>%
-    arrange(.data$alias)
-}
+
 
 warn_unnattached <- function(x, doc) {
-  force(doc)
   if (!identical(doc, "package")) {
     return(invisible(x))
   }
@@ -77,34 +63,23 @@ warn_unnattached <- function(x, doc) {
   }
 }
 
-attached <- function(x) {
-  purrr::map_lgl(glue("package:{x}"), rlang::is_attached)
-}
-
-collapse_alias <- function(.data, strip_s3class = FALSE) {
-  .data %>%
-    group_by(.data$topic) %>%
-    mutate(
-      alias = ifelse(
-        strip_s3class,
-        strip_or_not(.data$alias, .f = s3_strip_class),
-        strip_or_not(.data$alias, .f = identity)
-      )
-    ) %>%
-    ungroup() %>%
-    unique()
-}
-
-strip_or_not <- function(x, .f = s3_strip_class) {
-  paste(unique(.f(x)), collapse = ", ")
-}
-
-pick_useful_docs <- function(packages = NULL) {
-  search_docs(packages = packages) %>%
+pick_doc <- function(packages, doc, x) {
+  result <- search_docs(packages = packages) %>%
     exclude_package_doc(packages) %>%
     exclude_internal_functions() %>%
     select(-.data$libpath, -.data$id, -.data$encoding, -.data$name) %>%
-    unique()
+    unique() %>%
+    filter(.[[doc]] %in% x)
+
+  may_warn_missing_doc(result, doc, x)
+  result
+}
+
+tidy_reference <- function(.data, strip_s3class) {
+  .data %>%
+    collapse_alias(strip_s3class) %>%
+    select(c("topic", "alias", "title", "concept", "package")) %>%
+    arrange(.data$alias)
 }
 
 exclude_package_doc <- function(.data, packages) {
@@ -121,6 +96,43 @@ exclude_internal_functions <- function(.data) {
     filter(!.data$keyword %in% "internal")
 }
 
+attached <- function(x) {
+  purrr::map_lgl(glue("package:{x}"), rlang::is_attached)
+}
+
+may_warn_missing_doc <- function(.data, doc, x) {
+  good_request <- x %in% unique(.data[[doc]])
+  if (all(good_request))
+    return(invisible(.data))
+
+  bad_request <- x[!good_request]
+  warn(glue("No {doc} matches '{bad_request}'."))
+}
+
+collapse_alias <- function(.data, strip_s3class = FALSE) {
+  .data %>%
+    group_by(.data$topic) %>%
+    mutate(
+      alias = dplyr::case_when(
+        !strip_s3class ~ may_strip_s3class(.data$alias, .f = identity),
+         strip_s3class ~ may_strip_s3class(.data$alias, .f = s3_strip_class),
+      )
+    ) %>%
+    ungroup() %>%
+    unique()
+}
+
+may_strip_s3class <- function(x, .f = s3_strip_class) {
+  paste(unique(.f(x)), collapse = ", ")
+}
+
+may_add_url <- function(x, url) {
+  if (is.null(url)) {
+    return(unique(x))
+  }
+  unique(link_topic(x, url))
+}
+
 link_topic <- function(.data, url) {
   .data %>%
     mutate(
@@ -128,11 +140,4 @@ link_topic <- function(.data, url) {
       package = glue("<a href={url}{package}>{package}</a>")
     ) %>%
     arrange(.data$package)
-}
-
-may_url <- function(x, url) {
-  if (is.null(url)) {
-    return(unique(x))
-  }
-  unique(link_topic(x, url))
 }

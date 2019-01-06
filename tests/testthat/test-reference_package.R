@@ -1,8 +1,15 @@
 context("reference_concept")
 
-test_that("reference_concept fails gracefully w/ inexisting concept", {
+test_that("reference_concept warns if no concept is matched", {
   expect_warning(
     reference_concept("bad concept"),
+    "No concept matches.*bad concept"
+  )
+})
+
+test_that("reference_concept warns if some concept is not matched", {
+  expect_warning(
+    reference_concept(c("combine strings", "bad concept")),
     "No concept matches.*bad concept"
   )
 })
@@ -33,9 +40,16 @@ test_that("reference_package warns if some package isn't attached", {
   )
 })
 
-test_that("reference_package fails gracefully w/ inexisting concept", {
+test_that("reference_package warns if a single concept does not exist", {
   expect_warning(
     reference_package("badpackage"),
+    "No package matches.*badpackage"
+  )
+})
+
+test_that("reference_package warns if some package is not matched", {
+  expect_warning(
+    reference_package(c("base", "badpackage")),
     "No package matches.*badpackage"
   )
 })
