@@ -11,6 +11,7 @@
 #' search_docs(NULL)
 #'
 #' @export
+#' @family retrieve documentation
 search_docs <- function(packages = NULL) {
   docs <- suppressMessages(
     purrr::reduce(utils::hsearch_db(), dplyr::full_join)

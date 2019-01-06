@@ -3,10 +3,13 @@
 
 # pkgdoc
 
+[![lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 [![Travis build
 status](https://travis-ci.org/maurolepore/pkgdoc.svg?branch=master)](https://travis-ci.org/maurolepore/pkgdoc)
 [![Coverage
 status](https://coveralls.io/repos/github/maurolepore/pkgdoc/badge.svg)](https://coveralls.io/r/maurolepore/pkgdoc?branch=master)
+[![CRAN
+status](https://www.r-pkg.org/badges/version/pkgdoc)](https://cran.r-project.org/package=pkgdoc)
 
 Create dataframes of the documentation of installed packages. Combined
 with `krittr::kable()` or `DT::datatable()`, **pkgdoc** allows you to
@@ -31,7 +34,7 @@ library(pkgdoc)
 ``` r
 # Documentation of all installed packages
 search_docs()
-#> # A tibble: 71,920 x 11
+#> # A tibble: 71,919 x 11
 #>    package libpath id    name  title topic encoding type  alias keyword
 #>    <chr>   <chr>   <chr> <chr> <chr> <chr> <chr>    <chr> <chr> <chr>  
 #>  1 acepack C:/Use~ 1/1   ace   Alte~ ace   ""       help  ace   models 
@@ -44,7 +47,7 @@ search_docs()
 #>  8 addine~ C:/Use~ 2/4   refo~ Refo~ refo~ ""       help  refo~ <NA>   
 #>  9 addine~ C:/Use~ 2/5   subs~ Subs~ subs~ ""       help  subs~ <NA>   
 #> 10 AGBflu~ C:/Use~ 3/1   AGBf~ AGBf~ AGBf~ UTF-8    help  AGBf~ intern~
-#> # ... with 71,910 more rows, and 1 more variable: concept <chr>
+#> # ... with 71,909 more rows, and 1 more variable: concept <chr>
 
 some_packages <- c("utils", "base")
 search_docs(some_packages)
@@ -93,7 +96,7 @@ reference_concept(c("combine strings", "files", "PCA"))
 #> 4 princomp  princomp, plot, print, ~ Principal Compone~ PCA         stats
 ```
 
-### Referencing functions accross multiple packages
+### Referencing functions across multiple packages
 
 This example shows how to build a reference section like [this
 one](https://forestgeo.github.io/fgeo/articles/siteonly/reference.html),
@@ -125,29 +128,3 @@ reference_concept(
 | <a href=https://forestgeo.github.io/fgeo.plot/reference/autoplot.fgeo_habitat>?</a>       | autoplot                                                                                    | Quick habitat plots.                                                     | plot functions | <a href=https://forestgeo.github.io/fgeo.plot>fgeo.plot</a> |
 | <a href=https://forestgeo.github.io/fgeo.plot/reference/autoplot.sp_elev>?</a>            | autoplot                                                                                    | Quick plot of species distribution and/or topography.                    | plot functions | <a href=https://forestgeo.github.io/fgeo.plot>fgeo.plot</a> |
 | <a href=https://forestgeo.github.io/fgeo.plot/reference/autoplot_by_species.sp_elev>?</a> | autoplot\_by\_species                                                                       | List plots of species distribution and topography (good for pdf output). | plot functions | <a href=https://forestgeo.github.io/fgeo.plot>fgeo.plot</a> |
-
-``` r
-reference_package(
-  c("fgeo.x", "fgeo.analyze"), 
-  url = "https://forestgeo.github.io/"
- ) %>% 
-  arrange(concept) %>% 
-  knitr::kable()
-```
-
-| topic                                                                             | alias                                                                                       | title                                                                     | concept                                | package                                                           |
-| :-------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------ | :------------------------------------------------------------------------ | :------------------------------------- | :---------------------------------------------------------------- |
-| <a href=https://forestgeo.github.io/fgeo.x/reference/datasets>?</a>               | datasets, elevation, habitat, stem5, stem6, taxa, tree5, tree6, vft\_4quad, tree6\_3species | Datasets from Luquillo, Puerto Rico.                                      | datasets                               | <a href=https://forestgeo.github.io/fgeo.x>fgeo.x</a>             |
-| <a href=https://forestgeo.github.io/fgeo.x/reference/download_data>?</a>          | download\_data                                                                              | Download data from fgeo.data.                                             | datasets                               | <a href=https://forestgeo.github.io/fgeo.x>fgeo.x</a>             |
-| <a href=https://forestgeo.github.io/fgeo.x/reference/example_path>?</a>           | example\_path                                                                               | Path to directory containing example data.                                | datasets                               | <a href=https://forestgeo.github.io/fgeo.x>fgeo.x</a>             |
-| <a href=https://forestgeo.github.io/fgeo.analyze/reference/recruitment_ctfs>?</a> | recruitment\_ctfs, mortality\_ctfs, growth\_ctfs                                            | Recruitment, mortality, and growth.                                       | demography functions                   | <a href=https://forestgeo.github.io/fgeo.analyze>fgeo.analyze</a> |
-| <a href=https://forestgeo.github.io/fgeo.analyze/reference/abundance>?</a>        | abundance, basal\_area                                                                      | Abundance and basal area, optionally by groups.                           | functions for abundance and basal area | <a href=https://forestgeo.github.io/fgeo.analyze>fgeo.analyze</a> |
-| <a href=https://forestgeo.github.io/fgeo.analyze/reference/abundance_byyr>?</a>   | abundance\_byyr, basal\_area\_byyr                                                          | Create tables of abundance and basal area by year.                        | functions for abundance and basal area | <a href=https://forestgeo.github.io/fgeo.analyze>fgeo.analyze</a> |
-| <a href=https://forestgeo.github.io/fgeo.analyze/reference/recruitment_ctfs>?</a> | recruitment\_ctfs, mortality\_ctfs, growth\_ctfs                                            | Recruitment, mortality, and growth.                                       | functions for fgeo census.             | <a href=https://forestgeo.github.io/fgeo.analyze>fgeo.analyze</a> |
-| <a href=https://forestgeo.github.io/fgeo.analyze/reference/recruitment_ctfs>?</a> | recruitment\_ctfs, mortality\_ctfs, growth\_ctfs                                            | Recruitment, mortality, and growth.                                       | functions for ForestGEO data.          | <a href=https://forestgeo.github.io/fgeo.analyze>fgeo.analyze</a> |
-| <a href=https://forestgeo.github.io/fgeo.analyze/reference/fgeo_habitat>?</a>     | fgeo\_habitat                                                                               | Structure habitat data from measures of topography.                       | functions to construct fgeo classes    | <a href=https://forestgeo.github.io/fgeo.analyze>fgeo.analyze</a> |
-| <a href=https://forestgeo.github.io/fgeo.analyze/reference/fgeo_topography>?</a>  | fgeo\_topography                                                                            | Structure topography data with mean elevation, convexity, and slope.      | functions to construct fgeo classes    | <a href=https://forestgeo.github.io/fgeo.analyze>fgeo.analyze</a> |
-| <a href=https://forestgeo.github.io/fgeo.analyze/reference/fgeo_habitat>?</a>     | fgeo\_habitat                                                                               | Structure habitat data from measures of topography.                       | habitat functions                      | <a href=https://forestgeo.github.io/fgeo.analyze>fgeo.analyze</a> |
-| <a href=https://forestgeo.github.io/fgeo.analyze/reference/fgeo_topography>?</a>  | fgeo\_topography                                                                            | Structure topography data with mean elevation, convexity, and slope.      | habitat functions                      | <a href=https://forestgeo.github.io/fgeo.analyze>fgeo.analyze</a> |
-| <a href=https://forestgeo.github.io/fgeo.analyze/reference/tt_test>?</a>          | tt\_test                                                                                    | Torus Translation Test to determine habitat associations of tree species. | habitat functions                      | <a href=https://forestgeo.github.io/fgeo.analyze>fgeo.analyze</a> |
-| <a href=https://forestgeo.github.io/fgeo.analyze/reference/summary.tt_df>?</a>    | summary                                                                                     | Summary of ‘tt\_test()’ results.                                          | methods for common generics            | <a href=https://forestgeo.github.io/fgeo.analyze>fgeo.analyze</a> |

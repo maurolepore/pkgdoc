@@ -14,8 +14,10 @@ knitr::opts_chunk$set(
 ```
 # pkgdoc
 
+[![lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 [![Travis build status](https://travis-ci.org/maurolepore/pkgdoc.svg?branch=master)](https://travis-ci.org/maurolepore/pkgdoc)
 [![Coverage status](https://coveralls.io/repos/github/maurolepore/pkgdoc/badge.svg)](https://coveralls.io/r/maurolepore/pkgdoc?branch=master)
+[![CRAN status](https://www.r-pkg.org/badges/version/pkgdoc)](https://cran.r-project.org/package=pkgdoc)
 
 Create dataframes of the documentation of installed packages. Combined with `krittr::kable()` or `DT::datatable()`, __pkgdoc__ allows you to reference functions by package or concept across multiple packages and to provide links to each topic's help file (similar to the Reference section of a [__pkgdown__](https://pkgdown.r-lib.org/) website but not limited to a single package).
 
@@ -46,7 +48,7 @@ reference_package(c("stats", "MASS"))
 reference_concept(c("combine strings", "files", "PCA"))
 ```
 
-### Referencing functions accross multiple packages
+### Referencing functions across multiple packages
 
 This example shows how to build a reference section like [this one](https://forestgeo.github.io/fgeo/articles/siteonly/reference.html), from the  meta-package [__fgeo__](https://forestgeo.github.io/fgeo/index.html).
 
@@ -59,15 +61,6 @@ reference_concept(
   ) %>% 
   arrange(concept) %>%
   head() %>% 
-  knitr::kable()
-```
-
-```{r}
-reference_package(
-  c("fgeo.x", "fgeo.analyze"), 
-  url = "https://forestgeo.github.io/"
- ) %>% 
-  arrange(concept) %>% 
   knitr::kable()
 ```
 
