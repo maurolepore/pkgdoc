@@ -19,7 +19,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-This reference overwrites the [default Reference of __pkgdown__](https://pkgdown.r-lib.org/reference/build_articles.html). It is a vignette stored in vignettes/siteonly. The file `_pkgdown.yml` contains this header:
+This reference overwrites the [default Reference of __pkgdown__](https://pkgdown.r-lib.org/reference/build_articles.html). It is a vignette stored in vignettes/siteonly. The `_pkgdown.yml` file contains this header:
 
 ```
 navbar:
@@ -29,12 +29,11 @@ navbar:
     href: articles/siteonly/reference.html
 ```
 
-
-You can see __pkgdoc__ in action [here]](https://forestgeo.github.io/fgeo/articles/siteonly/reference.html).
+You can see __pkgdoc__ in action [here](https://forestgeo.github.io/fgeo/articles/siteonly/reference.html).
 
 ---
 
-We are going to build all references with __pkgdoc__, manipulate data with __dplyr__, and build tables with __knitr__ and __DT__. 
+Let's build references with __pkgdoc__, manipulate data with __dplyr__, and build tables with __knitr__ and __DT__. 
 
 ```{r}
 library(pkgdoc)
@@ -52,7 +51,13 @@ docs <- reference_package("pkgdoc", url = "https://maurolepore.github.io/")
 docs
 ```
 
-The functions are few and we can show them all at once. But let's emphasize the main functions by pushing the helper function to the bottom. Then let's hide the column `concept`. `knitr::kable()` will transform the ugly text into links. The column `package` isn't helpful but I'll leave it to show the link.
+The functions are few and we can show them all at once. But let's tweak the output:
+
+* Let's emphasize the main functions by pushing the helper function to the bottom.
+* Let's hide the `concept` column. 
+* Let's build transform the ugly text in `topic` and `package` into links. 
+
+(The column `package` isn't helpful but I'll leave it to show the link.)
 
 ```{r}
 docs %>% 
@@ -61,11 +66,11 @@ docs %>%
   knitr::kable()
 ```
 
-That's cool but __pkgdown__ does it already. Next let's see a more complex example where __pkgdoc__ is really useful.
+Okay, but __pkgdown__ does that already. To see the value of __pkgdoc__ let's explore a more complex example.
 
-## Example: Referencing objects across multiple packages
+## Example: Referencing documentation across multiple packages
 
-To show how to reference objects across multiple packages we will use the __fgeo__ meta-package [__fgeo__](https://forestgeo.github.io/).
+To show how to reference documentation across multiple packages we will use the __fgeo__ meta-package [__fgeo__](https://forestgeo.github.io/).
 
 ```{r}
 library(fgeo)
@@ -78,7 +83,7 @@ fgeo_url <- "https://forestgeo.github.io/"
 
 ### Searching
 
-You can reference a large number of objects. Instead of scanning a long list your readers may prefer to search.
+You can reference a large number of documentation. Instead of scanning a long list your readers may prefer to search.
 
 ```{r}
 # Pulling documentation of all fgeo packages
@@ -105,7 +110,7 @@ If the list isn't too long, your reader may scan the entire list. Sometimes it i
 
 #### Grouping multiple packages
 
-You may cherry-pick all objects from specific packages.
+You may cherry-pick all documentation from specific packages.
 
 ```{r}
 reference_package(
@@ -119,7 +124,7 @@ reference_package(
 
 #### Grouping concepts from multiple packages
 
-You may cherry-pick all objects matching some concept. Create topics by adding the tag `@family` in your documentation  (see [__roxygen2__](https://cran.r-project.org/web/packages/roxygen2/vignettes/rd.html)).
+You may cherry-pick all documentation matching some concept. Create topics by adding the tag `@family` in your documentation  (see [__roxygen2__](https://cran.r-project.org/web/packages/roxygen2/vignettes/rd.html)).
 
 ```{r}
 reference_concept(
