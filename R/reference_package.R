@@ -41,18 +41,6 @@ reference_any <- function(doc) {
   }
 }
 
-pick_doc <- function(packages, doc, x) {
-  result <- search_docs(packages = packages) %>%
-    exclude_package_doc(packages) %>%
-    exclude_internal_functions() %>%
-    select(-.data$libpath, -.data$id, -.data$encoding, -.data$name) %>%
-    unique() %>%
-    filter(.[[doc]] %in% x)
-
-    may_warn_missing_doc(result, doc, x)
-    result
-}
-
 #' @rdname reference_package
 #' @export
 reference_package <- reference_any("package")
@@ -61,12 +49,43 @@ reference_package <- reference_any("package")
 #' @export
 reference_concept <- reference_any("concept")
 
-tidy_reference <- function(.data, strip_s3class) {
-  .data %>%
-    collapse_alias(strip_s3class) %>%
-    select(c("topic", "alias", "title", "concept", "package")) %>%
-    arrange(.data$alias)
+
+
+# TODO relocate -----------------------------------------------------------
+
+pick_useful_doc <- function(packages = NULL) {
+  search_docs(packages = packages) %>%
+    exclude_package_doc(packages) %>%
+    exclude_internal_functions() %>%
+    select(-.data$libpath, -.data$id, -.data$encoding, -.data$name) %>%
+    unique()
 }
+
+link_topic <- function(.data, url) {
+  .data %>%
+    mutate(
+      topic   = glue("<a href={url}{package}/reference/{topic}>?</a>"),
+      package = glue("<a href={url}{package}>{package}</a>")
+    ) %>%
+    arrange(.data$package)
+}
+
+may_url <- function(x, url) {
+  if (is.null(url)) {
+    return(unique(x))
+  }
+  unique(link_topic(x, url))
+}
+
+
+
+
+
+
+
+
+
+# Helpers -----------------------------------------------------------------
 
 warn_unnattached <- function(x, doc) {
   if (!identical(doc, "package")) {
@@ -82,8 +101,50 @@ warn_unnattached <- function(x, doc) {
   }
 }
 
+pick_doc <- function(packages, doc, x) {
+  result <- search_docs(packages = packages) %>%
+    exclude_package_doc(packages) %>%
+    exclude_internal_functions() %>%
+    select(-.data$libpath, -.data$id, -.data$encoding, -.data$name) %>%
+    unique() %>%
+    filter(.[[doc]] %in% x)
+
+  may_warn_missing_doc(result, doc, x)
+  result
+}
+
+tidy_reference <- function(.data, strip_s3class) {
+  .data %>%
+    collapse_alias(strip_s3class) %>%
+    select(c("topic", "alias", "title", "concept", "package")) %>%
+    arrange(.data$alias)
+}
+
+exclude_package_doc <- function(.data, packages) {
+  if (is.null(packages)) {
+    return(.data)
+  }
+
+  .data %>%
+    filter(!.data$alias %in% c(packages, glue("{package}-package")))
+}
+
+exclude_internal_functions <- function(.data) {
+  .data %>%
+    filter(!.data$keyword %in% "internal")
+}
+
 attached <- function(x) {
   purrr::map_lgl(glue("package:{x}"), rlang::is_attached)
+}
+
+may_warn_missing_doc <- function(.data, doc, x) {
+  good_request <- x %in% unique(.data[[doc]])
+  if (all(good_request))
+    return(invisible(.data))
+
+  bad_request <- x[!good_request]
+  warn(glue("No {doc} matches '{bad_request}'."))
 }
 
 collapse_alias <- function(.data, strip_s3class = FALSE) {
@@ -104,49 +165,3 @@ strip_or_not <- function(x, .f = s3_strip_class) {
   paste(unique(.f(x)), collapse = ", ")
 }
 
-pick_useful_doc <- function(packages = NULL) {
-  search_docs(packages = packages) %>%
-    exclude_package_doc(packages) %>%
-    exclude_internal_functions() %>%
-    select(-.data$libpath, -.data$id, -.data$encoding, -.data$name) %>%
-    unique()
-}
-
-exclude_package_doc <- function(.data, packages) {
-  if (is.null(packages)) {
-    return(.data)
-  }
-
-  .data %>%
-    filter(!.data$alias %in% c(packages, glue("{package}-package")))
-}
-
-exclude_internal_functions <- function(.data) {
-  .data %>%
-    filter(!.data$keyword %in% "internal")
-}
-
-link_topic <- function(.data, url) {
-  .data %>%
-    mutate(
-      topic   = glue("<a href={url}{package}/reference/{topic}>?</a>"),
-      package = glue("<a href={url}{package}>{package}</a>")
-    ) %>%
-    arrange(.data$package)
-}
-
-may_url <- function(x, url) {
-  if (is.null(url)) {
-    return(unique(x))
-  }
-  unique(link_topic(x, url))
-}
-
-may_warn_missing_doc <- function(.data, doc, x) {
-  good_request <- x %in% unique(.data[[doc]])
-  if (all(good_request))
-    return(invisible(.data))
-
-  bad_request <- x[!good_request]
-  warn(glue("No {doc} matches '{bad_request}'."))
-}
