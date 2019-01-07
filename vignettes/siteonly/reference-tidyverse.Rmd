@@ -35,7 +35,7 @@ Let's pull the documenation of all core-tidyverse-packages with __pkgdoc__.
 (docs <- reference_package(tidyverse:::core))
 ```
 
-`reference_package()` and `reference_concept()` include the argument `url` but it only works if all packages are under the GitHub organization and the url is formatted as `https://{organization}.github.io/{package}/`. But we can create arbitrary links easily with `glue::glue()`.
+`reference_package()` and `reference_concept()` include the argument `url` but currently it only works if all packages are under the same GitHub organization and the url is formatted as `https://{organization}.github.io/{package}/`. But we can create arbitrary links easily with `glue::glue()`.
 
 ```{r}
 link_topic <- function(package, topic) {
