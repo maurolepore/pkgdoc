@@ -1,0 +1,127 @@
+---
+title: "Demo of [pkgdoc](https://maurolepore.github.io/pkgdoc/) for the [Chicago R Unconference](https://chirunconf.github.io/)"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Demo of pkgdoc for the Chicago R Unconference}
+  %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  echo = TRUE,
+  message = FALSE,
+  warning = FALSE,
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+### Introduction
+
+[pkgdoc](https://maurolepore.github.io/pkgdoc/) helps you to reference R documentation across multiple packages, by packages and by concept. pkgdoc does for any number of packages what [pkgdown](http://pkgdown.r-lib.org) does for a single package.
+
+### Motivation
+
+This article will show you different products that you can create with pkgdoc. Imagine you are organizing the [Chicago R Unconference](https://chirunconf.github.io/). Here you will use pkgdoc to centralize the references of the great packages developed during the event.
+
+```{r}
+# To do the heavy lifting
+library(pkgdoc)
+# To create html output
+library(DT)
+library(knitr)
+library(kableExtra)
+# To manipulate data
+library(dplyr)
+```
+
+The examples below show real packages developed by [Emily Riederer](https://github.com/EmilyRiederer) and 
+[Alex Hayes](https://github.com/alexpghayes). But let's imagine that these packages were developed during the  [Chicago R Unconference](https://chirunconf.github.io/).
+
+```{r}
+library(projmgr)
+library(formulize)
+library(safepredict)
+
+emi_alex <- c("projmgr", "formulize", "safepredict")
+```
+
+### A tibble
+
+You can pull the documentation of the packages they built with `pkgdoc::search_docs()`.
+
+```{r}
+search_docs(emi_alex)
+```
+
+What concepts were covered (created with the tag `@family`)?
+
+```{r}
+emi_alex %>% 
+  search_docs() %>% 
+  filter(!is.na(concept)) %>% 
+  select(package, alias, concept)
+```
+
+Emily and Alex worked in different teams and submitted their packages to a single organization, which serves the websites of the packages they built (here 'maurolepore.github.io' but think 'chirunconf.github.io').
+
+```{r}
+# Just a demo. NOT where you should look for Emily's and Alex's real work
+chirunconf <- "https://maurolepore.github.io/"
+```
+
+### A searchable widget
+
+You can create links to online documentation with `pkgdoc::reference_package()`.
+
+```{r}
+emi_alex %>% 
+  purrr::map_dfr(reference_package, url = chirunconf) %>% 
+  DT::datatable(
+    escape = FALSE,
+    rownames = NULL,
+    options = list(search = list(search = "issues"))
+  )
+```
+
+### An OK index
+
+You can create an index by package with `reference_package()`.
+
+```{r}
+by_alex <- c("formulize", "safepredict")
+
+by_alex %>% 
+  reference_package(, url = chirunconf) %>% 
+  knitr::kable(escape = FALSE)
+```
+
+#### A nice index by concept
+
+Let's write a helper to produce an output similar to the 'Reference' section of a [pkgdown](https://pkgdown.r-lib.org/) website. This helper may become a function in pkgdoc.
+
+```{r, warning=FALSE}
+nice_kable <- function(x) {
+  x %>% 
+    select(-package, -concept) %>% 
+    unique() %>%
+    knitr::kable(
+      x, 
+      format = "html",
+      col.names = NULL,
+      escape = FALSE
+    ) %>%
+    kableExtra::column_spec(1, bold = TRUE) %>% 
+    kableExtra::column_spec(2, width = "20em")
+}
+```
+
+With `pkgdoc::reference_concept()` you can gather documentation by concept across multiple packages. Here, the functions that start with `browse_` come from one package and all other functions come from a different one (follow the links to confirm).
+
+```{r}
+pkgdoc::reference_concept("chirunconf", url = chirunconf) %>% 
+  nice_kable()
+```
