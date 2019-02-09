@@ -91,36 +91,36 @@
 <p><code><a href="reference/search_docs.html">search_docs()</a></code> creates a dataframe of documentation available to you.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="co"># Documentation of all installed packages</span></a>
 <a class="sourceLine" id="cb3-2" data-line-number="2"><span class="kw"><a href="reference/search_docs.html">search_docs</a></span>()</a>
-<a class="sourceLine" id="cb3-3" data-line-number="3"><span class="co">#&gt; # A tibble: 71,919 x 11</span></a>
+<a class="sourceLine" id="cb3-3" data-line-number="3"><span class="co">#&gt; # A tibble: 75,949 x 11</span></a>
 <a class="sourceLine" id="cb3-4" data-line-number="4"><span class="co">#&gt;    package libpath id    name  title topic encoding type  alias keyword</span></a>
 <a class="sourceLine" id="cb3-5" data-line-number="5"><span class="co">#&gt;    &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;  </span></a>
 <a class="sourceLine" id="cb3-6" data-line-number="6"><span class="co">#&gt;  1 acepack C:/Use~ 1/1   ace   Alte~ ace   ""       help  ace   models </span></a>
 <a class="sourceLine" id="cb3-7" data-line-number="7"><span class="co">#&gt;  2 acepack C:/Use~ 1/2   avas  Addi~ avas  ""       help  avas  models </span></a>
 <a class="sourceLine" id="cb3-8" data-line-number="8"><span class="co">#&gt;  3 acepack C:/Use~ 1/2   avas  Addi~ avas  ""       help  avas~ models </span></a>
-<a class="sourceLine" id="cb3-9" data-line-number="9"><span class="co">#&gt;  4 addine~ C:/Use~ 2/1   addi~ RStu~ addi~ ""       help  addi~ &lt;NA&gt;   </span></a>
-<a class="sourceLine" id="cb3-10" data-line-number="10"><span class="co">#&gt;  5 addine~ C:/Use~ 2/1   addi~ RStu~ addi~ ""       help  addi~ &lt;NA&gt;   </span></a>
-<a class="sourceLine" id="cb3-11" data-line-number="11"><span class="co">#&gt;  6 addine~ C:/Use~ 2/2   find~ Find~ find~ ""       help  find~ &lt;NA&gt;   </span></a>
-<a class="sourceLine" id="cb3-12" data-line-number="12"><span class="co">#&gt;  7 addine~ C:/Use~ 2/3   inse~ Inse~ inse~ ""       help  inse~ &lt;NA&gt;   </span></a>
-<a class="sourceLine" id="cb3-13" data-line-number="13"><span class="co">#&gt;  8 addine~ C:/Use~ 2/4   refo~ Refo~ refo~ ""       help  refo~ &lt;NA&gt;   </span></a>
-<a class="sourceLine" id="cb3-14" data-line-number="14"><span class="co">#&gt;  9 addine~ C:/Use~ 2/5   subs~ Subs~ subs~ ""       help  subs~ &lt;NA&gt;   </span></a>
-<a class="sourceLine" id="cb3-15" data-line-number="15"><span class="co">#&gt; 10 AGBflu~ C:/Use~ 3/1   AGBf~ AGBf~ AGBf~ UTF-8    help  AGBf~ intern~</span></a>
-<a class="sourceLine" id="cb3-16" data-line-number="16"><span class="co">#&gt; # ... with 71,909 more rows, and 1 more variable: concept &lt;chr&gt;</span></a>
+<a class="sourceLine" id="cb3-9" data-line-number="9"><span class="co">#&gt;  4 animat~ C:/Use~ 2/1   BM.c~ Brow~ BM.c~ UTF-8    help  BM.c~ &lt;NA&gt;   </span></a>
+<a class="sourceLine" id="cb3-10" data-line-number="10"><span class="co">#&gt;  5 animat~ C:/Use~ 2/2   CLEL~ The ~ CLEL~ UTF-8    help  CLEL~ &lt;NA&gt;   </span></a>
+<a class="sourceLine" id="cb3-11" data-line-number="11"><span class="co">#&gt;  6 animat~ C:/Use~ 2/3   HuSp~ Word~ HuSp~ UTF-8    help  HuSp~ &lt;NA&gt;   </span></a>
+<a class="sourceLine" id="cb3-12" data-line-number="12"><span class="co">#&gt;  7 animat~ C:/Use~ 2/4   MC.h~ Hit ~ MC.h~ UTF-8    help  MC.h~ &lt;NA&gt;   </span></a>
+<a class="sourceLine" id="cb3-13" data-line-number="13"><span class="co">#&gt;  8 animat~ C:/Use~ 2/5   MC.s~ Samp~ MC.s~ UTF-8    help  MC.s~ &lt;NA&gt;   </span></a>
+<a class="sourceLine" id="cb3-14" data-line-number="14"><span class="co">#&gt;  9 animat~ C:/Use~ 2/6   Obam~ Word~ Obam~ UTF-8    help  Obam~ &lt;NA&gt;   </span></a>
+<a class="sourceLine" id="cb3-15" data-line-number="15"><span class="co">#&gt; 10 animat~ C:/Use~ 2/7   Rosl~ The ~ Rosl~ UTF-8    help  Rosl~ &lt;NA&gt;   </span></a>
+<a class="sourceLine" id="cb3-16" data-line-number="16"><span class="co">#&gt; # ... with 75,939 more rows, and 1 more variable: concept &lt;chr&gt;</span></a>
 <a class="sourceLine" id="cb3-17" data-line-number="17"></a>
 <a class="sourceLine" id="cb3-18" data-line-number="18">some_packages &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"utils"</span>, <span class="st">"base"</span>)</a>
 <a class="sourceLine" id="cb3-19" data-line-number="19"><span class="kw"><a href="reference/search_docs.html">search_docs</a></span>(some_packages)</a>
 <a class="sourceLine" id="cb3-20" data-line-number="20"><span class="co">#&gt; # A tibble: 5,935 x 11</span></a>
 <a class="sourceLine" id="cb3-21" data-line-number="21"><span class="co">#&gt;    package libpath id    name  title topic encoding type  alias keyword</span></a>
 <a class="sourceLine" id="cb3-22" data-line-number="22"><span class="co">#&gt;    &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;  </span></a>
-<a class="sourceLine" id="cb3-23" data-line-number="23"><span class="co">#&gt;  1 base    C:/Use~ 10/1  abbr~ Abbr~ abbr~ ""       help  abbr~ charac~</span></a>
-<a class="sourceLine" id="cb3-24" data-line-number="24"><span class="co">#&gt;  2 base    C:/Use~ 10/2  agrep Appr~ agrep ""       help  agrep charac~</span></a>
-<a class="sourceLine" id="cb3-25" data-line-number="25"><span class="co">#&gt;  3 base    C:/Use~ 10/2  agrep Appr~ agrep ""       help  agre~ charac~</span></a>
-<a class="sourceLine" id="cb3-26" data-line-number="26"><span class="co">#&gt;  4 base    C:/Use~ 10/2  agrep Appr~ agrep ""       help  fuzz~ charac~</span></a>
-<a class="sourceLine" id="cb3-27" data-line-number="27"><span class="co">#&gt;  5 base    C:/Use~ 10/2  agrep Appr~ agrep ""       help  .ama~ charac~</span></a>
-<a class="sourceLine" id="cb3-28" data-line-number="28"><span class="co">#&gt;  6 base    C:/Use~ 10/2  agrep Appr~ agrep ""       help  .ama~ charac~</span></a>
-<a class="sourceLine" id="cb3-29" data-line-number="29"><span class="co">#&gt;  7 base    C:/Use~ 10/3  all.~ Test~ all.~ ""       help  all.~ progra~</span></a>
-<a class="sourceLine" id="cb3-30" data-line-number="30"><span class="co">#&gt;  8 base    C:/Use~ 10/3  all.~ Test~ all.~ ""       help  all.~ progra~</span></a>
-<a class="sourceLine" id="cb3-31" data-line-number="31"><span class="co">#&gt;  9 base    C:/Use~ 10/3  all.~ Test~ all.~ ""       help  all.~ progra~</span></a>
-<a class="sourceLine" id="cb3-32" data-line-number="32"><span class="co">#&gt; 10 base    C:/Use~ 10/3  all.~ Test~ all.~ ""       help  all.~ progra~</span></a>
+<a class="sourceLine" id="cb3-23" data-line-number="23"><span class="co">#&gt;  1 base    C:/Use~ 353/1 abbr~ Abbr~ abbr~ ""       help  abbr~ charac~</span></a>
+<a class="sourceLine" id="cb3-24" data-line-number="24"><span class="co">#&gt;  2 base    C:/Use~ 353/2 agrep Appr~ agrep ""       help  agrep charac~</span></a>
+<a class="sourceLine" id="cb3-25" data-line-number="25"><span class="co">#&gt;  3 base    C:/Use~ 353/2 agrep Appr~ agrep ""       help  agre~ charac~</span></a>
+<a class="sourceLine" id="cb3-26" data-line-number="26"><span class="co">#&gt;  4 base    C:/Use~ 353/2 agrep Appr~ agrep ""       help  fuzz~ charac~</span></a>
+<a class="sourceLine" id="cb3-27" data-line-number="27"><span class="co">#&gt;  5 base    C:/Use~ 353/2 agrep Appr~ agrep ""       help  .ama~ charac~</span></a>
+<a class="sourceLine" id="cb3-28" data-line-number="28"><span class="co">#&gt;  6 base    C:/Use~ 353/2 agrep Appr~ agrep ""       help  .ama~ charac~</span></a>
+<a class="sourceLine" id="cb3-29" data-line-number="29"><span class="co">#&gt;  7 base    C:/Use~ 353/3 all.~ Test~ all.~ ""       help  all.~ progra~</span></a>
+<a class="sourceLine" id="cb3-30" data-line-number="30"><span class="co">#&gt;  8 base    C:/Use~ 353/3 all.~ Test~ all.~ ""       help  all.~ progra~</span></a>
+<a class="sourceLine" id="cb3-31" data-line-number="31"><span class="co">#&gt;  9 base    C:/Use~ 353/3 all.~ Test~ all.~ ""       help  all.~ progra~</span></a>
+<a class="sourceLine" id="cb3-32" data-line-number="32"><span class="co">#&gt; 10 base    C:/Use~ 353/3 all.~ Test~ all.~ ""       help  all.~ progra~</span></a>
 <a class="sourceLine" id="cb3-33" data-line-number="33"><span class="co">#&gt; # ... with 5,925 more rows, and 1 more variable: concept &lt;chr&gt;</span></a></code></pre></div>
 <p><code><a href="reference/reference_package.html">reference_package()</a></code> and <code><a href="reference/reference_package.html">reference_concept()</a></code> allow you to pick specific documentation.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw"><a href="reference/reference_package.html">reference_package</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"stats"</span>, <span class="st">"MASS"</span>))</a>
@@ -151,10 +151,10 @@
 <a class="sourceLine" id="cb4-26" data-line-number="26"><span class="co">#&gt; 4 princomp  princomp, plot, print, ~ Principal Compone~ PCA         stats</span></a></code></pre></div>
 <p>Use <code>knittr::kable()</code> or <code><a href="https://www.rdocumentation.org/packages/DT/topics/datatable">DT::datatable()</a></code> for the links to become clickable.</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(fgeo)</a>
-<a class="sourceLine" id="cb5-2" data-line-number="2"><span class="co">#&gt; -- Attaching packages ------------------------------------------------------------ fgeo 0.0.0.9002 --</span></a>
-<a class="sourceLine" id="cb5-3" data-line-number="3"><span class="co">#&gt; v fgeo.analyze 0.0.0.9003     v fgeo.tool    0.0.0.9005</span></a>
-<a class="sourceLine" id="cb5-4" data-line-number="4"><span class="co">#&gt; v fgeo.plot    0.0.0.9402     v fgeo.x       0.0.0.9000</span></a>
-<a class="sourceLine" id="cb5-5" data-line-number="5"><span class="co">#&gt; -- Conflicts -------------------------------------------------------------------- fgeo_conflicts() --</span></a>
+<a class="sourceLine" id="cb5-2" data-line-number="2"><span class="co">#&gt; -- Attaching packages -------------------------------------------------------------- fgeo 1.1.1 --</span></a>
+<a class="sourceLine" id="cb5-3" data-line-number="3"><span class="co">#&gt; v fgeo.analyze 1.1.4     v fgeo.tool    1.2.2</span></a>
+<a class="sourceLine" id="cb5-4" data-line-number="4"><span class="co">#&gt; v fgeo.plot    1.1.3     v fgeo.x       1.1.2</span></a>
+<a class="sourceLine" id="cb5-5" data-line-number="5"><span class="co">#&gt; -- Conflicts ----------------------------------------------------------------- fgeo_conflicts() --</span></a>
 <a class="sourceLine" id="cb5-6" data-line-number="6"><span class="co">#&gt; x fgeo.tool::filter() masks stats::filter()</span></a>
 <a class="sourceLine" id="cb5-7" data-line-number="7"></a>
 <a class="sourceLine" id="cb5-8" data-line-number="8"><span class="kw"><a href="reference/reference_package.html">reference_concept</a></span>(</a>
@@ -175,36 +175,37 @@
 <tbody>
 <tr class="odd">
 <td align="left"><a href="https://forestgeo.github.io/fgeo.x/reference/datasets">?</a></td>
-<td align="left">datasets, elevation, habitat, stem5, stem6, taxa, tree5, tree6, vft_4quad, tree6_3species</td>
-<td align="left">Datasets from Luquillo, Puerto Rico.</td>
+<td align="left">datasets, elevation, habitat, stem5, stem6, tree5, tree6, vft_4quad, tree6_3species</td>
+<td align="left">Access data via ‘library(fgeo.x)’ or ‘fgeo.x::<dataset-name>’.</dataset-name>
+</td>
 <td align="left">datasets</td>
 <td align="left"><a href="https://forestgeo.github.io/fgeo.x">fgeo.x</a></td>
 </tr>
 <tr class="even">
 <td align="left"><a href="https://forestgeo.github.io/fgeo.x/reference/download_data">?</a></td>
 <td align="left">download_data</td>
-<td align="left">Download data from fgeo.data.</td>
+<td align="left">Access data stored online.</td>
 <td align="left">datasets</td>
 <td align="left"><a href="https://forestgeo.github.io/fgeo.x">fgeo.x</a></td>
 </tr>
 <tr class="odd">
 <td align="left"><a href="https://forestgeo.github.io/fgeo.x/reference/example_path">?</a></td>
 <td align="left">example_path</td>
-<td align="left">Path to directory containing example data.</td>
+<td align="left">Access data stored in system files.</td>
 <td align="left">datasets</td>
 <td align="left"><a href="https://forestgeo.github.io/fgeo.x">fgeo.x</a></td>
 </tr>
 <tr class="even">
 <td align="left"><a href="https://forestgeo.github.io/fgeo.plot/reference/autoplot.fgeo_habitat">?</a></td>
 <td align="left">autoplot</td>
-<td align="left">Quick habitat plots.</td>
+<td align="left">Plot habitats.</td>
 <td align="left">plot functions</td>
 <td align="left"><a href="https://forestgeo.github.io/fgeo.plot">fgeo.plot</a></td>
 </tr>
 <tr class="odd">
 <td align="left"><a href="https://forestgeo.github.io/fgeo.plot/reference/autoplot.sp_elev">?</a></td>
 <td align="left">autoplot</td>
-<td align="left">Quick plot of species distribution and/or topography.</td>
+<td align="left">Plot species distribution and/or topography.</td>
 <td align="left">plot functions</td>
 <td align="left"><a href="https://forestgeo.github.io/fgeo.plot">fgeo.plot</a></td>
 </tr>
