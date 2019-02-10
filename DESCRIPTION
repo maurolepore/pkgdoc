@@ -31,12 +31,10 @@ Suggests:
     knitr (>= 1.21),
     projmgr (>= 0.0.0.9900),
     rmarkdown (>= 1.11),
-    safepredict (>= 0.0.0.9001),
     spelling (>= 2.0),
     testthat (>= 2.0.1)
 Remotes: 
     maurolepore/formulize,
-    alexpghayes/safepredict,
     maurolepore/projmgr
 Additional_repositories: https://forestgeo.github.io/drat
 Encoding: UTF-8

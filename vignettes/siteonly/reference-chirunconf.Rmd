@@ -1,8 +1,8 @@
 ---
-title: "Demo of [pkgdoc](https://maurolepore.github.io/pkgdoc/) for the [Chicago R Unconference](https://chirunconf.github.io/)"
+title: "Demo for chirunconf"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Demo of pkgdoc for the Chicago R Unconference}
+  %\VignetteIndexEntry{Demo for chirunconf}
   %\VignetteEncoding{UTF-8}
   %\VignetteEngine{knitr::rmarkdown}
 editor_options: 
@@ -19,7 +19,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-This document shows how to use [pkgdoc](https://maurolepore.github.io/pkgdoc/) to organize, search, and link documentation from multiple R packages -- all in one page. pkgdoc complements existing tools. It is similar to [RDocumentation](https://www.rdocumentation.org/) but not limited to packages published on CRAN. It is also similar to the _Reference_ section of [pkgdown](https://pkgdown.r-lib.org/) websites but is not limited to a single package.
+This document shows how to use [pkgdoc](https://maurolepore.github.io/pkgdoc/) to organize, search, and link documentation from multiple R packages -- all in one page. pkgdoc complements existing tools. It is similar to [RDocumentation](https://www.rdocumentation.org) but not limited to packages published on CRAN. It is also similar to the _Reference_ section of [pkgdown](https://pkgdown.r-lib.org/) websites but is not limited to a single package.
 
 pkgdoc may be used to centralize R packages developed during Chicago R Unconference. Suppose that during chirunconf [Emily Riederer](https://github.com/EmilyRiederer) and [Alex Hayes](https://github.com/alexpghayes) developed the packages projmgr and formulize. This document shows some ways you could use pkgdoc to show Emily's and Alex's work.
 
