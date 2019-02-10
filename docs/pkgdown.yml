@@ -4,4 +4,5 @@ pkgdown_sha: ~
 articles:
   reference-chirunconf: siteonly/reference-chirunconf.html
   reference-tidyverse: siteonly/reference-tidyverse.html
+  reference: siteonly/reference.html
 

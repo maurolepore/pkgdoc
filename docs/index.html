@@ -5,15 +5,12 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dataframe and Reference the Documentation of Available
-    Packages • pkgdoc</title>
+<title>Reference Documented R Objects Across Multiple Packages • pkgdoc</title>
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
-<script src="pkgdown.js"></script><meta property="og:title" content="Dataframe and Reference the Documentation of Available
-    Packages">
-<meta property="og:description" content="Dataframe the documentation of available packages,
-    and reference objects across multiple packages by package or concept.">
+<script src="pkgdown.js"></script><meta property="og:title" content="Reference Documented R Objects Across Multiple Packages">
+<meta property="og:description" content="Reference documented R objects across multiple packages.">
 <meta name="twitter:card" content="summary">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -91,7 +88,7 @@
 <p><code><a href="reference/search_docs.html">search_docs()</a></code> creates a dataframe of documentation available to you.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="co"># Documentation of all installed packages</span></a>
 <a class="sourceLine" id="cb3-2" data-line-number="2"><span class="kw"><a href="reference/search_docs.html">search_docs</a></span>()</a>
-<a class="sourceLine" id="cb3-3" data-line-number="3"><span class="co">#&gt; # A tibble: 75,949 x 11</span></a>
+<a class="sourceLine" id="cb3-3" data-line-number="3"><span class="co">#&gt; # A tibble: 75,968 x 11</span></a>
 <a class="sourceLine" id="cb3-4" data-line-number="4"><span class="co">#&gt;    package libpath id    name  title topic encoding type  alias keyword</span></a>
 <a class="sourceLine" id="cb3-5" data-line-number="5"><span class="co">#&gt;    &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;  </span></a>
 <a class="sourceLine" id="cb3-6" data-line-number="6"><span class="co">#&gt;  1 acepack C:/Use~ 1/1   ace   Alte~ ace   ""       help  ace   models </span></a>
@@ -104,23 +101,23 @@
 <a class="sourceLine" id="cb3-13" data-line-number="13"><span class="co">#&gt;  8 animat~ C:/Use~ 2/5   MC.s~ Samp~ MC.s~ UTF-8    help  MC.s~ &lt;NA&gt;   </span></a>
 <a class="sourceLine" id="cb3-14" data-line-number="14"><span class="co">#&gt;  9 animat~ C:/Use~ 2/6   Obam~ Word~ Obam~ UTF-8    help  Obam~ &lt;NA&gt;   </span></a>
 <a class="sourceLine" id="cb3-15" data-line-number="15"><span class="co">#&gt; 10 animat~ C:/Use~ 2/7   Rosl~ The ~ Rosl~ UTF-8    help  Rosl~ &lt;NA&gt;   </span></a>
-<a class="sourceLine" id="cb3-16" data-line-number="16"><span class="co">#&gt; # ... with 75,939 more rows, and 1 more variable: concept &lt;chr&gt;</span></a>
+<a class="sourceLine" id="cb3-16" data-line-number="16"><span class="co">#&gt; # ... with 75,958 more rows, and 1 more variable: concept &lt;chr&gt;</span></a>
 <a class="sourceLine" id="cb3-17" data-line-number="17"></a>
 <a class="sourceLine" id="cb3-18" data-line-number="18">some_packages &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"utils"</span>, <span class="st">"base"</span>)</a>
 <a class="sourceLine" id="cb3-19" data-line-number="19"><span class="kw"><a href="reference/search_docs.html">search_docs</a></span>(some_packages)</a>
 <a class="sourceLine" id="cb3-20" data-line-number="20"><span class="co">#&gt; # A tibble: 5,935 x 11</span></a>
 <a class="sourceLine" id="cb3-21" data-line-number="21"><span class="co">#&gt;    package libpath id    name  title topic encoding type  alias keyword</span></a>
 <a class="sourceLine" id="cb3-22" data-line-number="22"><span class="co">#&gt;    &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;  </span></a>
-<a class="sourceLine" id="cb3-23" data-line-number="23"><span class="co">#&gt;  1 base    C:/Use~ 353/1 abbr~ Abbr~ abbr~ ""       help  abbr~ charac~</span></a>
-<a class="sourceLine" id="cb3-24" data-line-number="24"><span class="co">#&gt;  2 base    C:/Use~ 353/2 agrep Appr~ agrep ""       help  agrep charac~</span></a>
-<a class="sourceLine" id="cb3-25" data-line-number="25"><span class="co">#&gt;  3 base    C:/Use~ 353/2 agrep Appr~ agrep ""       help  agre~ charac~</span></a>
-<a class="sourceLine" id="cb3-26" data-line-number="26"><span class="co">#&gt;  4 base    C:/Use~ 353/2 agrep Appr~ agrep ""       help  fuzz~ charac~</span></a>
-<a class="sourceLine" id="cb3-27" data-line-number="27"><span class="co">#&gt;  5 base    C:/Use~ 353/2 agrep Appr~ agrep ""       help  .ama~ charac~</span></a>
-<a class="sourceLine" id="cb3-28" data-line-number="28"><span class="co">#&gt;  6 base    C:/Use~ 353/2 agrep Appr~ agrep ""       help  .ama~ charac~</span></a>
-<a class="sourceLine" id="cb3-29" data-line-number="29"><span class="co">#&gt;  7 base    C:/Use~ 353/3 all.~ Test~ all.~ ""       help  all.~ progra~</span></a>
-<a class="sourceLine" id="cb3-30" data-line-number="30"><span class="co">#&gt;  8 base    C:/Use~ 353/3 all.~ Test~ all.~ ""       help  all.~ progra~</span></a>
-<a class="sourceLine" id="cb3-31" data-line-number="31"><span class="co">#&gt;  9 base    C:/Use~ 353/3 all.~ Test~ all.~ ""       help  all.~ progra~</span></a>
-<a class="sourceLine" id="cb3-32" data-line-number="32"><span class="co">#&gt; 10 base    C:/Use~ 353/3 all.~ Test~ all.~ ""       help  all.~ progra~</span></a>
+<a class="sourceLine" id="cb3-23" data-line-number="23"><span class="co">#&gt;  1 base    C:/Use~ 356/1 abbr~ Abbr~ abbr~ ""       help  abbr~ charac~</span></a>
+<a class="sourceLine" id="cb3-24" data-line-number="24"><span class="co">#&gt;  2 base    C:/Use~ 356/2 agrep Appr~ agrep ""       help  agrep charac~</span></a>
+<a class="sourceLine" id="cb3-25" data-line-number="25"><span class="co">#&gt;  3 base    C:/Use~ 356/2 agrep Appr~ agrep ""       help  agre~ charac~</span></a>
+<a class="sourceLine" id="cb3-26" data-line-number="26"><span class="co">#&gt;  4 base    C:/Use~ 356/2 agrep Appr~ agrep ""       help  fuzz~ charac~</span></a>
+<a class="sourceLine" id="cb3-27" data-line-number="27"><span class="co">#&gt;  5 base    C:/Use~ 356/2 agrep Appr~ agrep ""       help  .ama~ charac~</span></a>
+<a class="sourceLine" id="cb3-28" data-line-number="28"><span class="co">#&gt;  6 base    C:/Use~ 356/2 agrep Appr~ agrep ""       help  .ama~ charac~</span></a>
+<a class="sourceLine" id="cb3-29" data-line-number="29"><span class="co">#&gt;  7 base    C:/Use~ 356/3 all.~ Test~ all.~ ""       help  all.~ progra~</span></a>
+<a class="sourceLine" id="cb3-30" data-line-number="30"><span class="co">#&gt;  8 base    C:/Use~ 356/3 all.~ Test~ all.~ ""       help  all.~ progra~</span></a>
+<a class="sourceLine" id="cb3-31" data-line-number="31"><span class="co">#&gt;  9 base    C:/Use~ 356/3 all.~ Test~ all.~ ""       help  all.~ progra~</span></a>
+<a class="sourceLine" id="cb3-32" data-line-number="32"><span class="co">#&gt; 10 base    C:/Use~ 356/3 all.~ Test~ all.~ ""       help  all.~ progra~</span></a>
 <a class="sourceLine" id="cb3-33" data-line-number="33"><span class="co">#&gt; # ... with 5,925 more rows, and 1 more variable: concept &lt;chr&gt;</span></a></code></pre></div>
 <p><code><a href="reference/reference_package.html">reference_package()</a></code> and <code><a href="reference/reference_package.html">reference_concept()</a></code> allow you to pick specific documentation.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw"><a href="reference/reference_package.html">reference_package</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"stats"</span>, <span class="st">"MASS"</span>))</a>
@@ -151,10 +148,10 @@
 <a class="sourceLine" id="cb4-26" data-line-number="26"><span class="co">#&gt; 4 princomp  princomp, plot, print, ~ Principal Compone~ PCA         stats</span></a></code></pre></div>
 <p>Use <code>knittr::kable()</code> or <code><a href="https://www.rdocumentation.org/packages/DT/topics/datatable">DT::datatable()</a></code> for the links to become clickable.</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(fgeo)</a>
-<a class="sourceLine" id="cb5-2" data-line-number="2"><span class="co">#&gt; -- Attaching packages -------------------------------------------------------------- fgeo 1.1.1 --</span></a>
+<a class="sourceLine" id="cb5-2" data-line-number="2"><span class="co">#&gt; -- Attaching packages --------------------------------------------------- fgeo 1.1.1 --</span></a>
 <a class="sourceLine" id="cb5-3" data-line-number="3"><span class="co">#&gt; v fgeo.analyze 1.1.4     v fgeo.tool    1.2.2</span></a>
 <a class="sourceLine" id="cb5-4" data-line-number="4"><span class="co">#&gt; v fgeo.plot    1.1.3     v fgeo.x       1.1.2</span></a>
-<a class="sourceLine" id="cb5-5" data-line-number="5"><span class="co">#&gt; -- Conflicts ----------------------------------------------------------------- fgeo_conflicts() --</span></a>
+<a class="sourceLine" id="cb5-5" data-line-number="5"><span class="co">#&gt; -- Conflicts ------------------------------------------------------ fgeo_conflicts() --</span></a>
 <a class="sourceLine" id="cb5-6" data-line-number="6"><span class="co">#&gt; x fgeo.tool::filter() masks stats::filter()</span></a>
 <a class="sourceLine" id="cb5-7" data-line-number="7"></a>
 <a class="sourceLine" id="cb5-8" data-line-number="8"><span class="kw"><a href="reference/reference_package.html">reference_concept</a></span>(</a>
