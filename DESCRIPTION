@@ -27,11 +27,18 @@ Suggests:
     fgeo (>= 1.1.1),
     fgeo.analyze (>= 1.1.4),
     fgeo.x (>= 1.1.2),
+    formulize (>= 0.1.0.9000),
     kableExtra (>= 1.0.1),
     knitr (>= 1.21),
+    projmgr (>= 0.0.0.9900),
     rmarkdown (>= 1.11),
-    spelling (>= 2.0),
+    safepredict (>= 0.0.0.9001)
+    spelling),
     testthat (>= 2.0.1)
+Remotes: 
+    alexpghayes/formulize,
+    alexpghayes/safepredict,
+    emilyriederer/projmgr
 Additional_repositories: https://forestgeo.github.io/drat
 Encoding: UTF-8
 Language: en-US
