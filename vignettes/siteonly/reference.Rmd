@@ -78,7 +78,6 @@ library(fgeo)
 fgeo:::fgeo_packages()
 
 fgeo_url <- "https://forestgeo.github.io/"
-
 ```
 
 ### Searching

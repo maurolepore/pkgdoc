@@ -6,7 +6,8 @@
 \alias{pkgdoc-package}
 \title{pkgdoc: Reference Documented R Objects Across Multiple Packages}
 \description{
-Reference documented R objects across multiple packages.
+Reference documented R objects across multiple
+    packages.
 }
 \seealso{
 Useful links:
