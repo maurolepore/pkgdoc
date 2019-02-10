@@ -21,7 +21,7 @@ knitr::opts_chunk$set(
 
 This document shows how to use [pkgdoc](https://maurolepore.github.io/pkgdoc/) to organize, search, and link documentation from multiple R packages -- all in one page. pkgdoc complements existing tools. It is similar to [RDocumentation](https://www.rdocumentation.org) but not limited to packages published on CRAN. It is also similar to the _Reference_ section of [pkgdown](https://pkgdown.r-lib.org/) websites but is not limited to a single package.
 
-pkgdoc may be used to centralize R packages developed during Chicago R Unconference. Suppose that during chirunconf [Emily Riederer](https://github.com/EmilyRiederer) and [Alex Hayes](https://github.com/alexpghayes) developed the packages projmgr and formulize. This document shows some ways you could use pkgdoc to show Emily's and Alex's work.
+pkgdoc may be used to centralize R packages developed during [chirunconf](https://chirunconf.github.io). Suppose that during chirunconf [Emily Riederer](https://github.com/EmilyRiederer) and [Alex Hayes](https://github.com/alexpghayes) developed the packages projmgr and formulize. This document shows some ways you could use pkgdoc to show Emily's and Alex's work.
 
 ```{r}
 library(dplyr)
@@ -57,37 +57,15 @@ pkgdoc::reference_package("formulize", url = chirunconf) %>%
   )
 ```
 
-With pkgdoc + `knitr::kable()` you can create a static table with clickable links. Here for example we group features across multiple packages by concept (create concepts with the tag `#' @family`)
+With pkgdoc + `knitr::kable()` you can create a static table with clickable links. For example, here we group features across multiple packages by concept (created with `#' @family`).
 
 ### `#' @family chirunconf`
 
-(The concept 'chirunconf' was created for this demo only.)
+('chirunconf' is a toy concept, created for this demo.)
 
 ```{r}
 pkgdoc::reference_concept("chirunconf", url = chirunconf) %>% 
   knitr::kable()
 ```
 
-With the kableExtra package we can tweak the output like the 'Reference' section of a [pkgdown](https://pkgdown.r-lib.org/) website.
-
-### `#' @family chirunconf`
-
-```{r, warning=FALSE}
-nice_kable <- function(x) {
-  x %>% 
-    select(-package, -concept) %>% 
-    unique() %>%
-    knitr::kable(
-      x, 
-      format = "html",
-      col.names = NULL,
-      escape = FALSE
-    ) %>%
-    kableExtra::column_spec(1, bold = TRUE) %>% 
-    kableExtra::column_spec(2, width = "20em")
-}
-
-pkgdoc::reference_concept("chirunconf", url = chirunconf) %>% 
-  nice_kable()
-```
-
+[Visit pkgdoc](https://maurolepore.github.io/pkgdoc/index.html)
