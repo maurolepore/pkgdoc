@@ -18,8 +18,7 @@ Imports:
     magrittr,
     purrr,
     rlang,
-    tibble,
-    utils
+    tibble
 Suggests: 
     covr,
     knitr,
