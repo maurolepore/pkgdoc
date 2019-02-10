@@ -36,9 +36,9 @@ Suggests:
     spelling (>= 2.0),
     testthat (>= 2.0.1)
 Remotes: 
-    alexpghayes/formulize,
+    maurolepore/formulize,
     alexpghayes/safepredict,
-    emilyriederer/projmgr
+    maurolepore/projmgr
 Additional_repositories: https://forestgeo.github.io/drat
 Encoding: UTF-8
 Language: en-US
