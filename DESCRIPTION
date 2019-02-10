@@ -1,34 +1,33 @@
 Package: pkgdoc
-Title: Dataframe and Reference the Documentation of Available
-    Packages
+Title: Reference Documented R Objects Across Multiple Packages
 Version: 0.0.0.9000
 Authors@R: 
     person(given = "Mauro",
            family = "Lepore",
            role = c("aut", "ctr", "cre"),
            email = "leporem@si.edu")
-Description: Dataframe the documentation of available packages,
-    and reference objects across multiple packages by package or concept.
+Description: Reference documented R objects across multiple packages.
 License: GPL-3
 URL: https://github.com/maurolepore/pkgdoc
 BugReports: https://github.com/maurolepore/pkgdoc/issues
+Depends: 
+    R (>= 3.1)
 Imports: 
-    dplyr,
-    glue,
-    magrittr,
-    purrr,
-    rlang,
-    tibble
+    dplyr (>= 0.7.8),
+    glue (>= 1.3.0),
+    magrittr (>= 1.5),
+    purrr (>= 0.3.0),
+    rlang (>= 0.3.1),
+    tibble (>= 2.0.1),
+    utils
 Suggests: 
-    covr,
-    knitr,
-    rmarkdown,
-    testthat,
-    spelling
-VignetteBuilder: 
-    knitr
+    covr (>= 3.2.1),
+    knitr (>= 1.21),
+    rmarkdown (>= 1.11),
+    spelling (>= 2.0),
+    testthat (>= 2.0.1)
 Encoding: UTF-8
+Language: en-US
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.1.1
-Language: en-US

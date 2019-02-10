@@ -29,7 +29,7 @@ library(glue)
 library(DT)
 ```
 
-Let's pull the documenation of all core-tidyverse-packages with __pkgdoc__.
+Let's pull the documentation of all core-tidyverse-packages with __pkgdoc__.
 
 ```{r}
 (docs <- reference_package(tidyverse:::core))

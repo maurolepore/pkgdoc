@@ -1,3 +1,4 @@
+^codecov\.yml$
 ^vignettes/siteonly$
 ^docs$
 ^_pkgdown\.yml$

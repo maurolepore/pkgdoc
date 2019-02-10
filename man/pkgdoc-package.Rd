@@ -4,11 +4,9 @@
 \name{pkgdoc-package}
 \alias{pkgdoc}
 \alias{pkgdoc-package}
-\title{pkgdoc: Dataframe and Reference the Documentation of Available
-    Packages}
+\title{pkgdoc: Reference Documented R Objects Across Multiple Packages}
 \description{
-Dataframe the documentation of available packages,
-    and reference objects across multiple packages by package or concept.
+Reference documented R objects across multiple packages.
 }
 \seealso{
 Useful links:
