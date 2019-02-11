@@ -19,11 +19,11 @@ knitr::opts_chunk$set(
 )
 ```
 
-Introduction
+## Introduction
 
 [pkgdoc](https://maurolepore.github.io/pkgdoc/) complements existing tools. You can use it to search documentation, similar to [RDocumentation](https://www.rdocumentation.org) but not limited to packages published on CRAN. Also you can use it to create a documentation index, similar to the _Reference_ section of [pkgdown](https://pkgdown.r-lib.org/) websites but is not limited to a single package.
 
-The example uses the packages projmgr and formulize, by [Emily Riederer](https://github.com/EmilyRiederer) and [Alex Hayes](https://github.com/alexpghayes).
+The examples below use the packages projmgr and formulize, by [Emily Riederer](https://github.com/EmilyRiederer) and [Alex Hayes](https://github.com/alexpghayes).
 
 ```{r}
 # By Emily
@@ -35,11 +35,9 @@ library(formulize)
 library(dplyr)
 ```
 
-# Example
+## Example
 
-You may use pkgdoc to centralize R packages developed during [chirunconf](https://chirunconf.github.io). For all packages you may create a single widget to search any documentation. Or you you may create one widget by author's group.
-
-## Creating a serchable widget with pkgdoc + `DT::datatable()`
+You may use pkgdoc to centralize R packages developed during [chirunconf](https://chirunconf.github.io). You may create a single widget to search any documentation in all packages, or one widget per team.
 
 ### A package by Emily's team
 
@@ -67,9 +65,9 @@ pkgdoc::reference_package("formulize", url = chirunconf) %>%
   )
 ```
 
-## Creating an index by concept with pkgdoc + `knitr::kable()`
-
 You may use use pkgdoc to organize your documentation index by any concept created with the [roxygen2](https://github.com/klutometis/roxygen) tag `#' @family`. 
+
+### Documentation about 'chirunconf'
 
 ```{r}
 # 'chirunconf' is a fake concept, created for this demo
