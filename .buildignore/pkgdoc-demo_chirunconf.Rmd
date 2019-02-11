@@ -1,12 +1,13 @@
 ---
 title: "Demo for chirunconf"
-output: rmarkdown::html_vignette
-vignette: >
-  %\VignetteIndexEntry{Demo for chirunconf}
-  %\VignetteEncoding{UTF-8}
-  %\VignetteEngine{knitr::rmarkdown}
-editor_options: 
-  chunk_output_type: console
+author: "Mauro Lepore"
+date: "`r Sys.Date()`"
+output:
+  prettydoc::html_pretty:
+    highlight: github
+    theme: architect
+resource_files:
+- pkgdoc-demo_chirunconf.html
 ---
 
 ```{r setup, include = FALSE}
