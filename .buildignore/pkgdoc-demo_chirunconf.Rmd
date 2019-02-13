@@ -76,4 +76,6 @@ pkgdoc::reference_concept("chirunconf", url = chirunconf) %>%
   knitr::kable()
 ```
 
-[Get started with pkgdoc](https://maurolepore.github.io/pkgdoc/index.html)
+---
+
+pkgdoc already meets the requirements for CRAN submission but it would greatly benefit from the work of three to five people for about two days. The open issues are diverse enough to accommodate people with diverse skills and experience ranging beginners to experts (<https://github.com/maurolepore/pkgdoc/issues>).
