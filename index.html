@@ -89,7 +89,7 @@
 <p><code><a href="reference/search_docs.html">search_docs()</a></code> creates a dataframe of documentation available to you.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="co"># Documentation of all installed packages</span></a>
 <a class="sourceLine" id="cb3-2" data-line-number="2"><span class="kw"><a href="reference/search_docs.html">search_docs</a></span>()</a>
-<a class="sourceLine" id="cb3-3" data-line-number="3"><span class="co">#&gt; # A tibble: 36,257 x 11</span></a>
+<a class="sourceLine" id="cb3-3" data-line-number="3"><span class="co">#&gt; # A tibble: 36,258 x 11</span></a>
 <a class="sourceLine" id="cb3-4" data-line-number="4"><span class="co">#&gt;    package libpath id    name  title topic encoding type  alias keyword</span></a>
 <a class="sourceLine" id="cb3-5" data-line-number="5"><span class="co">#&gt;    &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;  </span></a>
 <a class="sourceLine" id="cb3-6" data-line-number="6"><span class="co">#&gt;  1 askpass /home/… 1/1   askp… Pass… askp… UTF-8    help  askp… &lt;NA&gt;   </span></a>
@@ -102,7 +102,7 @@
 <a class="sourceLine" id="cb3-13" data-line-number="13"><span class="co">#&gt;  8 assert… /home/… 2/3   asse… Asse… asse… ""       help  see_… &lt;NA&gt;   </span></a>
 <a class="sourceLine" id="cb3-14" data-line-number="14"><span class="co">#&gt;  9 assert… /home/… 2/4   asse… Usef… asse… ""       help  asse… &lt;NA&gt;   </span></a>
 <a class="sourceLine" id="cb3-15" data-line-number="15"><span class="co">#&gt; 10 assert… /home/… 2/4   asse… Usef… asse… ""       help  is.d… &lt;NA&gt;   </span></a>
-<a class="sourceLine" id="cb3-16" data-line-number="16"><span class="co">#&gt; # … with 36,247 more rows, and 1 more variable: concept &lt;chr&gt;</span></a>
+<a class="sourceLine" id="cb3-16" data-line-number="16"><span class="co">#&gt; # … with 36,248 more rows, and 1 more variable: concept &lt;chr&gt;</span></a>
 <a class="sourceLine" id="cb3-17" data-line-number="17"></a>
 <a class="sourceLine" id="cb3-18" data-line-number="18">some_packages &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"utils"</span>, <span class="st">"base"</span>)</a>
 <a class="sourceLine" id="cb3-19" data-line-number="19"><span class="kw"><a href="reference/search_docs.html">search_docs</a></span>(some_packages)</a>
