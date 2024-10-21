@@ -29,7 +29,7 @@ Suggests:
     projmgr (>= 0.0.0.9900),
     rmarkdown (>= 1.11),
     spelling (>= 2.0),
-    testthat (>= 2.0.1)
+    testthat (>= 3.0.0)
 Remotes: 
     maurolepore/formulize,
     maurolepore/projmgr
@@ -38,3 +38,4 @@ Language: en-US
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.1.1
+Config/testthat/edition: 3
