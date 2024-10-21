@@ -2,12 +2,8 @@ Package: pkgdoc
 Title: Reference Documented R Objects Across Multiple Packages
 Version: 0.0.0.9000
 Authors@R: 
-    person(given = "Mauro",
-           family = "Lepore",
-           role = c("aut", "ctr", "cre"),
-           email = "leporem@si.edu")
-Description: Reference documented R objects across multiple
-    packages.
+    person("Mauro", "Lepore", , "leporem@si.edu", role = c("aut", "ctr", "cre"))
+Description: Reference documented R objects across multiple packages.
 License: GPL-3
 URL: https://github.com/maurolepore/pkgdoc
 BugReports: https://github.com/maurolepore/pkgdoc/issues
