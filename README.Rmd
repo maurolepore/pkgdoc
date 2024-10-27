@@ -21,12 +21,9 @@ knitr::opts_chunk$set(
 <!-- badges: end -->
 
 The goal of pkgdoc is to make it easy to create a data frame of the
-documentation of multiple packages. Combined with `krittr::kable()` or
-`DT::datatable()`, pkgdoc allows you to organize documentation by package or
-concept, and link each function or dataset to it's corresponding help file
-online.
+documentation of multiple packages.
 
-If you develop a universe, like the tidyverse and tidymodels, pkgdoc helps you
+If you develop a universe, such as the tidyverse or tidymodels, pkgdoc helps you
 to easily create a universe-wide reference for the pkgdown website of your
 meta-package
 ([example](https://forestgeo.github.io/fgeo/articles/siteonly/reference.html#global-search)).
@@ -45,17 +42,23 @@ library(pkgdoc)
 library(fgeo.x)
 library(fgeo.plot)
 
-universe <- c("fgeo.x", "fgeo.plot")
+universe <- c("fgeo.plot", "fgeo.x")
 
-universe |> 
-  reference_package(url = "https://forestgeo.github.io/")
+docs <- reference_package(universe, url = "https://forestgeo.github.io/")
+docs
 ```
 
-You can make links clickable with `DT::datatable()` or `knitr::kable()`.
+You can easily organize the documentation by concept (`#' @family`) and make
+links clickable with `DT::datatable()` or `knitr::kable()`. For example:
+
+* Datasets
 
 ```{r}
-universe |> 
-  reference_package(url = "https://forestgeo.github.io/") |> 
-  knitr::kable()
+knitr::kable(subset(docs, concept == "datasets"))
 ```
 
+* Autoplots
+
+```{r}
+knitr::kable(subset(docs, concept == "autoplots"))
+```
