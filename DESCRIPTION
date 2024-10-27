@@ -10,26 +10,17 @@ BugReports: https://github.com/maurolepore/pkgdoc/issues
 Depends: 
     R (>= 3.1)
 Imports: 
-    dplyr (>= 0.7.8),
-    glue (>= 1.3.0),
-    magrittr (>= 1.5),
-    purrr (>= 0.3.0),
-    rlang (>= 0.3.1),
-    tibble (>= 2.0.1),
+    dplyr,
+    glue,
+    magrittr,
+    purrr,
+    rlang,
+    tibble,
     utils
 Suggests: 
-    covr (>= 3.2.1),
-    DT (>= 0.5),
-    fgeo (>= 1.1.1),
-    fgeo.analyze (>= 1.1.4),
-    fgeo.x (>= 1.1.2),
-    formulize (>= 0.1.0.9000),
-    kableExtra (>= 1.0.1),
-    knitr (>= 1.21),
-    projmgr (>= 0.0.0.9900),
-    rmarkdown (>= 1.11),
-    spelling (>= 2.0),
-    testthat (>= 3.0.0),
+    fgeo.plot,
+    fgeo.x,
+    testthat,
     withr
 Remotes: 
     maurolepore/formulize,
