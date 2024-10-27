@@ -60,9 +60,9 @@ The functions are few and we can show them all at once. But let's tweak the outp
 (The column `package` isn't helpful but I'll leave it to show the link.)
 
 ```{r}
-docs %>% 
-  arrange(desc(concept)) %>% 
-  select(-concept) %>% 
+docs %>%
+  arrange(desc(concept)) %>%
+  select(-concept) %>%
   knitr::kable()
 ```
 
@@ -86,12 +86,12 @@ You can reference a large number of documentation. Instead of scanning a long li
 
 ```{r}
 # Pulling documentation of all fgeo packages
-docs <- fgeo:::fgeo_packages() %>% 
-  purrr::map_dfr(reference_package, url = fgeo_url) %>% 
-  select(-package, -concept) %>% 
+docs <- fgeo:::fgeo_packages() %>%
+  purrr::map_dfr(reference_package, url = fgeo_url) %>%
+  select(-package, -concept) %>%
   unique()
 
-docs %>% 
+docs %>%
   DT::datatable(
     escape = FALSE,
     rownames = NULL,
@@ -113,11 +113,11 @@ You may cherry-pick all documentation from specific packages.
 
 ```{r}
 reference_package(
-  c("fgeo.x", "fgeo.analyze"), 
+  c("fgeo.x", "fgeo.analyze"),
   url = fgeo_url
- ) %>% 
-  arrange(concept) %>% 
-  select(-package, -concept) %>% 
+) %>%
+  arrange(concept) %>%
+  select(-package, -concept) %>%
   knitr::kable()
 ```
 
@@ -131,8 +131,8 @@ reference_concept(
   url = fgeo_url,
   # limit the search of documentation within these packages
   packages = fgeo:::fgeo_packages(),
-  ) %>% 
+) %>%
   arrange(concept) %>%
-  select(-package, -concept) %>% 
+  select(-package, -concept) %>%
   knitr::kable()
 ```

@@ -15,7 +15,6 @@ test_that("does nothing with non existing functions", {
 })
 
 test_that("outputs expected generics", {
-
   expect_equal(
     s3_strip_class(c(
       "print.data.frame",

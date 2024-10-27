@@ -46,11 +46,11 @@ link_package <- function(package) {
   glue("<a href=https://{package}.tidyverse.org/index.html>{package}</a>")
 }
 
-linked <- docs %>% 
+linked <- docs %>%
   mutate(
     topic   = link_topic(package, topic),
     package = link_package(package)
-)
+  )
 
 linked
 ```
@@ -58,7 +58,7 @@ linked
 We are now read to create a searchable table with `DT::datatable()`.
 
 ```{r}
-linked %>% 
+linked %>%
   datatable(
     escape = FALSE,
     rownames = NULL,

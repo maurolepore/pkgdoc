@@ -38,7 +38,7 @@ With pkgdoc + `DT::datatable()` you can create searchable widgets. For example, 
 # (Not really -- this is just a toy example)
 chirunconf <- "https://maurolepore.github.io/"
 
-pkgdoc::reference_package("projmgr", url = chirunconf) %>% 
+pkgdoc::reference_package("projmgr", url = chirunconf) %>%
   DT::datatable(
     escape = FALSE,
     rownames = NULL,
@@ -49,7 +49,7 @@ pkgdoc::reference_package("projmgr", url = chirunconf) %>%
 ### A package by Alex
 
 ```{r}
-pkgdoc::reference_package("formulize", url = chirunconf) %>% 
+pkgdoc::reference_package("formulize", url = chirunconf) %>%
   DT::datatable(
     escape = FALSE,
     rownames = NULL,
@@ -64,7 +64,7 @@ With pkgdoc + `knitr::kable()` you can create a static table with clickable link
 (The concept 'chirunconf' was created for this demo only.)
 
 ```{r}
-pkgdoc::reference_concept("chirunconf", url = chirunconf) %>% 
+pkgdoc::reference_concept("chirunconf", url = chirunconf) %>%
   knitr::kable()
 ```
 
@@ -74,20 +74,20 @@ With the kableExtra package we can tweak the output like the 'Reference' section
 
 ```{r, warning=FALSE}
 nice_kable <- function(x) {
-  x %>% 
-    select(-package, -concept) %>% 
+  x %>%
+    select(-package, -concept) %>%
     unique() %>%
     knitr::kable(
-      x, 
+      x,
       format = "html",
       col.names = NULL,
       escape = FALSE
     ) %>%
-    kableExtra::column_spec(1, bold = TRUE) %>% 
+    kableExtra::column_spec(1, bold = TRUE) %>%
     kableExtra::column_spec(2, width = "20em")
 }
 
-pkgdoc::reference_concept("chirunconf", url = chirunconf) %>% 
+pkgdoc::reference_concept("chirunconf", url = chirunconf) %>%
   nice_kable()
 ```
 

@@ -63,9 +63,9 @@ library(fgeo)
 reference_concept(
   c("datasets", "plot functions"),
   url = "https://forestgeo.github.io/",
-  ) %>% 
+) %>%
   arrange(concept) %>%
-  head() %>% 
+  head() %>%
   knitr::kable()
 ```
 

@@ -11,7 +11,7 @@
 #'
 #' @param x A character vector giving concepts or package names to match.
 #' @param url Character vector of length-1 giving a base url, e.g.
-#'   "https://forestgeo.github.io/".
+#'   "https://maurolepore.github.io/".
 #' @param strip_s3class `TRUE` removes the class component of S3 methods.
 #' @param packages A character vector with the names of packages to limit the
 #'   search, or `NULL` to serach in all known libraries.
@@ -47,8 +47,6 @@ reference_package <- reference_any("package")
 #' @export
 reference_concept <- reference_any("concept")
 
-
-
 warn_unnattached <- function(x, doc) {
   if (!identical(doc, "package")) {
     return(invisible(x))
@@ -71,7 +69,7 @@ pick_doc <- function(packages, doc, x) {
     unique() %>%
     filter(.[[doc]] %in% x)
 
-  may_warn_missing_doc(result, doc, x)
+  abort_missing_doc(result, doc, x)
   result
 }
 
@@ -100,10 +98,11 @@ attached <- function(x) {
   purrr::map_lgl(glue("package:{x}"), rlang::is_attached)
 }
 
-may_warn_missing_doc <- function(.data, doc, x) {
+abort_missing_doc <- function(.data, doc, x) {
   good_request <- x %in% unique(.data[[doc]])
-  if (all(good_request))
+  if (all(good_request)) {
     return(invisible(.data))
+  }
 
   bad_request <- x[!good_request]
   abort(glue("No {doc} matches '{bad_request}'."))
@@ -115,7 +114,7 @@ collapse_alias <- function(.data, strip_s3class = FALSE) {
     mutate(
       alias = dplyr::case_when(
         !strip_s3class ~ may_strip_s3class(.data$alias, .f = identity),
-         strip_s3class ~ may_strip_s3class(.data$alias, .f = s3_strip_class),
+        strip_s3class ~ may_strip_s3class(.data$alias, .f = s3_strip_class),
       )
     ) %>%
     ungroup() %>%
