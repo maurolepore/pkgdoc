@@ -51,8 +51,8 @@
 </h1></div>
 <!-- badges: start -->
 
-<p>The goal of pkgdoc is to make it easy to create a data frame of the documentation of multiple packages. Combined with <code>krittr::kable()</code> or <code>DT::datatable()</code>, pkgdoc allows you to organize documentation by package or concept, and link each function or dataset to it’s corresponding help file online.</p>
-<p>If you develop a universe, like the tidyverse and tidymodels, pkgdoc helps you to easily create a universe-wide reference for the pkgdown website of your meta-package (<a href="https://forestgeo.github.io/fgeo/articles/siteonly/reference.html#global-search" class="external-link">example</a>).</p>
+<p>The goal of pkgdoc is to make it easy to create a data frame of the documentation of multiple packages.</p>
+<p>If you develop a universe, such as the tidyverse or tidymodels, pkgdoc helps you to easily create a universe-wide reference for the pkgdown website of your meta-package (<a href="https://forestgeo.github.io/fgeo/articles/siteonly/reference.html#global-search" class="external-link">example</a>).</p>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
@@ -68,10 +68,10 @@
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/forestgeo/fgeo.x" class="external-link">fgeo.x</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/forestgeo/fgeo.plot" class="external-link">fgeo.plot</a></span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">universe</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"fgeo.x"</span>, <span class="st">"fgeo.plot"</span><span class="op">)</span></span>
+<span><span class="va">universe</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"fgeo.plot"</span>, <span class="st">"fgeo.x"</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">universe</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="reference/reference_package.html">reference_package</a></span><span class="op">(</span>url <span class="op">=</span> <span class="st">"https://forestgeo.github.io/"</span><span class="op">)</span></span>
+<span><span class="va">docs</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/reference_package.html">reference_package</a></span><span class="op">(</span><span class="va">universe</span>, url <span class="op">=</span> <span class="st">"https://forestgeo.github.io/"</span><span class="op">)</span></span>
+<span><span class="va">docs</span></span>
 <span><span class="co">#&gt; # A tibble: 32 × 5</span></span>
 <span><span class="co">#&gt;    topic                                             alias title concept package</span></span>
 <span><span class="co">#&gt;    &lt;glue&gt;                                            &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;   &lt;glue&gt; </span></span>
@@ -86,11 +86,57 @@
 <span><span class="co">#&gt;  9 &lt;a href=https://forestgeo.github.io/fgeo.plot/re… auto… List… functi… &lt;a hre…</span></span>
 <span><span class="co">#&gt; 10 &lt;a href=https://forestgeo.github.io/fgeo.plot/re… auto… List… plot f… &lt;a hre…</span></span>
 <span><span class="co">#&gt; # ℹ 22 more rows</span></span></code></pre></div>
-<p>You can make links clickable with <code>DT::datatable()</code> or <code><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">knitr::kable()</a></code>.</p>
+<p>You can easily organize the documentation by concept (<code>#' @family</code>) and make links clickable with <code>DT::datatable()</code> or <code><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">knitr::kable()</a></code>. For example:</p>
+<ul>
+<li>Datasets</li>
+</ul>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">universe</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="reference/reference_package.html">reference_package</a></span><span class="op">(</span>url <span class="op">=</span> <span class="st">"https://forestgeo.github.io/"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">docs</span>, <span class="va">concept</span> <span class="op">==</span> <span class="st">"datasets"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<table class="table">
+<colgroup>
+<col width="20%">
+<col width="20%">
+<col width="20%">
+<col width="20%">
+<col width="20%">
+</colgroup>
+<thead><tr class="header">
+<th align="left">topic</th>
+<th align="left">alias</th>
+<th align="left">title</th>
+<th align="left">concept</th>
+<th align="left">package</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left"><a href="https://forestgeo.github.io/fgeo.x/reference/datasets" class="external-link">?</a></td>
+<td align="left">datasets, elevation, habitat, stem5, stem6, tree5, tree6, vft_4quad, tree6_3species</td>
+<td align="left">Access data via ‘library(fgeo.x)’ or ‘fgeo.x::<dataset-name>’.</dataset-name>
+</td>
+<td align="left">datasets</td>
+<td align="left"><a href="https://forestgeo.github.io/fgeo.x" class="external-link">fgeo.x</a></td>
+</tr>
+<tr class="even">
+<td align="left"><a href="https://forestgeo.github.io/fgeo.x/reference/download_data" class="external-link">?</a></td>
+<td align="left">download_data</td>
+<td align="left">Access data stored online.</td>
+<td align="left">datasets</td>
+<td align="left"><a href="https://forestgeo.github.io/fgeo.x" class="external-link">fgeo.x</a></td>
+</tr>
+<tr class="odd">
+<td align="left"><a href="https://forestgeo.github.io/fgeo.x/reference/example_path" class="external-link">?</a></td>
+<td align="left">example_path</td>
+<td align="left">Access data stored in system files.</td>
+<td align="left">datasets</td>
+<td align="left"><a href="https://forestgeo.github.io/fgeo.x" class="external-link">fgeo.x</a></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Autoplots</li>
+</ul>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">docs</span>, <span class="va">concept</span> <span class="op">==</span> <span class="st">"autoplots"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <table class="table">
 <colgroup>
 <col width="20%">
@@ -115,158 +161,17 @@
 <td align="left"><a href="https://forestgeo.github.io/fgeo.plot" class="external-link">fgeo.plot</a></td>
 </tr>
 <tr class="even">
-<td align="left"><a href="https://forestgeo.github.io/fgeo.plot/reference/autoplot.fgeo_habitat" class="external-link">?</a></td>
-<td align="left">autoplot</td>
-<td align="left">Plot habitats.</td>
-<td align="left">plot functions</td>
-<td align="left"><a href="https://forestgeo.github.io/fgeo.plot" class="external-link">fgeo.plot</a></td>
-</tr>
-<tr class="odd">
 <td align="left"><a href="https://forestgeo.github.io/fgeo.plot/reference/autoplot.sp_elev" class="external-link">?</a></td>
 <td align="left">autoplot</td>
 <td align="left">Plot species distribution and/or topography.</td>
 <td align="left">autoplots</td>
 <td align="left"><a href="https://forestgeo.github.io/fgeo.plot" class="external-link">fgeo.plot</a></td>
 </tr>
-<tr class="even">
-<td align="left"><a href="https://forestgeo.github.io/fgeo.plot/reference/autoplot.sp_elev" class="external-link">?</a></td>
-<td align="left">autoplot</td>
-<td align="left">Plot species distribution and/or topography.</td>
-<td align="left">functions to plot elevation</td>
-<td align="left"><a href="https://forestgeo.github.io/fgeo.plot" class="external-link">fgeo.plot</a></td>
-</tr>
-<tr class="odd">
-<td align="left"><a href="https://forestgeo.github.io/fgeo.plot/reference/autoplot.sp_elev" class="external-link">?</a></td>
-<td align="left">autoplot</td>
-<td align="left">Plot species distribution and/or topography.</td>
-<td align="left">functions to plot species</td>
-<td align="left"><a href="https://forestgeo.github.io/fgeo.plot" class="external-link">fgeo.plot</a></td>
-</tr>
-<tr class="even">
-<td align="left"><a href="https://forestgeo.github.io/fgeo.plot/reference/autoplot.sp_elev" class="external-link">?</a></td>
-<td align="left">autoplot</td>
-<td align="left">Plot species distribution and/or topography.</td>
-<td align="left">plot functions</td>
-<td align="left"><a href="https://forestgeo.github.io/fgeo.plot" class="external-link">fgeo.plot</a></td>
-</tr>
-<tr class="odd">
-<td align="left"><a href="https://forestgeo.github.io/fgeo.plot/reference/autoplot_by_species.sp_elev" class="external-link">?</a></td>
-<td align="left">autoplot_by_species</td>
-<td align="left">List plots of species distribution and topography (good for pdf output).</td>
-<td align="left">functions to list plots from different ForestGEO classes</td>
-<td align="left"><a href="https://forestgeo.github.io/fgeo.plot" class="external-link">fgeo.plot</a></td>
-</tr>
-<tr class="even">
-<td align="left"><a href="https://forestgeo.github.io/fgeo.plot/reference/autoplot_by_species.sp_elev" class="external-link">?</a></td>
-<td align="left">autoplot_by_species</td>
-<td align="left">List plots of species distribution and topography (good for pdf output).</td>
-<td align="left">functions to plot elevation</td>
-<td align="left"><a href="https://forestgeo.github.io/fgeo.plot" class="external-link">fgeo.plot</a></td>
-</tr>
-<tr class="odd">
-<td align="left"><a href="https://forestgeo.github.io/fgeo.plot/reference/autoplot_by_species.sp_elev" class="external-link">?</a></td>
-<td align="left">autoplot_by_species</td>
-<td align="left">List plots of species distribution and topography (good for pdf output).</td>
-<td align="left">functions to plot species</td>
-<td align="left"><a href="https://forestgeo.github.io/fgeo.plot" class="external-link">fgeo.plot</a></td>
-</tr>
-<tr class="even">
-<td align="left"><a href="https://forestgeo.github.io/fgeo.plot/reference/autoplot_by_species.sp_elev" class="external-link">?</a></td>
-<td align="left">autoplot_by_species</td>
-<td align="left">List plots of species distribution and topography (good for pdf output).</td>
-<td align="left">plot functions</td>
-<td align="left"><a href="https://forestgeo.github.io/fgeo.plot" class="external-link">fgeo.plot</a></td>
-</tr>
-<tr class="odd">
-<td align="left"><a href="https://forestgeo.github.io/fgeo.x/reference/datasets" class="external-link">?</a></td>
-<td align="left">datasets, elevation, habitat, stem5, stem6, tree5, tree6, vft_4quad, tree6_3species</td>
-<td align="left">Access data via ‘library(fgeo.x)’ or ‘fgeo.x::<dataset-name>’.</dataset-name>
-</td>
-<td align="left">datasets</td>
-<td align="left"><a href="https://forestgeo.github.io/fgeo.x" class="external-link">fgeo.x</a></td>
-</tr>
-<tr class="even">
-<td align="left"><a href="https://forestgeo.github.io/fgeo.x/reference/download_data" class="external-link">?</a></td>
-<td align="left">download_data</td>
-<td align="left">Access data stored online.</td>
-<td align="left">datasets</td>
-<td align="left"><a href="https://forestgeo.github.io/fgeo.x" class="external-link">fgeo.x</a></td>
-</tr>
 <tr class="odd">
 <td align="left"><a href="https://forestgeo.github.io/fgeo.plot/reference/elev" class="external-link">?</a></td>
 <td align="left">elev</td>
 <td align="left">Allow autoplotting the column ‘elev’.</td>
 <td align="left">autoplots</td>
-<td align="left"><a href="https://forestgeo.github.io/fgeo.plot" class="external-link">fgeo.plot</a></td>
-</tr>
-<tr class="even">
-<td align="left"><a href="https://forestgeo.github.io/fgeo.plot/reference/elev" class="external-link">?</a></td>
-<td align="left">elev</td>
-<td align="left">Allow autoplotting the column ‘elev’.</td>
-<td align="left">functions to construct fgeo classes</td>
-<td align="left"><a href="https://forestgeo.github.io/fgeo.plot" class="external-link">fgeo.plot</a></td>
-</tr>
-<tr class="odd">
-<td align="left"><a href="https://forestgeo.github.io/fgeo.plot/reference/elev" class="external-link">?</a></td>
-<td align="left">elev</td>
-<td align="left">Allow autoplotting the column ‘elev’.</td>
-<td align="left">functions to plot elevation</td>
-<td align="left"><a href="https://forestgeo.github.io/fgeo.plot" class="external-link">fgeo.plot</a></td>
-</tr>
-<tr class="even">
-<td align="left"><a href="https://forestgeo.github.io/fgeo.plot/reference/elev" class="external-link">?</a></td>
-<td align="left">elev</td>
-<td align="left">Allow autoplotting the column ‘elev’.</td>
-<td align="left">plot functions</td>
-<td align="left"><a href="https://forestgeo.github.io/fgeo.plot" class="external-link">fgeo.plot</a></td>
-</tr>
-<tr class="odd">
-<td align="left"><a href="https://forestgeo.github.io/fgeo.x/reference/example_path" class="external-link">?</a></td>
-<td align="left">example_path</td>
-<td align="left">Access data stored in system files.</td>
-<td align="left">datasets</td>
-<td align="left"><a href="https://forestgeo.github.io/fgeo.x" class="external-link">fgeo.x</a></td>
-</tr>
-<tr class="even">
-<td align="left"><a href="https://forestgeo.github.io/fgeo.plot/reference/plot_dbh_bubbles_by_quadrat" class="external-link">?</a></td>
-<td align="left">plot_dbh_bubbles_by_quadrat</td>
-<td align="left">List dbh bubble-plots by quadrat (good for .pdf output).</td>
-<td align="left">functions to list plots from ForestGEO ViewFullTable</td>
-<td align="left"><a href="https://forestgeo.github.io/fgeo.plot" class="external-link">fgeo.plot</a></td>
-</tr>
-<tr class="odd">
-<td align="left"><a href="https://forestgeo.github.io/fgeo.plot/reference/plot_dbh_bubbles_by_quadrat" class="external-link">?</a></td>
-<td align="left">plot_dbh_bubbles_by_quadrat</td>
-<td align="left">List dbh bubble-plots by quadrat (good for .pdf output).</td>
-<td align="left">functions to plot dbh bubbles</td>
-<td align="left"><a href="https://forestgeo.github.io/fgeo.plot" class="external-link">fgeo.plot</a></td>
-</tr>
-<tr class="even">
-<td align="left"><a href="https://forestgeo.github.io/fgeo.plot/reference/plot_dbh_bubbles_by_quadrat" class="external-link">?</a></td>
-<td align="left">plot_dbh_bubbles_by_quadrat</td>
-<td align="left">List dbh bubble-plots by quadrat (good for .pdf output).</td>
-<td align="left">plot functions</td>
-<td align="left"><a href="https://forestgeo.github.io/fgeo.plot" class="external-link">fgeo.plot</a></td>
-</tr>
-<tr class="odd">
-<td align="left"><a href="https://forestgeo.github.io/fgeo.plot/reference/plot_tag_status_by_subquadrat" class="external-link">?</a></td>
-<td align="left">plot_tag_status_by_subquadrat</td>
-<td align="left">List plots of tree-tag status by subquadrat (good for .pdf output).</td>
-<td align="left">functions to list plots from ForestGEO ViewFullTable</td>
-<td align="left"><a href="https://forestgeo.github.io/fgeo.plot" class="external-link">fgeo.plot</a></td>
-</tr>
-<tr class="even">
-<td align="left"><a href="https://forestgeo.github.io/fgeo.plot/reference/plot_tag_status_by_subquadrat" class="external-link">?</a></td>
-<td align="left">plot_tag_status_by_subquadrat</td>
-<td align="left">List plots of tree-tag status by subquadrat (good for .pdf output).</td>
-<td align="left">functions to plot tag status</td>
-<td align="left"><a href="https://forestgeo.github.io/fgeo.plot" class="external-link">fgeo.plot</a></td>
-</tr>
-<tr class="odd">
-<td align="left"><a href="https://forestgeo.github.io/fgeo.plot/reference/plot_tag_status_by_subquadrat" class="external-link">?</a></td>
-<td align="left">plot_tag_status_by_subquadrat</td>
-<td align="left">List plots of tree-tag status by subquadrat (good for .pdf output).</td>
-<td align="left">plot functions</td>
 <td align="left"><a href="https://forestgeo.github.io/fgeo.plot" class="external-link">fgeo.plot</a></td>
 </tr>
 <tr class="even">
@@ -277,59 +182,10 @@
 <td align="left"><a href="https://forestgeo.github.io/fgeo.plot" class="external-link">fgeo.plot</a></td>
 </tr>
 <tr class="odd">
-<td align="left"><a href="https://forestgeo.github.io/fgeo.plot/reference/sp" class="external-link">?</a></td>
-<td align="left">sp</td>
-<td align="left">Allow autoplotting the column ‘sp’.</td>
-<td align="left">functions to construct fgeo classes</td>
-<td align="left"><a href="https://forestgeo.github.io/fgeo.plot" class="external-link">fgeo.plot</a></td>
-</tr>
-<tr class="even">
-<td align="left"><a href="https://forestgeo.github.io/fgeo.plot/reference/sp" class="external-link">?</a></td>
-<td align="left">sp</td>
-<td align="left">Allow autoplotting the column ‘sp’.</td>
-<td align="left">functions to plot species</td>
-<td align="left"><a href="https://forestgeo.github.io/fgeo.plot" class="external-link">fgeo.plot</a></td>
-</tr>
-<tr class="odd">
-<td align="left"><a href="https://forestgeo.github.io/fgeo.plot/reference/sp" class="external-link">?</a></td>
-<td align="left">sp</td>
-<td align="left">Allow autoplotting the column ‘sp’.</td>
-<td align="left">plot functions</td>
-<td align="left"><a href="https://forestgeo.github.io/fgeo.plot" class="external-link">fgeo.plot</a></td>
-</tr>
-<tr class="even">
 <td align="left"><a href="https://forestgeo.github.io/fgeo.plot/reference/sp_elev" class="external-link">?</a></td>
 <td align="left">sp_elev</td>
 <td align="left">Allow autoplotting the columns ‘sp’ and ‘elev’.</td>
 <td align="left">autoplots</td>
-<td align="left"><a href="https://forestgeo.github.io/fgeo.plot" class="external-link">fgeo.plot</a></td>
-</tr>
-<tr class="odd">
-<td align="left"><a href="https://forestgeo.github.io/fgeo.plot/reference/sp_elev" class="external-link">?</a></td>
-<td align="left">sp_elev</td>
-<td align="left">Allow autoplotting the columns ‘sp’ and ‘elev’.</td>
-<td align="left">functions to construct fgeo classes</td>
-<td align="left"><a href="https://forestgeo.github.io/fgeo.plot" class="external-link">fgeo.plot</a></td>
-</tr>
-<tr class="even">
-<td align="left"><a href="https://forestgeo.github.io/fgeo.plot/reference/sp_elev" class="external-link">?</a></td>
-<td align="left">sp_elev</td>
-<td align="left">Allow autoplotting the columns ‘sp’ and ‘elev’.</td>
-<td align="left">functions to plot elevation</td>
-<td align="left"><a href="https://forestgeo.github.io/fgeo.plot" class="external-link">fgeo.plot</a></td>
-</tr>
-<tr class="odd">
-<td align="left"><a href="https://forestgeo.github.io/fgeo.plot/reference/sp_elev" class="external-link">?</a></td>
-<td align="left">sp_elev</td>
-<td align="left">Allow autoplotting the columns ‘sp’ and ‘elev’.</td>
-<td align="left">functions to plot species</td>
-<td align="left"><a href="https://forestgeo.github.io/fgeo.plot" class="external-link">fgeo.plot</a></td>
-</tr>
-<tr class="even">
-<td align="left"><a href="https://forestgeo.github.io/fgeo.plot/reference/sp_elev" class="external-link">?</a></td>
-<td align="left">sp_elev</td>
-<td align="left">Allow autoplotting the columns ‘sp’ and ‘elev’.</td>
-<td align="left">plot functions</td>
 <td align="left"><a href="https://forestgeo.github.io/fgeo.plot" class="external-link">fgeo.plot</a></td>
 </tr>
 </tbody>

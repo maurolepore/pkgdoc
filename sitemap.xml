@@ -1,15 +1,15 @@
 <urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
-<url><loc>/404.html</loc></url>
-<url><loc>/CODE_OF_CONDUCT.html</loc></url>
-<url><loc>/LICENSE.html</loc></url>
-<url><loc>/authors.html</loc></url>
-<url><loc>/index.html</loc></url>
-<url><loc>/news/index.html</loc></url>
-<url><loc>/reference/index.html</loc></url>
-<url><loc>/reference/pipe.html</loc></url>
-<url><loc>/reference/pkgdoc-package.html</loc></url>
-<url><loc>/reference/reference_package.html</loc></url>
-<url><loc>/reference/s3_strip_class.html</loc></url>
-<url><loc>/reference/search_docs.html</loc></url>
+<url><loc>https://maurolepore.github.io/pkgdoc/404.html</loc></url>
+<url><loc>https://maurolepore.github.io/pkgdoc/CODE_OF_CONDUCT.html</loc></url>
+<url><loc>https://maurolepore.github.io/pkgdoc/LICENSE.html</loc></url>
+<url><loc>https://maurolepore.github.io/pkgdoc/authors.html</loc></url>
+<url><loc>https://maurolepore.github.io/pkgdoc/index.html</loc></url>
+<url><loc>https://maurolepore.github.io/pkgdoc/news/index.html</loc></url>
+<url><loc>https://maurolepore.github.io/pkgdoc/reference/index.html</loc></url>
+<url><loc>https://maurolepore.github.io/pkgdoc/reference/pipe.html</loc></url>
+<url><loc>https://maurolepore.github.io/pkgdoc/reference/pkgdoc-package.html</loc></url>
+<url><loc>https://maurolepore.github.io/pkgdoc/reference/reference_package.html</loc></url>
+<url><loc>https://maurolepore.github.io/pkgdoc/reference/s3_strip_class.html</loc></url>
+<url><loc>https://maurolepore.github.io/pkgdoc/reference/search_docs.html</loc></url>
 </urlset>
 
