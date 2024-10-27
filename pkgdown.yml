@@ -1,8 +1,5 @@
-pandoc: '2.2'
-pkgdown: 1.4.1
+pandoc: 3.1.11
+pkgdown: 2.1.1
 pkgdown_sha: ~
-articles:
-  reference-chirunconf: siteonly/reference-chirunconf.html
-  reference-tidyverse: siteonly/reference-tidyverse.html
-  reference: siteonly/reference.html
-
+articles: {}
+last_built: 2024-10-27T21:54Z
