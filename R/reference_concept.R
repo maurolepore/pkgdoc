@@ -57,7 +57,7 @@ warn_unnattached <- function(x, doc) {
   if (!all(attached(x))) {
     unnatacched <- x[!attached(x)]
     warn(glue("
-      All packages should be attached `strip_s3class` to work properly.
+      All packages should be attached to work properly.
       Not attached: {unnatacched}
     "))
   }
@@ -67,7 +67,7 @@ pick_doc <- function(packages, doc, x) {
   result <- search_docs(packages = packages) %>%
     exclude_package_doc(packages) %>%
     exclude_internal_functions() %>%
-    select(-.data$libpath, -.data$id, -.data$encoding, -.data$name) %>%
+    select(-"libpath", -"id", -"encoding", -"name") %>%
     unique() %>%
     filter(.[[doc]] %in% x)
 
@@ -106,7 +106,7 @@ may_warn_missing_doc <- function(.data, doc, x) {
     return(invisible(.data))
 
   bad_request <- x[!good_request]
-  warn(glue("No {doc} matches '{bad_request}'."))
+  abort(glue("No {doc} matches '{bad_request}'."))
 }
 
 collapse_alias <- function(.data, strip_s3class = FALSE) {
