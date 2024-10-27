@@ -17,7 +17,7 @@ search_docs <- function(packages = NULL) {
     purrr::reduce(utils::hsearch_db(), dplyr::full_join)
   )
 
-  result <- set_names(tibble::as.tibble(docs), tolower)
+  result <- set_names(tibble::as_tibble(docs), tolower)
 
   if (is.null(packages)) {
     return(result)

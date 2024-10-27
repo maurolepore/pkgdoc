@@ -1,5 +1,3 @@
-context("search_docs")
-
 test_that("returns the expected data structure", {
   cols <- c(
     "package",
@@ -18,7 +16,7 @@ test_that("returns the expected data structure", {
     result <- search_docs(), cols
   )
   expect_true(length(unique(result$package)) > 1)
-  expect_is(result, "tbl")
+  expect_s3_class(result, "tbl")
 })
 
 test_that("can pick specific packages", {

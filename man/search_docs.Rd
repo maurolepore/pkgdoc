@@ -15,13 +15,14 @@ A dataframe.
 }
 \description{
 This is fundamentally a dataframe version of the output of
-\code{\link[utils:hsearch_db]{utils::hsearch_db()}}.
+\code{\link[utils:hsearch-utils]{utils::hsearch_db()}}.
 }
 \examples{
 search_docs(NULL)
 
 }
 \seealso{
-Other retrieve documentation: \code{\link{reference_package}}
+Other retrieve documentation: 
+\code{\link{reference_package}()}
 }
 \concept{retrieve documentation}
