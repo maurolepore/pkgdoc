@@ -12,6 +12,7 @@ Reference documented R objects across multiple packages.
 Useful links:
 \itemize{
   \item \url{https://github.com/maurolepore/pkgdoc}
+  \item \url{https://maurolepore.github.io/pkgdoc/}
   \item Report bugs at \url{https://github.com/maurolepore/pkgdoc/issues}
 }
 
