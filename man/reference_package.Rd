@@ -2,12 +2,9 @@
 % Please edit documentation in R/reference_package.R
 \name{reference_package}
 \alias{reference_package}
-\alias{reference_concept}
 \title{Create a data.frame with documentation metadata of one or more packages}
 \usage{
 reference_package(x, url = NULL, packages = NULL, strip_s3class = TRUE)
-
-reference_concept(x, url = NULL, packages = NULL, strip_s3class = TRUE)
 }
 \arguments{
 \item{x}{A character vector giving concepts or package names to match.}

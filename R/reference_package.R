@@ -34,7 +34,8 @@ reference_any <- function(doc) {
 #' @rdname reference_package
 #' @export
 reference_package <- reference_any("package")
-#' @rdname reference_package
+
+#' @rdname reference_concept
 #' @export
 reference_concept <- reference_any("concept")
 
