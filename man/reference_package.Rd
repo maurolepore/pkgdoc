@@ -2,12 +2,9 @@
 % Please edit documentation in R/reference.R
 \name{reference_package}
 \alias{reference_package}
-\alias{reference_concept}
-\title{Pick documentation matching some concepts or package names.}
+\title{Create a data.frame with documentation metadata of one or more packages}
 \usage{
 reference_package(x, url = NULL, packages = NULL, strip_s3class = TRUE)
-
-reference_concept(x, url = NULL, packages = NULL, strip_s3class = TRUE)
 }
 \arguments{
 \item{x}{A character vector giving concepts or package names to match.}
@@ -24,26 +21,14 @@ search, or \code{NULL} to serach in all known libraries.}
 A dataframe.
 }
 \description{
-These functions help you to reference the documentation of specific functions
-across multiple packages. This is useful in meta-packages. * The functions
-ending in \code{package} output all exported objects of the given packages, and
-the functions ending in \code{concept} output all objects containing the given
-concepts (strings passed to \verb{@family}).
-\itemize{
-\item The functions starting with \code{reference_} output a dataframe optimized for
-building a reference table (maybe with \code{DT::datatable()} or
-\code{knitr::kable()}).
-}
+Create a data.frame with documentation metadata of one or more packages. If
+you develop a universe, such as the tidyverse or tidymodels, pkgdoc helps you
+to easily create a universe-wide reference for the pkgdown website of your
+meta-package.
 }
 \examples{
-\dontrun{
-if (requireNamespace("fgeo.x", quietly = TRUE)) {
-  library(fgeo.x)
+reference_package("datasets")
 
-  reference_concept("datasets", url = "https://forestgeo.github.io/")
-  reference_package("datasets", url = "https://forestgeo.github.io/")
-}
-}
 }
 \seealso{
 Other retrieve documentation: 

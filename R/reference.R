@@ -1,13 +1,9 @@
-#' Pick documentation matching some concepts or package names.
+#' Create a data.frame with documentation metadata of one or more packages
 #'
-#' These functions help you to reference the documentation of specific functions
-#' across multiple packages. This is useful in meta-packages. * The functions
-#' ending in `package` output all exported objects of the given packages, and
-#' the functions ending in `concept` output all objects containing the given
-#' concepts (strings passed to `@family`).
-#' * The functions starting with `reference_` output a dataframe optimized for
-#' building a reference table (maybe with `DT::datatable()` or
-#' `knitr::kable()`).
+#' Create a data.frame with documentation metadata of one or more packages. If
+#' you develop a universe, such as the tidyverse or tidymodels, pkgdoc helps you
+#' to easily create a universe-wide reference for the pkgdown website of your
+#' meta-package.
 #'
 #' @param x A character vector giving concepts or package names to match.
 #' @param url Character vector of length-1 giving a base url, e.g.
@@ -19,17 +15,12 @@
 #' @return A dataframe.
 #'
 #' @examples
-#' \dontrun{
-#' if (requireNamespace("fgeo.x", quietly = TRUE)) {
-#'   library(fgeo.x)
+#' reference_package("datasets")
 #'
-#'   reference_concept("datasets", url = "https://forestgeo.github.io/")
-#'   reference_package("datasets", url = "https://forestgeo.github.io/")
-#' }
-#' }
 #' @name reference_package
 #' @family retrieve documentation
 NULL
+
 reference_any <- function(doc) {
   force(doc)
   function(x, url = NULL, packages = NULL, strip_s3class = TRUE) {
@@ -43,8 +34,6 @@ reference_any <- function(doc) {
 #' @rdname reference_package
 #' @export
 reference_package <- reference_any("package")
-#' @rdname reference_package
-#' @export
 reference_concept <- reference_any("concept")
 
 warn_unnattached <- function(x, doc) {
