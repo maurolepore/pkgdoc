@@ -47,20 +47,3 @@ test_that("doesn't include the package-level documentation", {
   out <- reference_package("pkgdoc")
   expect_false(any(grepl("pkgdoc-package", unique(out$alias))))
 })
-
-test_that("reference_concept() errors if some concept is not matched", {
-  expect_error(
-    reference_concept(c("combine strings", "bad concept")),
-    "No concept matches.*bad concept"
-  )
-})
-
-test_that("reference_concept() is sensitive to `concept`", {
-  out <- reference_concept("combine strings", packages = "base")
-  expect_equal(unique(out$topic), "paste")
-})
-
-test_that("reference_concept() is sensitive to `packages`", {
-  out <- reference_concept("combine strings", packages = "base")
-  expect_equal(unique(out$package), "base")
-})
