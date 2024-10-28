@@ -12,7 +12,6 @@ Depends:
 Imports: 
     dplyr,
     glue,
-    lifecycle,
     magrittr,
     purrr,
     rlang,
