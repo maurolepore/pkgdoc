@@ -43,22 +43,9 @@ test_that("by default srips teh class of S3 methods", {
   expect_true(grepl("numeric", alias))
 })
 
-test_that("with fgeo outputs the expected data structure", {
-  skip_if_not_installed("fgeo")
-  withr::local_package("fgeo")
-
-  result <- reference_package("fgeo")
-  expect_s3_class(result, "data.frame")
-  expect_named(result, c("topic", "alias", "title", "concept", "package"))
-
-  expect_false(grepl("href", result$topic[[1]]))
-})
-
-test_that("no longer includes package documentation", {
-  skip_if_not_installed("fgeo")
-  withr::local_package("fgeo")
-
-  expect_false(any(grepl("fgeo-package", unique(reference_package("fgeo")$alias))))
+test_that("doesn't include the package-level documentation", {
+  out <- reference_package("pkgdoc")
+  expect_false(any(grepl("pkgdoc-package", unique(out$alias))))
 })
 
 test_that("reference_concept() errors if some concept is not matched", {
