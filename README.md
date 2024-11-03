@@ -25,14 +25,13 @@ pak::pak("maurolepore/pkgdoc")
 ## Example
 
 ``` r
+# Use pkgdoc and the packages you want to generate the reference for
 library(pkgdoc)
-
 library(tools)
 library(datasets)
 
 universe <- c("datasets", "tools")
 url_template <- "https://www.rdocumentation.org/packages/{package}/versions/3.6.2/topics/{topic}.html"
-
 linked <- reference_package(universe, url_template = url_template)
 linked
 #> # A tibble: 228 × 5
@@ -50,14 +49,14 @@ linked
 #> 10 <a href=https://www.rdocumentation.org/packages/… EuSt… Dail… Datase… datase…
 #> # ℹ 218 more rows
 
-knitr::kable(head(linked[c("topic", "title")]))
+knitr::kable(head(linked))
 ```
 
-| topic | title |
-|:---|:---|
-| <a href=https://www.rdocumentation.org/packages/tools/versions/3.6.2/topics/.print.via.format.html>.print.via.format</a> | Printing Utilities |
-| <a href=https://www.rdocumentation.org/packages/tools/versions/3.6.2/topics/Adobe_glyphs.html>Adobe_glyphs</a> | Conversion Tables between Character Sets |
-| <a href=https://www.rdocumentation.org/packages/datasets/versions/3.6.2/topics/AirPassengers.html>AirPassengers</a> | Monthly Airline Passenger Numbers 1949-1960 |
-| <a href=https://www.rdocumentation.org/packages/datasets/versions/3.6.2/topics/BJsales.html>BJsales</a> | Sales Data with Leading Indicator |
-| <a href=https://www.rdocumentation.org/packages/datasets/versions/3.6.2/topics/BOD.html>BOD</a> | Biochemical Oxygen Demand |
-| <a href=https://www.rdocumentation.org/packages/datasets/versions/3.6.2/topics/CO2.html>CO2</a> | Carbon Dioxide Uptake in Grass Plants |
+| topic | alias | title | concept | package |
+|:---|:---|:---|:---|:---|
+| <a href=https://www.rdocumentation.org/packages/tools/versions/3.6.2/topics/.print.via.format.html>.print.via.format</a> | .print.via.format | Printing Utilities | Utilities | tools |
+| <a href=https://www.rdocumentation.org/packages/tools/versions/3.6.2/topics/Adobe_glyphs.html>Adobe_glyphs</a> | Adobe_glyphs, charset_to_Unicode | Conversion Tables between Character Sets | Datasets available by data() | tools |
+| <a href=https://www.rdocumentation.org/packages/datasets/versions/3.6.2/topics/AirPassengers.html>AirPassengers</a> | AirPassengers | Monthly Airline Passenger Numbers 1949-1960 | Datasets available by data() | datasets |
+| <a href=https://www.rdocumentation.org/packages/datasets/versions/3.6.2/topics/BJsales.html>BJsales</a> | BJsales, BJsales.lead | Sales Data with Leading Indicator | Datasets available by data() | datasets |
+| <a href=https://www.rdocumentation.org/packages/datasets/versions/3.6.2/topics/BOD.html>BOD</a> | BOD | Biochemical Oxygen Demand | Datasets available by data() | datasets |
+| <a href=https://www.rdocumentation.org/packages/datasets/versions/3.6.2/topics/CO2.html>CO2</a> | CO2 | Carbon Dioxide Uptake in Grass Plants | Datasets available by data() | datasets |

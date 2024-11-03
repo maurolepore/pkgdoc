@@ -36,18 +36,15 @@ pak::pak("maurolepore/pkgdoc")
 ## Example
 
 ```{r}
+# Use pkgdoc and the packages you want to generate the reference for
 library(pkgdoc)
-
 library(tools)
 library(datasets)
 
 universe <- c("datasets", "tools")
 url_template <- "https://www.rdocumentation.org/packages/{package}/versions/3.6.2/topics/{topic}.html"
-
 linked <- reference_package(universe, url_template = url_template)
 linked
 
-knitr::kable(head(linked[c("topic", "title")]))
+knitr::kable(head(linked))
 ```
-
-
