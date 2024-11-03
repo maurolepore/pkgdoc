@@ -46,7 +46,7 @@ universe <- c("tools", "datasets")
 docs <- reference_package(universe)
 ```
 
-You can easily organize the documentation by package or concept (`#' @family`):
+You may organize the documentation by package or concept (`#' @family`):
 
 ```{r}
 # By package
@@ -55,17 +55,19 @@ subset(docs, package == "datasets")
 subset(docs, package == "tools")
 
 # By concept
-subset(docs, concept == "Datasets available by data()")
+datasets <- subset(docs, concept == "Datasets available by data()")
+datasets
 
-subset(docs, concept == "utilities")
+utilities <- subset(docs, concept == "utilities")
+utilities
 ```
 
-You can make links clickable with `DT::datatable()` or `knitr::kable()`.
+You may link to documentation online.
 
 ```{r}
 template <- "<a href=https://www.rdocumentation.org/packages/%s/versions/3.6.2/topics/%s>?</a>"
-linked <- transform(docs, topic = sprintf(template, package, topic))
-knitr::kable(linked)
+linked <- transform(datasets, topic = sprintf(template, package, topic))
+knitr::kable(head(linked))
 ```
 
 
