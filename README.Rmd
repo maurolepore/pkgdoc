@@ -38,26 +38,34 @@ pak::pak("maurolepore/pkgdoc")
 
 ```{r}
 library(pkgdoc)
-library(fgeo.x)
-library(fgeo.plot)
 
-universe <- c("fgeo.plot", "fgeo.x")
+library(tools)
+library(datasets)
+universe <- c("tools", "datasets")
 
-docs <- reference_package(universe, url = "https://forestgeo.github.io/")
-docs
+docs <- reference_package(universe)
 ```
 
-You can easily organize the documentation by concept (`#' @family`) and make
-links clickable with `DT::datatable()` or `knitr::kable()`. For example:
-
-* Datasets
+You can easily organize the documentation by package or concept (`#' @family`):
 
 ```{r}
-knitr::kable(subset(docs, concept == "datasets"))
+# By package
+subset(docs, package == "datasets")
+
+subset(docs, package == "tools")
+
+# By concept
+subset(docs, concept == "Datasets available by data()")
+
+subset(docs, concept == "utilities")
 ```
 
-* Autoplots
+You can make links clickable with `DT::datatable()` or `knitr::kable()`.
 
 ```{r}
-knitr::kable(subset(docs, concept == "autoplots"))
+template <- "<a href=https://www.rdocumentation.org/packages/%s/versions/3.6.2/topics/%s>?</a>"
+linked <- transform(docs, topic = sprintf(template, package, topic))
+knitr::kable(linked)
 ```
+
+
