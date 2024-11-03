@@ -2,3 +2,25 @@ url: https://maurolepore.github.io/pkgdoc/
 template:
   bootstrap: 5
 
+development:
+  mode: auto
+
+authors:
+  Mauro Lepore:
+    href: https://github.com/maurolepore
+
+navbar:
+  structure:
+    left:  [reference, articles, news]
+  components:
+    reference:
+      text: "Reference"
+      href: articles/reference.html
+    articles:
+      text: "Articles"
+      menu:
+        - text: "Get started"
+          href: articles/pkgdoc.html
+    news:
+      text: "Changelog"
+      href: news/index.html

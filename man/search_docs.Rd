@@ -21,8 +21,3 @@ This is fundamentally a dataframe version of the output of
 search_docs(NULL)
 
 }
-\seealso{
-Other retrieve documentation: 
-\code{\link{reference_package}()}
-}
-\concept{retrieve documentation}

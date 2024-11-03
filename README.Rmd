@@ -40,35 +40,14 @@ library(pkgdoc)
 
 library(tools)
 library(datasets)
-universe <- c("tools", "datasets")
 
-docs <- reference_package(universe)
-```
-
-You may organize the documentation by package or concept (`#' @family`):
-
-```{r}
-# By package
-subset(docs, package == "datasets")
-
-subset(docs, package == "tools")
-
-# By concept
-datasets <- subset(docs, concept == "Datasets available by data()")
-datasets
-
-utilities <- subset(docs, concept == "utilities")
-utilities
-```
-
-You may link to documentation online.
-
-```{r}
+universe <- c("datasets", "tools")
 url_template <- "https://www.rdocumentation.org/packages/{package}/versions/3.6.2/topics/{topic}.html"
-linked <- reference_package("datasets", url_template = url_template)
-linked["topic"]
 
-knitr::kable(head(linked))
+linked <- reference_package(universe, url_template = url_template)
+linked
+
+knitr::kable(head(linked[c("topic", "title")]))
 ```
 
 

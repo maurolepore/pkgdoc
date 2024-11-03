@@ -16,13 +16,14 @@
 #' @param packages A character vector with the names of packages to limit the
 #'   search, or `NULL` to serach in all known libraries.
 #'
+#' @family main functions
+#'
 #' @return A dataframe.
 #'
 #' @examples
 #' reference_package("datasets")
 #'
 #' @name reference_package
-#' @family retrieve documentation
 NULL
 
 reference_any <- function(doc) {

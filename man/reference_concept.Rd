@@ -40,7 +40,3 @@ meta-package.
 \examples{
 reference_concept("Datasets available by data()")
 }
-\seealso{
-Other retrieve documentation: 
-\code{\link{search_docs}()}
-}

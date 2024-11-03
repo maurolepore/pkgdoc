@@ -10,7 +10,6 @@
 #' s3_strip_class(c("print", "print.factor", "print.data.frame"))
 #'
 #' @export
-#' @family helper
 s3_strip_class <- function(x) {
   unlist(lapply(x, s3_strip_class_impl))
 }

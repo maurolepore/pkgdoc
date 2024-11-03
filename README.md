@@ -29,101 +29,35 @@ library(pkgdoc)
 
 library(tools)
 library(datasets)
-universe <- c("tools", "datasets")
 
-docs <- reference_package(universe)
-```
-
-You may organize the documentation by package or concept (`#' @family`):
-
-``` r
-# By package
-subset(docs, package == "datasets")
-#> # A tibble: 87 × 5
-#>    topic          alias                 title                    concept package
-#>    <chr>          <chr>                 <chr>                    <chr>   <chr>  
-#>  1 AirPassengers  AirPassengers         Monthly Airline Passeng… Datase… datase…
-#>  2 BJsales        BJsales, BJsales.lead Sales Data with Leading… Datase… datase…
-#>  3 BOD            BOD                   Biochemical Oxygen Dema… Datase… datase…
-#>  4 CO2            CO2                   Carbon Dioxide Uptake i… Datase… datase…
-#>  5 ChickWeight    ChickWeight           Weight versus age of ch… Datase… datase…
-#>  6 DNase          DNase                 Elisa assay of DNase     Datase… datase…
-#>  7 EuStockMarkets EuStockMarkets        Daily Closing Prices of… Datase… datase…
-#>  8 Formaldehyde   Formaldehyde          Determination of Formal… Datase… datase…
-#>  9 HairEyeColor   HairEyeColor          Hair and Eye Color of S… Datase… datase…
-#> 10 Harman23.cor   Harman23.cor          Harman Example 2.3       Datase… datase…
-#> # ℹ 77 more rows
-
-subset(docs, package == "tools")
-#> # A tibble: 141 × 5
-#>    topic             alias                                 title concept package
-#>    <chr>             <chr>                                 <chr> <chr>   <chr>  
-#>  1 .print.via.format .print.via.format                     Prin… Utilit… tools  
-#>  2 Adobe_glyphs      Adobe_glyphs, charset_to_Unicode      Conv… Datase… tools  
-#>  3 CRAN_package_db   CRAN_package_db, CRAN_check_results,… CRAN… <NA>    tools  
-#>  4 HTMLheader        HTMLheader                            Gene… Utilit… tools  
-#>  5 HTMLheader        HTMLheader                            Gene… Docume… tools  
-#>  6 HTMLheader        HTMLheader                            Gene… Utilit… tools  
-#>  7 HTMLheader        HTMLheader                            Gene… Docume… tools  
-#>  8 QC                QC, checkDocFiles, checkDocStyle, ch… QC C… Utilit… tools  
-#>  9 QC                QC, checkDocFiles, checkDocStyle, ch… QC C… Docume… tools  
-#> 10 QC                QC, checkDocFiles, checkDocStyle, ch… QC C… Utilit… tools  
-#> # ℹ 131 more rows
-
-# By concept
-datasets <- subset(docs, concept == "Datasets available by data()")
-datasets
-#> # A tibble: 87 × 5
-#>    topic          alias                            title         concept package
-#>    <chr>          <chr>                            <chr>         <chr>   <chr>  
-#>  1 Adobe_glyphs   Adobe_glyphs, charset_to_Unicode Conversion T… Datase… tools  
-#>  2 AirPassengers  AirPassengers                    Monthly Airl… Datase… datase…
-#>  3 BJsales        BJsales, BJsales.lead            Sales Data w… Datase… datase…
-#>  4 BOD            BOD                              Biochemical … Datase… datase…
-#>  5 CO2            CO2                              Carbon Dioxi… Datase… datase…
-#>  6 ChickWeight    ChickWeight                      Weight versu… Datase… datase…
-#>  7 DNase          DNase                            Elisa assay … Datase… datase…
-#>  8 EuStockMarkets EuStockMarkets                   Daily Closin… Datase… datase…
-#>  9 Formaldehyde   Formaldehyde                     Determinatio… Datase… datase…
-#> 10 HairEyeColor   HairEyeColor                     Hair and Eye… Datase… datase…
-#> # ℹ 77 more rows
-
-utilities <- subset(docs, concept == "utilities")
-utilities
-#> # A tibble: 0 × 5
-#> # ℹ 5 variables: topic <chr>, alias <chr>, title <chr>, concept <chr>,
-#> #   package <chr>
-```
-
-You may link to documentation online.
-
-``` r
+universe <- c("datasets", "tools")
 url_template <- "https://www.rdocumentation.org/packages/{package}/versions/3.6.2/topics/{topic}.html"
-linked <- reference_package("datasets", url_template = url_template)
-linked["topic"]
-#> # A tibble: 87 × 1
-#>    topic                                                                        
-#>    <chr>                                                                        
-#>  1 <a href=https://www.rdocumentation.org/packages/datasets/versions/3.6.2/topi…
-#>  2 <a href=https://www.rdocumentation.org/packages/datasets/versions/3.6.2/topi…
-#>  3 <a href=https://www.rdocumentation.org/packages/datasets/versions/3.6.2/topi…
-#>  4 <a href=https://www.rdocumentation.org/packages/datasets/versions/3.6.2/topi…
-#>  5 <a href=https://www.rdocumentation.org/packages/datasets/versions/3.6.2/topi…
-#>  6 <a href=https://www.rdocumentation.org/packages/datasets/versions/3.6.2/topi…
-#>  7 <a href=https://www.rdocumentation.org/packages/datasets/versions/3.6.2/topi…
-#>  8 <a href=https://www.rdocumentation.org/packages/datasets/versions/3.6.2/topi…
-#>  9 <a href=https://www.rdocumentation.org/packages/datasets/versions/3.6.2/topi…
-#> 10 <a href=https://www.rdocumentation.org/packages/datasets/versions/3.6.2/topi…
-#> # ℹ 77 more rows
 
-knitr::kable(head(linked))
+linked <- reference_package(universe, url_template = url_template)
+linked
+#> # A tibble: 228 × 5
+#>    topic                                             alias title concept package
+#>    <chr>                                             <chr> <chr> <chr>   <chr>  
+#>  1 <a href=https://www.rdocumentation.org/packages/… .pri… Prin… Utilit… tools  
+#>  2 <a href=https://www.rdocumentation.org/packages/… Adob… Conv… Datase… tools  
+#>  3 <a href=https://www.rdocumentation.org/packages/… AirP… Mont… Datase… datase…
+#>  4 <a href=https://www.rdocumentation.org/packages/… BJsa… Sale… Datase… datase…
+#>  5 <a href=https://www.rdocumentation.org/packages/… BOD   Bioc… Datase… datase…
+#>  6 <a href=https://www.rdocumentation.org/packages/… CO2   Carb… Datase… datase…
+#>  7 <a href=https://www.rdocumentation.org/packages/… CRAN… CRAN… <NA>    tools  
+#>  8 <a href=https://www.rdocumentation.org/packages/… Chic… Weig… Datase… datase…
+#>  9 <a href=https://www.rdocumentation.org/packages/… DNase Elis… Datase… datase…
+#> 10 <a href=https://www.rdocumentation.org/packages/… EuSt… Dail… Datase… datase…
+#> # ℹ 218 more rows
+
+knitr::kable(head(linked[c("topic", "title")]))
 ```
 
-| topic | alias | title | concept | package |
-|:---|:---|:---|:---|:---|
-| <a href=https://www.rdocumentation.org/packages/datasets/versions/3.6.2/topics/AirPassengers.html>AirPassengers</a> | AirPassengers | Monthly Airline Passenger Numbers 1949-1960 | Datasets available by data() | datasets |
-| <a href=https://www.rdocumentation.org/packages/datasets/versions/3.6.2/topics/BJsales.html>BJsales</a> | BJsales, BJsales.lead | Sales Data with Leading Indicator | Datasets available by data() | datasets |
-| <a href=https://www.rdocumentation.org/packages/datasets/versions/3.6.2/topics/BOD.html>BOD</a> | BOD | Biochemical Oxygen Demand | Datasets available by data() | datasets |
-| <a href=https://www.rdocumentation.org/packages/datasets/versions/3.6.2/topics/CO2.html>CO2</a> | CO2 | Carbon Dioxide Uptake in Grass Plants | Datasets available by data() | datasets |
-| <a href=https://www.rdocumentation.org/packages/datasets/versions/3.6.2/topics/ChickWeight.html>ChickWeight</a> | ChickWeight | Weight versus age of chicks on different diets | Datasets available by data() | datasets |
-| <a href=https://www.rdocumentation.org/packages/datasets/versions/3.6.2/topics/DNase.html>DNase</a> | DNase | Elisa assay of DNase | Datasets available by data() | datasets |
+| topic | title |
+|:---|:---|
+| <a href=https://www.rdocumentation.org/packages/tools/versions/3.6.2/topics/.print.via.format.html>.print.via.format</a> | Printing Utilities |
+| <a href=https://www.rdocumentation.org/packages/tools/versions/3.6.2/topics/Adobe_glyphs.html>Adobe_glyphs</a> | Conversion Tables between Character Sets |
+| <a href=https://www.rdocumentation.org/packages/datasets/versions/3.6.2/topics/AirPassengers.html>AirPassengers</a> | Monthly Airline Passenger Numbers 1949-1960 |
+| <a href=https://www.rdocumentation.org/packages/datasets/versions/3.6.2/topics/BJsales.html>BJsales</a> | Sales Data with Leading Indicator |
+| <a href=https://www.rdocumentation.org/packages/datasets/versions/3.6.2/topics/BOD.html>BOD</a> | Biochemical Oxygen Demand |
+| <a href=https://www.rdocumentation.org/packages/datasets/versions/3.6.2/topics/CO2.html>CO2</a> | Carbon Dioxide Uptake in Grass Plants |

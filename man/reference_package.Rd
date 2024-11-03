@@ -41,8 +41,4 @@ meta-package.
 reference_package("datasets")
 
 }
-\seealso{
-Other retrieve documentation: 
-\code{\link{search_docs}()}
-}
-\concept{retrieve documentation}
+\concept{main functions}

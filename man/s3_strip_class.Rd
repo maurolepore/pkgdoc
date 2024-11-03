@@ -22,4 +22,3 @@ s3_strip_class(c("print", "print.factor", "print.data.frame"))
 \seealso{
 utils::isS3method()
 }
-\concept{helper}
