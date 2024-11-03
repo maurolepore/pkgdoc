@@ -30,21 +30,18 @@ select(linked, topic)
 You may generate a clickable table is with `knitr::kable()`.
 
 ```{r}
-pick1 <- linked |> 
-  select(topic, title) |> 
+pick <- linked |> 
+  select(topic, title, concept, package) |> 
   head()
 
-pick1 |> knitr::kable(col.names = NULL)
+pick |> knitr::kable(col.names = NULL)
 ```
 
 You may generate a searchable table with `DT::datatable()`.
 
 ```{r}
-pick2 <- linked |> 
-  select(topic, title, concept, package)
-
 # `escape = FALSE` shows the link (defaults to showing the underlying URL)
-pick2 |> DT::datatable(escape = FALSE)
+pick |> DT::datatable(escape = FALSE)
 ```
 
 ### Organization and customization
@@ -71,7 +68,7 @@ custom_table <- function(data, search = "") {
 * Datasets available by `data()`
 
 ```{r}
-by_concept <- filter(pick2, concept == "Datasets available by data()")
+by_concept <- filter(pick, concept == "Datasets available by data()")
 
 by_concept |> custom_table(search = "car")
 ```
@@ -79,7 +76,7 @@ by_concept |> custom_table(search = "car")
 * Documentation in `tools`
 
 ```{r}
-by_package <- filter(pick2, package == "tools")
+by_package <- filter(pick, package == "tools")
 
 by_package |> custom_table(search = "Utilities")
 ```
