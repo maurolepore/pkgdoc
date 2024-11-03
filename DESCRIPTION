@@ -1,6 +1,6 @@
 Package: pkgdoc
 Title: Reference Documented R Objects Across Multiple Packages
-Version: 0.0.0.9000
+Version: 0.0.0.9001
 Authors@R: 
     person("Mauro", "Lepore", , "leporem@si.edu", role = c("aut", "ctr", "cre"))
 Description: Reference documented R objects across multiple packages.
