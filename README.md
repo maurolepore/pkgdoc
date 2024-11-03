@@ -11,12 +11,11 @@ coverage](https://codecov.io/gh/maurolepore/pkgdoc/graph/badge.svg)](https://app
 <!-- badges: end -->
 
 The goal of pkgdoc is to make it easy to create a data frame of the
-documentation of multiple packages.
+metadata associated to the documentation of a collection of R packages.
 
-If you develop a universe, such as the tidyverse or tidymodels, pkgdoc
-helps you to easily create a universe-wide reference for the pkgdown
-website of your meta-package
-([example](https://forestgeo.github.io/fgeo/articles/siteonly/reference.html#global-search)).
+If you maintain an R-package universe, it helps you to easily create a
+universe-wide reference for the pkgdown website of your meta-package
+(e.g. tidyverse, tidymodels).
 
 ## Installation
 
