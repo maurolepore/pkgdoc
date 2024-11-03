@@ -22,7 +22,7 @@
 
     <a class="navbar-brand me-2" href="index.html">pkgdoc</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9001</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Unreleased version">0.0.0.9001</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -31,7 +31,13 @@
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto">
-<li class="nav-item"><a class="nav-link" href="reference/index.html">Reference</a></li>
+<li class="nav-item"><a class="nav-link" href="articles/reference.html">Reference</a></li>
+<li class="nav-item dropdown">
+  <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
+  <ul class="dropdown-menu" aria-labelledby="dropdown-articles">
+<li><a class="dropdown-item" href="articles/pkgdoc.html">Get started</a></li>
+  </ul>
+</li>
 <li class="nav-item"><a class="nav-link" href="news/index.html">Changelog</a></li>
       </ul>
 <ul class="navbar-nav">
@@ -64,90 +70,29 @@
 <h2 id="example">Example<a class="anchor" aria-label="anchor" href="#example"></a>
 </h2>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/maurolepore/pkgdoc" class="external-link">pkgdoc</a></span><span class="op">)</span></span>
-<span></span>
+<code class="sourceCode R"><span><span class="co"># Use pkgdoc and the packages you want to generate the reference for</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/maurolepore/pkgdoc" class="external-link">pkgdoc</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">tools</span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">datasets</span><span class="op">)</span></span>
-<span><span class="va">universe</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"tools"</span>, <span class="st">"datasets"</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">docs</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/reference_package.html">reference_package</a></span><span class="op">(</span><span class="va">universe</span><span class="op">)</span></span></code></pre></div>
-<p>You may organize the documentation by package or concept (<code>#' @family</code>):</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># By package</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">docs</span>, <span class="va">package</span> <span class="op">==</span> <span class="st">"datasets"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; # A tibble: 87 × 5</span></span>
-<span><span class="co">#&gt;    topic          alias                 title                    concept package</span></span>
-<span><span class="co">#&gt;    &lt;chr&gt;          &lt;chr&gt;                 &lt;chr&gt;                    &lt;chr&gt;   &lt;chr&gt;  </span></span>
-<span><span class="co">#&gt;  1 AirPassengers  AirPassengers         Monthly Airline Passeng… Datase… datase…</span></span>
-<span><span class="co">#&gt;  2 BJsales        BJsales, BJsales.lead Sales Data with Leading… Datase… datase…</span></span>
-<span><span class="co">#&gt;  3 BOD            BOD                   Biochemical Oxygen Dema… Datase… datase…</span></span>
-<span><span class="co">#&gt;  4 CO2            CO2                   Carbon Dioxide Uptake i… Datase… datase…</span></span>
-<span><span class="co">#&gt;  5 ChickWeight    ChickWeight           Weight versus age of ch… Datase… datase…</span></span>
-<span><span class="co">#&gt;  6 DNase          DNase                 Elisa assay of DNase     Datase… datase…</span></span>
-<span><span class="co">#&gt;  7 EuStockMarkets EuStockMarkets        Daily Closing Prices of… Datase… datase…</span></span>
-<span><span class="co">#&gt;  8 Formaldehyde   Formaldehyde          Determination of Formal… Datase… datase…</span></span>
-<span><span class="co">#&gt;  9 HairEyeColor   HairEyeColor          Hair and Eye Color of S… Datase… datase…</span></span>
-<span><span class="co">#&gt; 10 Harman23.cor   Harman23.cor          Harman Example 2.3       Datase… datase…</span></span>
-<span><span class="co">#&gt; # ℹ 77 more rows</span></span>
-<span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">docs</span>, <span class="va">package</span> <span class="op">==</span> <span class="st">"tools"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; # A tibble: 141 × 5</span></span>
-<span><span class="co">#&gt;    topic             alias                                 title concept package</span></span>
-<span><span class="co">#&gt;    &lt;chr&gt;             &lt;chr&gt;                                 &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;  </span></span>
-<span><span class="co">#&gt;  1 .print.via.format .print.via.format                     Prin… Utilit… tools  </span></span>
-<span><span class="co">#&gt;  2 Adobe_glyphs      Adobe_glyphs, charset_to_Unicode      Conv… Datase… tools  </span></span>
-<span><span class="co">#&gt;  3 CRAN_package_db   CRAN_package_db, CRAN_check_results,… CRAN… &lt;NA&gt;    tools  </span></span>
-<span><span class="co">#&gt;  4 HTMLheader        HTMLheader                            Gene… Utilit… tools  </span></span>
-<span><span class="co">#&gt;  5 HTMLheader        HTMLheader                            Gene… Docume… tools  </span></span>
-<span><span class="co">#&gt;  6 HTMLheader        HTMLheader                            Gene… Utilit… tools  </span></span>
-<span><span class="co">#&gt;  7 HTMLheader        HTMLheader                            Gene… Docume… tools  </span></span>
-<span><span class="co">#&gt;  8 QC                QC, checkDocFiles, checkDocStyle, ch… QC C… Utilit… tools  </span></span>
-<span><span class="co">#&gt;  9 QC                QC, checkDocFiles, checkDocStyle, ch… QC C… Docume… tools  </span></span>
-<span><span class="co">#&gt; 10 QC                QC, checkDocFiles, checkDocStyle, ch… QC C… Utilit… tools  </span></span>
-<span><span class="co">#&gt; # ℹ 131 more rows</span></span>
-<span></span>
-<span><span class="co"># By concept</span></span>
-<span><span class="va">datasets</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">docs</span>, <span class="va">concept</span> <span class="op">==</span> <span class="st">"Datasets available by data()"</span><span class="op">)</span></span>
-<span><span class="va">datasets</span></span>
-<span><span class="co">#&gt; # A tibble: 87 × 5</span></span>
-<span><span class="co">#&gt;    topic          alias                            title         concept package</span></span>
-<span><span class="co">#&gt;    &lt;chr&gt;          &lt;chr&gt;                            &lt;chr&gt;         &lt;chr&gt;   &lt;chr&gt;  </span></span>
-<span><span class="co">#&gt;  1 Adobe_glyphs   Adobe_glyphs, charset_to_Unicode Conversion T… Datase… tools  </span></span>
-<span><span class="co">#&gt;  2 AirPassengers  AirPassengers                    Monthly Airl… Datase… datase…</span></span>
-<span><span class="co">#&gt;  3 BJsales        BJsales, BJsales.lead            Sales Data w… Datase… datase…</span></span>
-<span><span class="co">#&gt;  4 BOD            BOD                              Biochemical … Datase… datase…</span></span>
-<span><span class="co">#&gt;  5 CO2            CO2                              Carbon Dioxi… Datase… datase…</span></span>
-<span><span class="co">#&gt;  6 ChickWeight    ChickWeight                      Weight versu… Datase… datase…</span></span>
-<span><span class="co">#&gt;  7 DNase          DNase                            Elisa assay … Datase… datase…</span></span>
-<span><span class="co">#&gt;  8 EuStockMarkets EuStockMarkets                   Daily Closin… Datase… datase…</span></span>
-<span><span class="co">#&gt;  9 Formaldehyde   Formaldehyde                     Determinatio… Datase… datase…</span></span>
-<span><span class="co">#&gt; 10 HairEyeColor   HairEyeColor                     Hair and Eye… Datase… datase…</span></span>
-<span><span class="co">#&gt; # ℹ 77 more rows</span></span>
-<span></span>
-<span><span class="va">utilities</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">docs</span>, <span class="va">concept</span> <span class="op">==</span> <span class="st">"utilities"</span><span class="op">)</span></span>
-<span><span class="va">utilities</span></span>
-<span><span class="co">#&gt; # A tibble: 0 × 5</span></span>
-<span><span class="co">#&gt; # ℹ 5 variables: topic &lt;chr&gt;, alias &lt;chr&gt;, title &lt;chr&gt;, concept &lt;chr&gt;,</span></span>
-<span><span class="co">#&gt; #   package &lt;chr&gt;</span></span></code></pre></div>
-<p>You may link to documentation online.</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">url_template</span> <span class="op">&lt;-</span> <span class="st">"https://www.rdocumentation.org/packages/{package}/versions/3.6.2/topics/{topic}.html"</span></span>
-<span><span class="va">linked</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/reference_package.html">reference_package</a></span><span class="op">(</span><span class="st">"datasets"</span>, url_template <span class="op">=</span> <span class="va">url_template</span><span class="op">)</span></span>
-<span><span class="va">linked</span><span class="op">[</span><span class="st">"topic"</span><span class="op">]</span></span>
-<span><span class="co">#&gt; # A tibble: 87 × 1</span></span>
-<span><span class="co">#&gt;    topic                                                                        </span></span>
-<span><span class="co">#&gt;    &lt;chr&gt;                                                                        </span></span>
-<span><span class="co">#&gt;  1 &lt;a href=https://www.rdocumentation.org/packages/datasets/versions/3.6.2/topi…</span></span>
-<span><span class="co">#&gt;  2 &lt;a href=https://www.rdocumentation.org/packages/datasets/versions/3.6.2/topi…</span></span>
-<span><span class="co">#&gt;  3 &lt;a href=https://www.rdocumentation.org/packages/datasets/versions/3.6.2/topi…</span></span>
-<span><span class="co">#&gt;  4 &lt;a href=https://www.rdocumentation.org/packages/datasets/versions/3.6.2/topi…</span></span>
-<span><span class="co">#&gt;  5 &lt;a href=https://www.rdocumentation.org/packages/datasets/versions/3.6.2/topi…</span></span>
-<span><span class="co">#&gt;  6 &lt;a href=https://www.rdocumentation.org/packages/datasets/versions/3.6.2/topi…</span></span>
-<span><span class="co">#&gt;  7 &lt;a href=https://www.rdocumentation.org/packages/datasets/versions/3.6.2/topi…</span></span>
-<span><span class="co">#&gt;  8 &lt;a href=https://www.rdocumentation.org/packages/datasets/versions/3.6.2/topi…</span></span>
-<span><span class="co">#&gt;  9 &lt;a href=https://www.rdocumentation.org/packages/datasets/versions/3.6.2/topi…</span></span>
-<span><span class="co">#&gt; 10 &lt;a href=https://www.rdocumentation.org/packages/datasets/versions/3.6.2/topi…</span></span>
-<span><span class="co">#&gt; # ℹ 77 more rows</span></span>
+<span><span class="va">universe</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"datasets"</span>, <span class="st">"tools"</span><span class="op">)</span></span>
+<span><span class="va">url_template</span> <span class="op">&lt;-</span> <span class="st">"https://www.rdocumentation.org/packages/{package}/versions/3.6.2/topics/{topic}.html"</span></span>
+<span><span class="va">linked</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/reference_package.html">reference_package</a></span><span class="op">(</span><span class="va">universe</span>, url_template <span class="op">=</span> <span class="va">url_template</span><span class="op">)</span></span>
+<span><span class="va">linked</span></span>
+<span><span class="co">#&gt; # A tibble: 228 × 5</span></span>
+<span><span class="co">#&gt;    topic                                             alias title concept package</span></span>
+<span><span class="co">#&gt;    &lt;chr&gt;                                             &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;  </span></span>
+<span><span class="co">#&gt;  1 &lt;a href=https://www.rdocumentation.org/packages/… .pri… Prin… Utilit… tools  </span></span>
+<span><span class="co">#&gt;  2 &lt;a href=https://www.rdocumentation.org/packages/… Adob… Conv… Datase… tools  </span></span>
+<span><span class="co">#&gt;  3 &lt;a href=https://www.rdocumentation.org/packages/… AirP… Mont… Datase… datase…</span></span>
+<span><span class="co">#&gt;  4 &lt;a href=https://www.rdocumentation.org/packages/… BJsa… Sale… Datase… datase…</span></span>
+<span><span class="co">#&gt;  5 &lt;a href=https://www.rdocumentation.org/packages/… BOD   Bioc… Datase… datase…</span></span>
+<span><span class="co">#&gt;  6 &lt;a href=https://www.rdocumentation.org/packages/… CO2   Carb… Datase… datase…</span></span>
+<span><span class="co">#&gt;  7 &lt;a href=https://www.rdocumentation.org/packages/… CRAN… CRAN… &lt;NA&gt;    tools  </span></span>
+<span><span class="co">#&gt;  8 &lt;a href=https://www.rdocumentation.org/packages/… Chic… Weig… Datase… datase…</span></span>
+<span><span class="co">#&gt;  9 &lt;a href=https://www.rdocumentation.org/packages/… DNase Elis… Datase… datase…</span></span>
+<span><span class="co">#&gt; 10 &lt;a href=https://www.rdocumentation.org/packages/… EuSt… Dail… Datase… datase…</span></span>
+<span><span class="co">#&gt; # ℹ 218 more rows</span></span>
 <span></span>
 <span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">linked</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <table class="table">
@@ -166,6 +111,20 @@
 <th align="left">package</th>
 </tr></thead>
 <tbody>
+<tr class="odd">
+<td align="left"><a href="https://www.rdocumentation.org/packages/tools/versions/3.6.2/topics/.print.via.format.html" class="external-link">.print.via.format</a></td>
+<td align="left">.print.via.format</td>
+<td align="left">Printing Utilities</td>
+<td align="left">Utilities</td>
+<td align="left">tools</td>
+</tr>
+<tr class="even">
+<td align="left"><a href="https://www.rdocumentation.org/packages/tools/versions/3.6.2/topics/Adobe_glyphs.html" class="external-link">Adobe_glyphs</a></td>
+<td align="left">Adobe_glyphs, charset_to_Unicode</td>
+<td align="left">Conversion Tables between Character Sets</td>
+<td align="left">Datasets available by data()</td>
+<td align="left">tools</td>
+</tr>
 <tr class="odd">
 <td align="left"><a href="https://www.rdocumentation.org/packages/datasets/versions/3.6.2/topics/AirPassengers.html" class="external-link">AirPassengers</a></td>
 <td align="left">AirPassengers</td>
@@ -191,20 +150,6 @@
 <td align="left"><a href="https://www.rdocumentation.org/packages/datasets/versions/3.6.2/topics/CO2.html" class="external-link">CO2</a></td>
 <td align="left">CO2</td>
 <td align="left">Carbon Dioxide Uptake in Grass Plants</td>
-<td align="left">Datasets available by data()</td>
-<td align="left">datasets</td>
-</tr>
-<tr class="odd">
-<td align="left"><a href="https://www.rdocumentation.org/packages/datasets/versions/3.6.2/topics/ChickWeight.html" class="external-link">ChickWeight</a></td>
-<td align="left">ChickWeight</td>
-<td align="left">Weight versus age of chicks on different diets</td>
-<td align="left">Datasets available by data()</td>
-<td align="left">datasets</td>
-</tr>
-<tr class="even">
-<td align="left"><a href="https://www.rdocumentation.org/packages/datasets/versions/3.6.2/topics/DNase.html" class="external-link">DNase</a></td>
-<td align="left">DNase</td>
-<td align="left">Elisa assay of DNase</td>
 <td align="left">Datasets available by data()</td>
 <td align="left">datasets</td>
 </tr>
@@ -245,7 +190,8 @@
 <div class="developers">
 <h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
-<li>Mauro Lepore <br><small class="roles"> Author, contractor, maintainer </small>  </li>
+<li>
+<a href="https://github.com/maurolepore" class="external-link">Mauro Lepore</a> <br><small class="roles"> Author, contractor, maintainer </small>  </li>
 </ul>
 </div>
 
@@ -261,7 +207,7 @@
 
 
     <footer><div class="pkgdown-footer-left">
-  <p>Developed by Mauro Lepore.</p>
+  <p>Developed by <a href="https://github.com/maurolepore" class="external-link">Mauro Lepore</a>.</p>
 </div>
 
 <div class="pkgdown-footer-right">
