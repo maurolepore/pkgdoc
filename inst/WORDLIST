@@ -1,8 +1,7 @@
 AirPassengers
 BJsales
 CMD
-ChickWeight
-DNase
+charset
 github
 https
 io
@@ -12,3 +11,4 @@ pkgdown
 serach
 tidymodels
 tidyverse
+yml
