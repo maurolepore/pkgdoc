@@ -48,7 +48,13 @@ meta-package.</p>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">reference_package</span><span class="op">(</span><span class="va">x</span>, url <span class="op">=</span> <span class="cn">NULL</span>, packages <span class="op">=</span> <span class="cn">NULL</span>, strip_s3class <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">reference_package</span><span class="op">(</span></span>
+<span>  <span class="va">x</span>,</span>
+<span>  url_template <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  url <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  packages <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  strip_s3class <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -57,6 +63,13 @@ meta-package.</p>
 
 <dl><dt id="arg-x">x<a class="anchor" aria-label="anchor" href="#arg-x"></a></dt>
 <dd><p>A character vector giving concepts or package names to match.</p></dd>
+
+
+<dt id="arg-url-template">url_template<a class="anchor" aria-label="anchor" href="#arg-url-template"></a></dt>
+<dd><p>Character. A template to generate links to documentation
+based on the column names of the output – typically <code>package</code> and <code>topic</code>,
+e.g. <code>"https://maurolepore.github.io/{package}/reference/{topic}.html"</code>
+(<code><a href="https://glue.tidyverse.org/reference/glue.html" class="external-link">glue::glue()</a></code> syntax).</p></dd>
 
 
 <dt id="arg-url">url<a class="anchor" aria-label="anchor" href="#arg-url"></a></dt>

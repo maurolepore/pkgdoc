@@ -131,8 +131,24 @@
 <span><span class="co">#&gt; #   package &lt;chr&gt;</span></span></code></pre></div>
 <p>You may link to documentation online.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">template</span> <span class="op">&lt;-</span> <span class="st">"&lt;a href=https://www.rdocumentation.org/packages/%s/versions/3.6.2/topics/%s&gt;?&lt;/a&gt;"</span></span>
-<span><span class="va">linked</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/transform.html" class="external-link">transform</a></span><span class="op">(</span><span class="va">datasets</span>, topic <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sprintf.html" class="external-link">sprintf</a></span><span class="op">(</span><span class="va">template</span>, <span class="va">package</span>, <span class="va">topic</span><span class="op">)</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">url_template</span> <span class="op">&lt;-</span> <span class="st">"https://www.rdocumentation.org/packages/{package}/versions/3.6.2/topics/{topic}.html"</span></span>
+<span><span class="va">linked</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/reference_package.html">reference_package</a></span><span class="op">(</span><span class="st">"datasets"</span>, url_template <span class="op">=</span> <span class="va">url_template</span><span class="op">)</span></span>
+<span><span class="va">linked</span><span class="op">[</span><span class="st">"topic"</span><span class="op">]</span></span>
+<span><span class="co">#&gt; # A tibble: 87 × 1</span></span>
+<span><span class="co">#&gt;    topic                                                                        </span></span>
+<span><span class="co">#&gt;    &lt;chr&gt;                                                                        </span></span>
+<span><span class="co">#&gt;  1 &lt;a href=https://www.rdocumentation.org/packages/datasets/versions/3.6.2/topi…</span></span>
+<span><span class="co">#&gt;  2 &lt;a href=https://www.rdocumentation.org/packages/datasets/versions/3.6.2/topi…</span></span>
+<span><span class="co">#&gt;  3 &lt;a href=https://www.rdocumentation.org/packages/datasets/versions/3.6.2/topi…</span></span>
+<span><span class="co">#&gt;  4 &lt;a href=https://www.rdocumentation.org/packages/datasets/versions/3.6.2/topi…</span></span>
+<span><span class="co">#&gt;  5 &lt;a href=https://www.rdocumentation.org/packages/datasets/versions/3.6.2/topi…</span></span>
+<span><span class="co">#&gt;  6 &lt;a href=https://www.rdocumentation.org/packages/datasets/versions/3.6.2/topi…</span></span>
+<span><span class="co">#&gt;  7 &lt;a href=https://www.rdocumentation.org/packages/datasets/versions/3.6.2/topi…</span></span>
+<span><span class="co">#&gt;  8 &lt;a href=https://www.rdocumentation.org/packages/datasets/versions/3.6.2/topi…</span></span>
+<span><span class="co">#&gt;  9 &lt;a href=https://www.rdocumentation.org/packages/datasets/versions/3.6.2/topi…</span></span>
+<span><span class="co">#&gt; 10 &lt;a href=https://www.rdocumentation.org/packages/datasets/versions/3.6.2/topi…</span></span>
+<span><span class="co">#&gt; # ℹ 77 more rows</span></span>
+<span></span>
 <span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">linked</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <table class="table">
 <colgroup>
@@ -151,44 +167,44 @@
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td align="left"><a href="https://www.rdocumentation.org/packages/tools/versions/3.6.2/topics/Adobe_glyphs" class="external-link">?</a></td>
-<td align="left">Adobe_glyphs, charset_to_Unicode</td>
-<td align="left">Conversion Tables between Character Sets</td>
-<td align="left">Datasets available by data()</td>
-<td align="left">tools</td>
-</tr>
-<tr class="even">
-<td align="left"><a href="https://www.rdocumentation.org/packages/datasets/versions/3.6.2/topics/AirPassengers" class="external-link">?</a></td>
+<td align="left"><a href="https://www.rdocumentation.org/packages/datasets/versions/3.6.2/topics/AirPassengers.html" class="external-link">AirPassengers</a></td>
 <td align="left">AirPassengers</td>
 <td align="left">Monthly Airline Passenger Numbers 1949-1960</td>
 <td align="left">Datasets available by data()</td>
 <td align="left">datasets</td>
 </tr>
-<tr class="odd">
-<td align="left"><a href="https://www.rdocumentation.org/packages/datasets/versions/3.6.2/topics/BJsales" class="external-link">?</a></td>
+<tr class="even">
+<td align="left"><a href="https://www.rdocumentation.org/packages/datasets/versions/3.6.2/topics/BJsales.html" class="external-link">BJsales</a></td>
 <td align="left">BJsales, BJsales.lead</td>
 <td align="left">Sales Data with Leading Indicator</td>
 <td align="left">Datasets available by data()</td>
 <td align="left">datasets</td>
 </tr>
-<tr class="even">
-<td align="left"><a href="https://www.rdocumentation.org/packages/datasets/versions/3.6.2/topics/BOD" class="external-link">?</a></td>
+<tr class="odd">
+<td align="left"><a href="https://www.rdocumentation.org/packages/datasets/versions/3.6.2/topics/BOD.html" class="external-link">BOD</a></td>
 <td align="left">BOD</td>
 <td align="left">Biochemical Oxygen Demand</td>
 <td align="left">Datasets available by data()</td>
 <td align="left">datasets</td>
 </tr>
-<tr class="odd">
-<td align="left"><a href="https://www.rdocumentation.org/packages/datasets/versions/3.6.2/topics/CO2" class="external-link">?</a></td>
+<tr class="even">
+<td align="left"><a href="https://www.rdocumentation.org/packages/datasets/versions/3.6.2/topics/CO2.html" class="external-link">CO2</a></td>
 <td align="left">CO2</td>
 <td align="left">Carbon Dioxide Uptake in Grass Plants</td>
 <td align="left">Datasets available by data()</td>
 <td align="left">datasets</td>
 </tr>
-<tr class="even">
-<td align="left"><a href="https://www.rdocumentation.org/packages/datasets/versions/3.6.2/topics/ChickWeight" class="external-link">?</a></td>
+<tr class="odd">
+<td align="left"><a href="https://www.rdocumentation.org/packages/datasets/versions/3.6.2/topics/ChickWeight.html" class="external-link">ChickWeight</a></td>
 <td align="left">ChickWeight</td>
 <td align="left">Weight versus age of chicks on different diets</td>
+<td align="left">Datasets available by data()</td>
+<td align="left">datasets</td>
+</tr>
+<tr class="even">
+<td align="left"><a href="https://www.rdocumentation.org/packages/datasets/versions/3.6.2/topics/DNase.html" class="external-link">DNase</a></td>
+<td align="left">DNase</td>
+<td align="left">Elisa assay of DNase</td>
 <td align="left">Datasets available by data()</td>
 <td align="left">datasets</td>
 </tr>
@@ -237,7 +253,6 @@
 <h2 data-toc-skip>Dev status</h2>
 <ul class="list-unstyled">
 <li><a href="https://github.com/maurolepore/pkgdoc/actions/workflows/R-CMD-check.yaml" class="external-link"><img src="https://github.com/maurolepore/pkgdoc/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></a></li>
-<li><a href="https://app.codecov.io/gh/maurolepore/pkgdoc" class="external-link"><img src="https://codecov.io/gh/maurolepore/pkgdoc/graph/badge.svg" alt="Codecov test coverage"></a></li>
 </ul>
 </div>
 
