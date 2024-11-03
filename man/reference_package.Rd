@@ -4,10 +4,21 @@
 \alias{reference_package}
 \title{Create a data.frame with documentation metadata of one or more packages}
 \usage{
-reference_package(x, url = NULL, packages = NULL, strip_s3class = TRUE)
+reference_package(
+  x,
+  url_template = NULL,
+  url = NULL,
+  packages = NULL,
+  strip_s3class = TRUE
+)
 }
 \arguments{
 \item{x}{A character vector giving concepts or package names to match.}
+
+\item{url_template}{Character. A template to generate links to documentation
+based on the column names of the output -- typically \code{package} and \code{topic},
+e.g. \code{"https://maurolepore.github.io/{package}/reference/{topic}.html"}
+(\code{glue::glue()} syntax).}
 
 \item{url}{Character vector of length-1 giving a base url, e.g.
 "https://maurolepore.github.io/".}

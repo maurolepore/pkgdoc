@@ -6,8 +6,6 @@
 <!-- badges: start -->
 
 [![R-CMD-check](https://github.com/maurolepore/pkgdoc/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/maurolepore/pkgdoc/actions/workflows/R-CMD-check.yaml)
-[![Codecov test
-coverage](https://codecov.io/gh/maurolepore/pkgdoc/graph/badge.svg)](https://app.codecov.io/gh/maurolepore/pkgdoc)
 <!-- badges: end -->
 
 The goal of pkgdoc is to make it easy to create a data frame of the
@@ -100,16 +98,32 @@ utilities
 You may link to documentation online.
 
 ``` r
-template <- "<a href=https://www.rdocumentation.org/packages/%s/versions/3.6.2/topics/%s>?</a>"
-linked <- transform(datasets, topic = sprintf(template, package, topic))
+url_template <- "https://www.rdocumentation.org/packages/{package}/versions/3.6.2/topics/{topic}.html"
+linked <- reference_package("datasets", url_template = url_template)
+linked["topic"]
+#> # A tibble: 87 × 1
+#>    topic                                                                        
+#>    <chr>                                                                        
+#>  1 <a href=https://www.rdocumentation.org/packages/datasets/versions/3.6.2/topi…
+#>  2 <a href=https://www.rdocumentation.org/packages/datasets/versions/3.6.2/topi…
+#>  3 <a href=https://www.rdocumentation.org/packages/datasets/versions/3.6.2/topi…
+#>  4 <a href=https://www.rdocumentation.org/packages/datasets/versions/3.6.2/topi…
+#>  5 <a href=https://www.rdocumentation.org/packages/datasets/versions/3.6.2/topi…
+#>  6 <a href=https://www.rdocumentation.org/packages/datasets/versions/3.6.2/topi…
+#>  7 <a href=https://www.rdocumentation.org/packages/datasets/versions/3.6.2/topi…
+#>  8 <a href=https://www.rdocumentation.org/packages/datasets/versions/3.6.2/topi…
+#>  9 <a href=https://www.rdocumentation.org/packages/datasets/versions/3.6.2/topi…
+#> 10 <a href=https://www.rdocumentation.org/packages/datasets/versions/3.6.2/topi…
+#> # ℹ 77 more rows
+
 knitr::kable(head(linked))
 ```
 
 | topic | alias | title | concept | package |
 |:---|:---|:---|:---|:---|
-| <a href=https://www.rdocumentation.org/packages/tools/versions/3.6.2/topics/Adobe_glyphs>?</a> | Adobe_glyphs, charset_to_Unicode | Conversion Tables between Character Sets | Datasets available by data() | tools |
-| <a href=https://www.rdocumentation.org/packages/datasets/versions/3.6.2/topics/AirPassengers>?</a> | AirPassengers | Monthly Airline Passenger Numbers 1949-1960 | Datasets available by data() | datasets |
-| <a href=https://www.rdocumentation.org/packages/datasets/versions/3.6.2/topics/BJsales>?</a> | BJsales, BJsales.lead | Sales Data with Leading Indicator | Datasets available by data() | datasets |
-| <a href=https://www.rdocumentation.org/packages/datasets/versions/3.6.2/topics/BOD>?</a> | BOD | Biochemical Oxygen Demand | Datasets available by data() | datasets |
-| <a href=https://www.rdocumentation.org/packages/datasets/versions/3.6.2/topics/CO2>?</a> | CO2 | Carbon Dioxide Uptake in Grass Plants | Datasets available by data() | datasets |
-| <a href=https://www.rdocumentation.org/packages/datasets/versions/3.6.2/topics/ChickWeight>?</a> | ChickWeight | Weight versus age of chicks on different diets | Datasets available by data() | datasets |
+| <a href=https://www.rdocumentation.org/packages/datasets/versions/3.6.2/topics/AirPassengers.html>AirPassengers</a> | AirPassengers | Monthly Airline Passenger Numbers 1949-1960 | Datasets available by data() | datasets |
+| <a href=https://www.rdocumentation.org/packages/datasets/versions/3.6.2/topics/BJsales.html>BJsales</a> | BJsales, BJsales.lead | Sales Data with Leading Indicator | Datasets available by data() | datasets |
+| <a href=https://www.rdocumentation.org/packages/datasets/versions/3.6.2/topics/BOD.html>BOD</a> | BOD | Biochemical Oxygen Demand | Datasets available by data() | datasets |
+| <a href=https://www.rdocumentation.org/packages/datasets/versions/3.6.2/topics/CO2.html>CO2</a> | CO2 | Carbon Dioxide Uptake in Grass Plants | Datasets available by data() | datasets |
+| <a href=https://www.rdocumentation.org/packages/datasets/versions/3.6.2/topics/ChickWeight.html>ChickWeight</a> | ChickWeight | Weight versus age of chicks on different diets | Datasets available by data() | datasets |
+| <a href=https://www.rdocumentation.org/packages/datasets/versions/3.6.2/topics/DNase.html>DNase</a> | DNase | Elisa assay of DNase | Datasets available by data() | datasets |

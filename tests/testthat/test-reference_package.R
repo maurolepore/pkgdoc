@@ -47,3 +47,14 @@ test_that("doesn't include the package-level documentation", {
   out <- reference_package("pkgdoc")
   expect_false(any(grepl("pkgdoc-package", unique(out$alias))))
 })
+
+test_that("takes a `url_template`", {
+  url_template <- "https://maurolepore.github.io/{package}/reference/{topic}.html"
+  out <- reference_package("pkgdoc", url_template = url_template)
+  expect_true(grepl("pkgdoc", out$topic[[1]]))
+})
+
+test_that("with bad `url_template` errors gracefully", {
+  bad <- "https://{bad}/{topic}.html"
+  expect_error(reference_package("pkgdoc", url_template = bad), "not found")
+})

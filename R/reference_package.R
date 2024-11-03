@@ -6,6 +6,10 @@
 #' meta-package.
 #'
 #' @param x A character vector giving concepts or package names to match.
+#' @param url_template Character. A template to generate links to documentation
+#'   based on the column names of the output -- typically `package` and `topic`,
+#'   e.g. `"https://maurolepore.github.io/{package}/reference/{topic}.html"`
+#'   (`glue::glue()` syntax).
 #' @param url Character vector of length-1 giving a base url, e.g.
 #'   "https://maurolepore.github.io/".
 #' @param strip_s3class `TRUE` removes the class component of S3 methods.
@@ -23,11 +27,17 @@ NULL
 
 reference_any <- function(doc) {
   force(doc)
-  function(x, url = NULL, packages = NULL, strip_s3class = TRUE) {
+  function(x, url_template = NULL, url = NULL, packages = NULL, strip_s3class = TRUE) {
     warn_unnattached(x, doc)
     pick <- pick_doc(packages = packages, doc = doc, x = x)
 
     result <- tidy_reference(may_add_url(pick, url), strip_s3class)
+
+    if (!is.null(url_template)) {
+      result <- mutate(result, topic = paste0("<a href=", glue::glue(url_template), ">", .data$topic, "</a>")
+      )
+    }
+
     result
   }
 }
