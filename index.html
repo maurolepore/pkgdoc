@@ -51,8 +51,8 @@
 </h1></div>
 <!-- badges: start -->
 
-<p>The goal of pkgdoc is to make it easy to create a data frame of the documentation of multiple packages.</p>
-<p>If you develop a universe, such as the tidyverse or tidymodels, pkgdoc helps you to easily create a universe-wide reference for the pkgdown website of your meta-package (<a href="https://forestgeo.github.io/fgeo/articles/siteonly/reference.html#global-search" class="external-link">example</a>).</p>
+<p>The goal of pkgdoc is to make it easy to create a data frame of the metadata associated to the documentation of a collection of R packages.</p>
+<p>If you maintain an R-package universe, it helps you to easily create a universe-wide reference for the pkgdown website of your meta-package (e.g. tidyverse, tidymodels).</p>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
@@ -65,78 +65,75 @@
 </h2>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/maurolepore/pkgdoc" class="external-link">pkgdoc</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/forestgeo/fgeo.x" class="external-link">fgeo.x</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/forestgeo/fgeo.plot" class="external-link">fgeo.plot</a></span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">universe</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"fgeo.plot"</span>, <span class="st">"fgeo.x"</span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">tools</span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">datasets</span><span class="op">)</span></span>
+<span><span class="va">universe</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"tools"</span>, <span class="st">"datasets"</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">docs</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/reference_package.html">reference_package</a></span><span class="op">(</span><span class="va">universe</span>, url <span class="op">=</span> <span class="st">"https://forestgeo.github.io/"</span><span class="op">)</span></span>
-<span><span class="va">docs</span></span>
-<span><span class="co">#&gt; # A tibble: 32 × 5</span></span>
-<span><span class="co">#&gt;    topic                                             alias title concept package</span></span>
-<span><span class="co">#&gt;    &lt;glue&gt;                                            &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;   &lt;glue&gt; </span></span>
-<span><span class="co">#&gt;  1 &lt;a href=https://forestgeo.github.io/fgeo.plot/re… auto… Plot… autopl… &lt;a hre…</span></span>
-<span><span class="co">#&gt;  2 &lt;a href=https://forestgeo.github.io/fgeo.plot/re… auto… Plot… plot f… &lt;a hre…</span></span>
-<span><span class="co">#&gt;  3 &lt;a href=https://forestgeo.github.io/fgeo.plot/re… auto… Plot… autopl… &lt;a hre…</span></span>
-<span><span class="co">#&gt;  4 &lt;a href=https://forestgeo.github.io/fgeo.plot/re… auto… Plot… functi… &lt;a hre…</span></span>
-<span><span class="co">#&gt;  5 &lt;a href=https://forestgeo.github.io/fgeo.plot/re… auto… Plot… functi… &lt;a hre…</span></span>
-<span><span class="co">#&gt;  6 &lt;a href=https://forestgeo.github.io/fgeo.plot/re… auto… Plot… plot f… &lt;a hre…</span></span>
-<span><span class="co">#&gt;  7 &lt;a href=https://forestgeo.github.io/fgeo.plot/re… auto… List… functi… &lt;a hre…</span></span>
-<span><span class="co">#&gt;  8 &lt;a href=https://forestgeo.github.io/fgeo.plot/re… auto… List… functi… &lt;a hre…</span></span>
-<span><span class="co">#&gt;  9 &lt;a href=https://forestgeo.github.io/fgeo.plot/re… auto… List… functi… &lt;a hre…</span></span>
-<span><span class="co">#&gt; 10 &lt;a href=https://forestgeo.github.io/fgeo.plot/re… auto… List… plot f… &lt;a hre…</span></span>
-<span><span class="co">#&gt; # ℹ 22 more rows</span></span></code></pre></div>
-<p>You can easily organize the documentation by concept (<code>#' @family</code>) and make links clickable with <code>DT::datatable()</code> or <code><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">knitr::kable()</a></code>. For example:</p>
-<ul>
-<li>Datasets</li>
-</ul>
+<span><span class="va">docs</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/reference_package.html">reference_package</a></span><span class="op">(</span><span class="va">universe</span><span class="op">)</span></span></code></pre></div>
+<p>You may organize the documentation by package or concept (<code>#' @family</code>):</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">docs</span>, <span class="va">concept</span> <span class="op">==</span> <span class="st">"datasets"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<table class="table">
-<colgroup>
-<col width="20%">
-<col width="20%">
-<col width="20%">
-<col width="20%">
-<col width="20%">
-</colgroup>
-<thead><tr class="header">
-<th align="left">topic</th>
-<th align="left">alias</th>
-<th align="left">title</th>
-<th align="left">concept</th>
-<th align="left">package</th>
-</tr></thead>
-<tbody>
-<tr class="odd">
-<td align="left"><a href="https://forestgeo.github.io/fgeo.x/reference/datasets" class="external-link">?</a></td>
-<td align="left">datasets, elevation, habitat, stem5, stem6, tree5, tree6, vft_4quad, tree6_3species</td>
-<td align="left">Access data via ‘library(fgeo.x)’ or ‘fgeo.x::<dataset-name>’.</dataset-name>
-</td>
-<td align="left">datasets</td>
-<td align="left"><a href="https://forestgeo.github.io/fgeo.x" class="external-link">fgeo.x</a></td>
-</tr>
-<tr class="even">
-<td align="left"><a href="https://forestgeo.github.io/fgeo.x/reference/download_data" class="external-link">?</a></td>
-<td align="left">download_data</td>
-<td align="left">Access data stored online.</td>
-<td align="left">datasets</td>
-<td align="left"><a href="https://forestgeo.github.io/fgeo.x" class="external-link">fgeo.x</a></td>
-</tr>
-<tr class="odd">
-<td align="left"><a href="https://forestgeo.github.io/fgeo.x/reference/example_path" class="external-link">?</a></td>
-<td align="left">example_path</td>
-<td align="left">Access data stored in system files.</td>
-<td align="left">datasets</td>
-<td align="left"><a href="https://forestgeo.github.io/fgeo.x" class="external-link">fgeo.x</a></td>
-</tr>
-</tbody>
-</table>
-<ul>
-<li>Autoplots</li>
-</ul>
+<code class="sourceCode R"><span><span class="co"># By package</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">docs</span>, <span class="va">package</span> <span class="op">==</span> <span class="st">"datasets"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; # A tibble: 87 × 5</span></span>
+<span><span class="co">#&gt;    topic          alias                 title                    concept package</span></span>
+<span><span class="co">#&gt;    &lt;chr&gt;          &lt;chr&gt;                 &lt;chr&gt;                    &lt;chr&gt;   &lt;chr&gt;  </span></span>
+<span><span class="co">#&gt;  1 AirPassengers  AirPassengers         Monthly Airline Passeng… Datase… datase…</span></span>
+<span><span class="co">#&gt;  2 BJsales        BJsales, BJsales.lead Sales Data with Leading… Datase… datase…</span></span>
+<span><span class="co">#&gt;  3 BOD            BOD                   Biochemical Oxygen Dema… Datase… datase…</span></span>
+<span><span class="co">#&gt;  4 CO2            CO2                   Carbon Dioxide Uptake i… Datase… datase…</span></span>
+<span><span class="co">#&gt;  5 ChickWeight    ChickWeight           Weight versus age of ch… Datase… datase…</span></span>
+<span><span class="co">#&gt;  6 DNase          DNase                 Elisa assay of DNase     Datase… datase…</span></span>
+<span><span class="co">#&gt;  7 EuStockMarkets EuStockMarkets        Daily Closing Prices of… Datase… datase…</span></span>
+<span><span class="co">#&gt;  8 Formaldehyde   Formaldehyde          Determination of Formal… Datase… datase…</span></span>
+<span><span class="co">#&gt;  9 HairEyeColor   HairEyeColor          Hair and Eye Color of S… Datase… datase…</span></span>
+<span><span class="co">#&gt; 10 Harman23.cor   Harman23.cor          Harman Example 2.3       Datase… datase…</span></span>
+<span><span class="co">#&gt; # ℹ 77 more rows</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">docs</span>, <span class="va">package</span> <span class="op">==</span> <span class="st">"tools"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; # A tibble: 141 × 5</span></span>
+<span><span class="co">#&gt;    topic             alias                                 title concept package</span></span>
+<span><span class="co">#&gt;    &lt;chr&gt;             &lt;chr&gt;                                 &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;  </span></span>
+<span><span class="co">#&gt;  1 .print.via.format .print.via.format                     Prin… Utilit… tools  </span></span>
+<span><span class="co">#&gt;  2 Adobe_glyphs      Adobe_glyphs, charset_to_Unicode      Conv… Datase… tools  </span></span>
+<span><span class="co">#&gt;  3 CRAN_package_db   CRAN_package_db, CRAN_check_results,… CRAN… &lt;NA&gt;    tools  </span></span>
+<span><span class="co">#&gt;  4 HTMLheader        HTMLheader                            Gene… Utilit… tools  </span></span>
+<span><span class="co">#&gt;  5 HTMLheader        HTMLheader                            Gene… Docume… tools  </span></span>
+<span><span class="co">#&gt;  6 HTMLheader        HTMLheader                            Gene… Utilit… tools  </span></span>
+<span><span class="co">#&gt;  7 HTMLheader        HTMLheader                            Gene… Docume… tools  </span></span>
+<span><span class="co">#&gt;  8 QC                QC, checkDocFiles, checkDocStyle, ch… QC C… Utilit… tools  </span></span>
+<span><span class="co">#&gt;  9 QC                QC, checkDocFiles, checkDocStyle, ch… QC C… Docume… tools  </span></span>
+<span><span class="co">#&gt; 10 QC                QC, checkDocFiles, checkDocStyle, ch… QC C… Utilit… tools  </span></span>
+<span><span class="co">#&gt; # ℹ 131 more rows</span></span>
+<span></span>
+<span><span class="co"># By concept</span></span>
+<span><span class="va">datasets</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">docs</span>, <span class="va">concept</span> <span class="op">==</span> <span class="st">"Datasets available by data()"</span><span class="op">)</span></span>
+<span><span class="va">datasets</span></span>
+<span><span class="co">#&gt; # A tibble: 87 × 5</span></span>
+<span><span class="co">#&gt;    topic          alias                            title         concept package</span></span>
+<span><span class="co">#&gt;    &lt;chr&gt;          &lt;chr&gt;                            &lt;chr&gt;         &lt;chr&gt;   &lt;chr&gt;  </span></span>
+<span><span class="co">#&gt;  1 Adobe_glyphs   Adobe_glyphs, charset_to_Unicode Conversion T… Datase… tools  </span></span>
+<span><span class="co">#&gt;  2 AirPassengers  AirPassengers                    Monthly Airl… Datase… datase…</span></span>
+<span><span class="co">#&gt;  3 BJsales        BJsales, BJsales.lead            Sales Data w… Datase… datase…</span></span>
+<span><span class="co">#&gt;  4 BOD            BOD                              Biochemical … Datase… datase…</span></span>
+<span><span class="co">#&gt;  5 CO2            CO2                              Carbon Dioxi… Datase… datase…</span></span>
+<span><span class="co">#&gt;  6 ChickWeight    ChickWeight                      Weight versu… Datase… datase…</span></span>
+<span><span class="co">#&gt;  7 DNase          DNase                            Elisa assay … Datase… datase…</span></span>
+<span><span class="co">#&gt;  8 EuStockMarkets EuStockMarkets                   Daily Closin… Datase… datase…</span></span>
+<span><span class="co">#&gt;  9 Formaldehyde   Formaldehyde                     Determinatio… Datase… datase…</span></span>
+<span><span class="co">#&gt; 10 HairEyeColor   HairEyeColor                     Hair and Eye… Datase… datase…</span></span>
+<span><span class="co">#&gt; # ℹ 77 more rows</span></span>
+<span></span>
+<span><span class="va">utilities</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">docs</span>, <span class="va">concept</span> <span class="op">==</span> <span class="st">"utilities"</span><span class="op">)</span></span>
+<span><span class="va">utilities</span></span>
+<span><span class="co">#&gt; # A tibble: 0 × 5</span></span>
+<span><span class="co">#&gt; # ℹ 5 variables: topic &lt;chr&gt;, alias &lt;chr&gt;, title &lt;chr&gt;, concept &lt;chr&gt;,</span></span>
+<span><span class="co">#&gt; #   package &lt;chr&gt;</span></span></code></pre></div>
+<p>You may link to documentation online.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">docs</span>, <span class="va">concept</span> <span class="op">==</span> <span class="st">"autoplots"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">template</span> <span class="op">&lt;-</span> <span class="st">"&lt;a href=https://www.rdocumentation.org/packages/%s/versions/3.6.2/topics/%s&gt;?&lt;/a&gt;"</span></span>
+<span><span class="va">linked</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/transform.html" class="external-link">transform</a></span><span class="op">(</span><span class="va">datasets</span>, topic <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sprintf.html" class="external-link">sprintf</a></span><span class="op">(</span><span class="va">template</span>, <span class="va">package</span>, <span class="va">topic</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">linked</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <table class="table">
 <colgroup>
 <col width="20%">
@@ -154,39 +151,46 @@
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td align="left"><a href="https://forestgeo.github.io/fgeo.plot/reference/autoplot.fgeo_habitat" class="external-link">?</a></td>
-<td align="left">autoplot</td>
-<td align="left">Plot habitats.</td>
-<td align="left">autoplots</td>
-<td align="left"><a href="https://forestgeo.github.io/fgeo.plot" class="external-link">fgeo.plot</a></td>
+<td align="left"><a href="https://www.rdocumentation.org/packages/tools/versions/3.6.2/topics/Adobe_glyphs" class="external-link">?</a></td>
+<td align="left">Adobe_glyphs, charset_to_Unicode</td>
+<td align="left">Conversion Tables between Character Sets</td>
+<td align="left">Datasets available by data()</td>
+<td align="left">tools</td>
 </tr>
 <tr class="even">
-<td align="left"><a href="https://forestgeo.github.io/fgeo.plot/reference/autoplot.sp_elev" class="external-link">?</a></td>
-<td align="left">autoplot</td>
-<td align="left">Plot species distribution and/or topography.</td>
-<td align="left">autoplots</td>
-<td align="left"><a href="https://forestgeo.github.io/fgeo.plot" class="external-link">fgeo.plot</a></td>
+<td align="left"><a href="https://www.rdocumentation.org/packages/datasets/versions/3.6.2/topics/AirPassengers" class="external-link">?</a></td>
+<td align="left">AirPassengers</td>
+<td align="left">Monthly Airline Passenger Numbers 1949-1960</td>
+<td align="left">Datasets available by data()</td>
+<td align="left">datasets</td>
 </tr>
 <tr class="odd">
-<td align="left"><a href="https://forestgeo.github.io/fgeo.plot/reference/elev" class="external-link">?</a></td>
-<td align="left">elev</td>
-<td align="left">Allow autoplotting the column ‘elev’.</td>
-<td align="left">autoplots</td>
-<td align="left"><a href="https://forestgeo.github.io/fgeo.plot" class="external-link">fgeo.plot</a></td>
+<td align="left"><a href="https://www.rdocumentation.org/packages/datasets/versions/3.6.2/topics/BJsales" class="external-link">?</a></td>
+<td align="left">BJsales, BJsales.lead</td>
+<td align="left">Sales Data with Leading Indicator</td>
+<td align="left">Datasets available by data()</td>
+<td align="left">datasets</td>
 </tr>
 <tr class="even">
-<td align="left"><a href="https://forestgeo.github.io/fgeo.plot/reference/sp" class="external-link">?</a></td>
-<td align="left">sp</td>
-<td align="left">Allow autoplotting the column ‘sp’.</td>
-<td align="left">autoplots</td>
-<td align="left"><a href="https://forestgeo.github.io/fgeo.plot" class="external-link">fgeo.plot</a></td>
+<td align="left"><a href="https://www.rdocumentation.org/packages/datasets/versions/3.6.2/topics/BOD" class="external-link">?</a></td>
+<td align="left">BOD</td>
+<td align="left">Biochemical Oxygen Demand</td>
+<td align="left">Datasets available by data()</td>
+<td align="left">datasets</td>
 </tr>
 <tr class="odd">
-<td align="left"><a href="https://forestgeo.github.io/fgeo.plot/reference/sp_elev" class="external-link">?</a></td>
-<td align="left">sp_elev</td>
-<td align="left">Allow autoplotting the columns ‘sp’ and ‘elev’.</td>
-<td align="left">autoplots</td>
-<td align="left"><a href="https://forestgeo.github.io/fgeo.plot" class="external-link">fgeo.plot</a></td>
+<td align="left"><a href="https://www.rdocumentation.org/packages/datasets/versions/3.6.2/topics/CO2" class="external-link">?</a></td>
+<td align="left">CO2</td>
+<td align="left">Carbon Dioxide Uptake in Grass Plants</td>
+<td align="left">Datasets available by data()</td>
+<td align="left">datasets</td>
+</tr>
+<tr class="even">
+<td align="left"><a href="https://www.rdocumentation.org/packages/datasets/versions/3.6.2/topics/ChickWeight" class="external-link">?</a></td>
+<td align="left">ChickWeight</td>
+<td align="left">Weight versus age of chicks on different diets</td>
+<td align="left">Datasets available by data()</td>
+<td align="left">datasets</td>
 </tr>
 </tbody>
 </table>
