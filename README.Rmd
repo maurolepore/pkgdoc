@@ -17,16 +17,14 @@ knitr::opts_chunk$set(
 
 <!-- badges: start -->
 [![R-CMD-check](https://github.com/maurolepore/pkgdoc/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/maurolepore/pkgdoc/actions/workflows/R-CMD-check.yaml)
-[![Codecov test coverage](https://codecov.io/gh/maurolepore/pkgdoc/graph/badge.svg)](https://app.codecov.io/gh/maurolepore/pkgdoc)
 <!-- badges: end -->
 
-The goal of pkgdoc is to make it easy to create a data frame of the
-documentation of multiple packages.
+The goal of pkgdoc is to make it easy to create a data frame of the metadata
+associated to the documentation of a collection of R packages.
 
-If you develop a universe, such as the tidyverse or tidymodels, pkgdoc helps you
-to easily create a universe-wide reference for the pkgdown website of your
-meta-package
-([example](https://forestgeo.github.io/fgeo/articles/siteonly/reference.html#global-search)).
+If you maintain an R-package universe, it helps you to easily create a
+universe-wide reference for the pkgdown website of your meta-package (e.g.
+tidyverse, tidymodels).
 
 ## Installation
 
@@ -39,26 +37,36 @@ pak::pak("maurolepore/pkgdoc")
 
 ```{r}
 library(pkgdoc)
-library(fgeo.x)
-library(fgeo.plot)
 
-universe <- c("fgeo.plot", "fgeo.x")
+library(tools)
+library(datasets)
+universe <- c("tools", "datasets")
 
-docs <- reference_package(universe, url = "https://forestgeo.github.io/")
-docs
+docs <- reference_package(universe)
 ```
 
-You can easily organize the documentation by concept (`#' @family`) and make
-links clickable with `DT::datatable()` or `knitr::kable()`. For example:
-
-* Datasets
+You may organize the documentation by package or concept (`#' @family`):
 
 ```{r}
-knitr::kable(subset(docs, concept == "datasets"))
+# By package
+subset(docs, package == "datasets")
+
+subset(docs, package == "tools")
+
+# By concept
+datasets <- subset(docs, concept == "Datasets available by data()")
+datasets
+
+utilities <- subset(docs, concept == "utilities")
+utilities
 ```
 
-* Autoplots
+You may link to documentation online.
 
 ```{r}
-knitr::kable(subset(docs, concept == "autoplots"))
+template <- "<a href=https://www.rdocumentation.org/packages/%s/versions/3.6.2/topics/%s>?</a>"
+linked <- transform(datasets, topic = sprintf(template, package, topic))
+knitr::kable(head(linked))
 ```
+
+
