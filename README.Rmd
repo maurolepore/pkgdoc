@@ -64,8 +64,10 @@ utilities
 You may link to documentation online.
 
 ```{r}
-template <- "<a href=https://www.rdocumentation.org/packages/%s/versions/3.6.2/topics/%s>?</a>"
-linked <- transform(datasets, topic = sprintf(template, package, topic))
+url_template <- "https://www.rdocumentation.org/packages/{package}/versions/3.6.2/topics/{topic}.html"
+linked <- reference_package("datasets", url_template = url_template)
+linked["topic"]
+
 knitr::kable(head(linked))
 ```
 
