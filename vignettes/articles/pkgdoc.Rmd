@@ -29,8 +29,8 @@ select(linked, topic)
 You may generate a clickable table is with `knitr::kable()`.
 
 ```{r}
-pick <- linked |> 
-  select(topic, title, concept, package) |> 
+pick <- linked |>
+  select(topic, title, concept, package) |>
   head()
 
 pick |> knitr::kable(col.names = NULL)
@@ -60,7 +60,6 @@ custom_table <- function(data, search = "") {
       dom = "fti", search = list(search = search)
     )
   )
-  
 }
 ```
 

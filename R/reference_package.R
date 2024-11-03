@@ -35,8 +35,7 @@ reference_any <- function(doc) {
     result <- tidy_reference(may_add_url(pick, url), strip_s3class)
 
     if (!is.null(url_template)) {
-      result <- mutate(result, topic = paste0("<a href=", glue::glue(url_template), ">", .data$topic, "</a>")
-      )
+      result <- mutate(result, topic = paste0("<a href=", glue::glue(url_template), ">", .data$topic, "</a>"))
     }
 
     result
